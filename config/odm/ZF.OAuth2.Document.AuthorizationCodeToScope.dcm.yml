@@ -1,0 +1,7 @@
+ZF\OAuth2\Document\AuthorizationCodeToScope:
+  type: document
+  fields:
+    Scope_id:
+      type: integer
+    AuthorizationCode_id:
+      type: integer

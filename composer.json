@@ -1,0 +1,50 @@
+{
+    "name": "zfcampus/zf-oauth2-doctrine",
+    "description": "Doctrine OAuth2 Server",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "api",
+        "oauth2",
+        "framework",
+        "zf2",
+        "doctrine"
+    ],
+    "repositories": [
+        { "type": "composer", "url": "https://packages.zendframework.com/" }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0-dev",
+            "dev-develop": "0.0-dev"
+        }
+    },
+    "require": {
+        "php": ">=5.3.23",
+        "bshaffer/oauth2-server-php": "~1.3",
+        "zfcampus/zf-oauth2": "*"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*",
+        "squizlabs/php_codesniffer": "~2",
+        "zendframework/zendframework": ">=2.3.2,<3.0.0",
+        "doctrine/doctrine-orm-module": "*",
+        "phpro/zf-doctrine-hydration-module": ">=0.1.5",
+        "zfcampus/zf-apigility": "~1.0",
+        "zfcampus/zf-apigility-documentation": "~1.0",
+        "zfcampus/zf-apigility-doctrine": "~0.3",
+        "zf-commons/zfc-user-doctrine-orm": "~1.0",
+        "hounddog/doctrine-data-fixture-module": "0.0.*",
+        "doctrine/couchdb": "1.0.*@dev",
+        "doctrine/couchdb-odm": "dev-master",
+        "ardemiranda/doctrine-couch-odm-module": "0.1.*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZF\\OAuth2\\Doctrine\\": "src/",
+            "ZFTest\\OAuth2\\Doctrine\\": "test/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    }
+}

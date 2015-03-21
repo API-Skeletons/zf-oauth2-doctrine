@@ -1,0 +1,18 @@
+ZF\OAuth2\Document\AuthorizationCode:
+  type: document
+  fields:
+    id:
+      id: true
+      type: integer
+    authorizationCode:
+      type: string
+    redirectUri:
+      type: string
+    expires:
+      type: date
+    idToken:
+      type: string
+  referenceOne:
+    client:
+      targetDocument: ZF\OAuth2\Document\Client
+      inversedBy: authorizationCode

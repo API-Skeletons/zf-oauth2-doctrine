@@ -1,0 +1,16 @@
+ZF\OAuth2\Document\PublicKey:
+  type: document
+  fields:
+    id:
+      id: true
+      type: integer
+    publicKey:
+      type: string
+    privateKey:
+      type: string
+    encryptionAlgorithm:
+      type: string
+  referenceOne:
+    client:
+      targetDocument: ZF\OAuth2\Document\Client
+      inversedBy: publicKey

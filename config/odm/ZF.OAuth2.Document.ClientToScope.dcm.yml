@@ -1,0 +1,7 @@
+ZF\OAuth2\Document\ClientToScope:
+  type: document
+  fields:
+    Scope_id:
+      type: integer
+    Client_id:
+      type: integer

@@ -1,0 +1,10 @@
+ZF\OAuth2\Document\Scope:
+  type: document
+  fields:
+    id:
+      id: true
+      type: integer
+    scope:
+      type: string
+    isDefault:
+      type: boolean

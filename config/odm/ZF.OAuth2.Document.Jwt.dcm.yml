@@ -1,0 +1,14 @@
+ZF\OAuth2\Document\Jwt:
+  type: document
+  fields:
+    id:
+      id: true
+      type: integer
+    subject:
+      type: string
+    primaryKey:
+      type: string
+  referenceOne:
+    client:
+      targetDocument: ZF\OAuth2\Document\Client
+      inversedBy: jwt

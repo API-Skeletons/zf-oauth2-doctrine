@@ -1,0 +1,18 @@
+ZF\OAuth2\Document\Jti:
+  type: document
+  fields:
+    id:
+      id: true
+      type: integer
+    subject:
+      type: string
+    audience:
+      type: string
+    expires:
+      type: date
+    jti:
+      type: string
+  referenceOne:
+    client:
+      targetDocument: ZF\OAuth2\Document\Client
+      inversedBy: jti

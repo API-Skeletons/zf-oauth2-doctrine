@@ -1,0 +1,14 @@
+ZF\OAuth2\Document\AccessToken:
+  type: document
+  fields:
+    id:
+      id: true
+      type: integer
+    accessToken:
+      type: string
+    expires:
+      type: date
+  referenceOne:
+    client:
+      targetDocument: ZF\OAuth2\Document\Client
+      inversedBy: accessToken

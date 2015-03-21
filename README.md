@@ -1,6 +1,9 @@
 OAuth2 Server for Doctrine
 ==========================
 
+*** IN DEVELOPMENT ***
+This library is not ready for production use.
+
 Requirements
 ------------
 

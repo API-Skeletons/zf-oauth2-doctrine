@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="./test/Bootstrap.php">
+    <testsuites>
+        <testsuite name="doctrine-orm">
+            <directory>./test/DoctrineOrm</directory>
+        </testsuite>
+        <testsuite name="doctrine-odm">
+            <directory>./test/DoctrineOdm</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+</phpunit>

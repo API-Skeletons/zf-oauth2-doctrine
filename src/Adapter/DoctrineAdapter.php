@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\OAuth2\Adapter\Doctrine;
+namespace ZF\OAuth2\Doctrine\Adapter;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

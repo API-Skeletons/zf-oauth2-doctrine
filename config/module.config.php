@@ -7,11 +7,11 @@ return array(
                 'ZF\OAuth2\Provider\UserId\AuthenticationService',
         ),
         'abstract_factories' => array(
-            'ZF\OAuth2\Factory\DoctrineMapperFactory',
+            'ZF\OAuth2\Doctrine\Factory\DoctrineMapperFactory',
         ),
         'factories' => array(
             'ZF\OAuth2\Adapter\DoctrineAdapter' => 
-                'ZF\OAuth2\Factory\DoctrineAdapterFactory',
+                'ZF\OAuth2\Doctrine\Factory\DoctrineAdapterFactory',
         ),
     ),
 );

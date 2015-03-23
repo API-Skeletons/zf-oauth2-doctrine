@@ -20,7 +20,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit
-  - ./vendor/bin/phpcs --standard=PSR2 --ignore=src/Adapter/BcryptTrait.php --ignore=test/data --ignore=test/Bootstrap.php --ignore=test/TestAsset src test
+  - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/data --ignore=test/Bootstrap.php --ignore=test/TestAsset src test
   
 notifications:
   irc: "irc.freenode.org#apigility-dev"

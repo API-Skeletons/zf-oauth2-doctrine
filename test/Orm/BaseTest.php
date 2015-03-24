@@ -18,8 +18,8 @@ abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpContro
         $serviceManager->setAllowOverride(true);
 
         copy(
-            __DIR__ . '/../TestAsset/data/doctrine-original.db',
-            __DIR__ . '/../TestAsset/data/doctrine.db'
+            __DIR__ . '/../asset/data/doctrine-original.db',
+            __DIR__ . '/../asset/data/doctrine.db'
         );
     }
 

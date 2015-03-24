@@ -4,7 +4,7 @@
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
  */
 
-namespace ZFTest\OAuth2;
+namespace ZFTest\OAuth2\Doctrine;
 
 use Zend\Loader\AutoloaderFactory;
 use RuntimeException;

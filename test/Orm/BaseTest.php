@@ -1,6 +1,6 @@
 <?php
 
-namespace ZFTest\OAuth2\DoctrineOrm;
+namespace ZFTest\OAuth2\Doctrine\Orm;
 
 use Doctrine\ORM\Tools\SchemaTool;
 
@@ -9,7 +9,7 @@ abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpContro
     protected function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../TestAsset/doctrine.application.config.php'
+            include __DIR__ . '/../asset/orm.config.php'
         );
 
         parent::setUp();

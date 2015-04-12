@@ -18,12 +18,12 @@ class UserCredentialsTest extends BaseTest
         // correct credentials
         $this->assertTrue($storage->checkUserCredentials('oauth_test_user', 'testpass'));
         // invalid password
-        $this->assertFalse($storage->checkUserCredentials('oauth_test_user', 'fakepass'));
+        $this->assertFalse($storage->checkUserCredentials('oauth_test_user', 'wronpass'));
         // invalid username
-        $this->assertFalse($storage->checkUserCredentials('fakeusername', 'testpass'));
+        $this->assertFalse($storage->checkUserCredentials('wrongusername', 'testpass'));
 
         // invalid username
-        $this->assertFalse($storage->getUserDetails('fakeusername'));
+        $this->assertFalse($storage->getUserDetails('wrongusername'));
 
         // ensure all properties are set
         $user = $storage->getUserDetails('oauth_test_user');
@@ -35,19 +35,19 @@ class UserCredentialsTest extends BaseTest
     /** @dataProvider provideStorage */
     public function testUserClaims(UserCredentialsInterface $storage)
     {
-        $claims = $storage->getUserClaims('oauth_test_user', 'profile');
-        $this->assertTrue(is_array($claims));
+        $profile = $storage->getUserClaims('oauth_test_user', 'profile');
+        $this->assertEquals(array('profile' => 'profile'), $profile);
 
-        $claims = $storage->getUserClaims('oauth_test_user', 'email');
-        $this->assertTrue(is_array($claims));
+        $email = $storage->getUserClaims('oauth_test_user', 'email');
+        $this->assertEquals(array('email' => 'doctrine@zfcampus'), $email);
 
-        $claims = $storage->getUserClaims('oauth_test_user', 'address');
-        $this->assertTrue(is_array($claims));
+        $address = $storage->getUserClaims('oauth_test_user', 'address');
+        $this->assertEquals(array('country' => 'US'), $address);
 
-        $claims = $storage->getUserClaims('oauth_test_user', 'phone');
-        $this->assertTrue(is_array($claims));
+        $phone = $storage->getUserClaims('oauth_test_user', 'phone');
+        $this->assertEquals(array('phone_number' => 'phone'), $phone);
 
         $this->assertFalse($storage->getUserClaims('oauth_test_user', 'invalid'));
-        $this->assertFalse($claims = $storage->getUserClaims('invalid', 'invalid'));
+        $this->assertFalse($storage->getUserClaims('invalid', 'invalid'));
     }
 }

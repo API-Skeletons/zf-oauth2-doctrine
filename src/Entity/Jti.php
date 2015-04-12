@@ -35,7 +35,7 @@ class Jti
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Entity\Client
+     * @var \ZF\OAuth2\Doctrine\Entity\Client
      */
     private $client;
 
@@ -183,10 +183,10 @@ class Jti
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      * @return Jti
      */
-    public function setClient(\ZF\OAuth2\Entity\Client $client)
+    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client = $client;
 
@@ -196,7 +196,7 @@ class Jti
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Entity\Client
+     * @return \ZF\OAuth2\Doctrine\Entity\Client
      */
     public function getClient()
     {

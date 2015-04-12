@@ -30,7 +30,7 @@ class PublicKey
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Entity\Client
+     * @var \ZF\OAuth2\Doctrine\Entity\Client
      */
     private $client;
 
@@ -127,10 +127,10 @@ class PublicKey
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      * @return PublicKey
      */
-    public function setClient(\ZF\OAuth2\Entity\Client $client)
+    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client = $client;
 
@@ -140,7 +140,7 @@ class PublicKey
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Entity\Client
+     * @return \ZF\OAuth2\Doctrine\Entity\Client
      */
     public function getClient()
     {

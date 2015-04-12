@@ -123,10 +123,10 @@ class Scope
     /**
      * Add client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      * @return Scope
      */
-    public function addClient(\ZF\OAuth2\Entity\Client $client)
+    public function addClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client[] = $client;
 
@@ -136,9 +136,9 @@ class Scope
     /**
      * Remove client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      */
-    public function removeClient(\ZF\OAuth2\Entity\Client $client)
+    public function removeClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client->removeElement($client);
     }
@@ -156,10 +156,10 @@ class Scope
     /**
      * Add authorizationCode
      *
-     * @param \ZF\OAuth2\Entity\AuthorizationCode $authorizationCode
+     * @param \ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode
      * @return Scope
      */
-    public function addAuthorizationCode(\ZF\OAuth2\Entity\AuthorizationCode $authorizationCode)
+    public function addAuthorizationCode(\ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode)
     {
         $this->authorizationCode[] = $authorizationCode;
 
@@ -169,9 +169,9 @@ class Scope
     /**
      * Remove authorizationCode
      *
-     * @param \ZF\OAuth2\Entity\AuthorizationCode $authorizationCode
+     * @param \ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode
      */
-    public function removeAuthorizationCode(\ZF\OAuth2\Entity\AuthorizationCode $authorizationCode)
+    public function removeAuthorizationCode(\ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode)
     {
         $this->authorizationCode->removeElement($authorizationCode);
     }
@@ -189,10 +189,10 @@ class Scope
     /**
      * Add refreshToken
      *
-     * @param \ZF\OAuth2\Entity\RefreshToken $refreshToken
+     * @param \ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken
      * @return Scope
      */
-    public function addRefreshToken(\ZF\OAuth2\Entity\RefreshToken $refreshToken)
+    public function addRefreshToken(\ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken)
     {
         $this->refreshToken[] = $refreshToken;
 
@@ -202,9 +202,9 @@ class Scope
     /**
      * Remove refreshToken
      *
-     * @param \ZF\OAuth2\Entity\RefreshToken $refreshToken
+     * @param \ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken
      */
-    public function removeRefreshToken(\ZF\OAuth2\Entity\RefreshToken $refreshToken)
+    public function removeRefreshToken(\ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken)
     {
         $this->refreshToken->removeElement($refreshToken);
     }
@@ -222,10 +222,10 @@ class Scope
     /**
      * Add accessToken
      *
-     * @param \ZF\OAuth2\Entity\AccessToken $accessToken
+     * @param \ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken
      * @return Scope
      */
-    public function addAccessToken(\ZF\OAuth2\Entity\AccessToken $accessToken)
+    public function addAccessToken(\ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken)
     {
         $this->accessToken[] = $accessToken;
 
@@ -235,9 +235,9 @@ class Scope
     /**
      * Remove accessToken
      *
-     * @param \ZF\OAuth2\Entity\AccessToken $accessToken
+     * @param \ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken
      */
-    public function removeAccessToken(\ZF\OAuth2\Entity\AccessToken $accessToken)
+    public function removeAccessToken(\ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken)
     {
         $this->accessToken->removeElement($accessToken);
     }

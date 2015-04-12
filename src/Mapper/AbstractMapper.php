@@ -317,7 +317,9 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
                             if (isset($config['mapping'][$key]['allow_null'])
                                 && $config['mapping'][$key]['allow_null']) {
                             } else {
-                                throw new Exception("Relation was not found: $key: $value");
+                                throw new Exception(
+                                    "Null value found for " . $key . " in mapper.  Should the reference be allow_null?"
+                                );
                             }
                         }
 
@@ -328,7 +330,7 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
 
                             // Recursively map relation data.  This should handle the user_id
                             // whenever the client_id is included.
-                            foreach ($applicationConfig['zf-oauth2']['storage_settings']['mapping'] as
+                            foreach ($applicationConfig['zf-oauth2-doctrine']['storage_settings']['mapping'] as
                                 $mapper => $mapperConfig) {
                                 if ($relation instanceof $mapperConfig['entity']) {
                                     foreach ($mapperConfig['mapping'] as $oAuth2Field => $mapperFieldConfig) {

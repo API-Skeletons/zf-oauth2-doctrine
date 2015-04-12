@@ -21,19 +21,19 @@ return array(
                     'field' => 'user',
                 ),
                 'client_entity' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                     'field' => 'client',
                 ),
                 'access_token_entity' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\AccessToken',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\AccessToken',
                     'field' => 'accessToken',
                 ),
                 'authorization_code_entity' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\AuthorizationCode',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\AuthorizationCode',
                     'field' => 'authorizationCode',
                 ),
                 'refresh_token_entity' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\RefreshToken',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
                     'field' => 'refreshToken',
                 ),
             ),
@@ -60,7 +60,7 @@ return array(
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\Client' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                     'mapping' => array(
                         'client_id' => array(
                             'type' => 'field',
@@ -85,7 +85,7 @@ return array(
                         'scope' => array(
                             'type' => 'collection',
                             'name' => 'scope',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Scope',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'ZF\OAuth2\Doctrine\Mapper\Scope',
                         ),
                         'user_id' => array(
@@ -100,7 +100,7 @@ return array(
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\AccessToken' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\AccessToken',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\AccessToken',
                     'mapping' => array(
                         'access_token' => array(
                             'type' => 'field',
@@ -115,14 +115,14 @@ return array(
                         'scope' => array(
                             'type' => 'collection',
                             'name' => 'scope',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Scope',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'ZF\OAuth2\Doctrine\Mapper\Scope',
                         ),
                         'client_id' => array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                         'user_id' => array(
@@ -136,7 +136,7 @@ return array(
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\RefreshToken' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\RefreshToken',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
                     'mapping' => array(
                         'refresh_token' => array(
                             'type' => 'field',
@@ -151,14 +151,14 @@ return array(
                         'scope' => array(
                             'type' => 'collection',
                             'name' => 'scope',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Scope',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'ZF\OAuth2\Doctrine\Mapper\Scope',
                         ),
                         'client_id' => array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                         'user_id' => array(
@@ -172,7 +172,7 @@ return array(
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\AuthorizationCode' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\AuthorizationCode',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\AuthorizationCode',
                     'mapping' => array(
                         'authorization_code' => array(
                             'type' => 'field',
@@ -192,7 +192,7 @@ return array(
                         'scope' => array(
                             'type' => 'collection',
                             'name' => 'scope',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Scope',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'ZF\OAuth2\Doctrine\Mapper\Scope',
                         ),
                         'id_token' => array(
@@ -204,7 +204,7 @@ return array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                         'user_id' => array(
@@ -218,7 +218,7 @@ return array(
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\Jwt' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\Jwt',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\Jwt',
                     'mapping' => array(
                         'subject' => array(
                             'type' => 'field',
@@ -234,14 +234,14 @@ return array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                     ),
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\Jti' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\Jti',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\Jti',
                     'mapping' => array(
                         'subject' => array(
                             'type' => 'field',
@@ -267,14 +267,14 @@ return array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                     ),
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\Scope' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\Scope',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                     'mapping' => array(
                         'scope' => array(
                             'type' => 'field',
@@ -290,14 +290,14 @@ return array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                     ),
                 ),
 
                 'ZF\OAuth2\Doctrine\Mapper\PublicKey' => array(
-                    'entity' => 'Zf\OAuth2\Doctrine\Entity\PublicKey',
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\PublicKey',
                     'mapping' => array(
                         'public_key' => array(
                             'type' => 'field',
@@ -318,7 +318,7 @@ return array(
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
-                            'entity' => 'Zf\OAuth2\Doctrine\Entity\Client',
+                            'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
                         ),
                     ),

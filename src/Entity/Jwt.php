@@ -25,7 +25,7 @@ class Jwt
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Entity\Client
+     * @var \ZF\OAuth2\Doctrine\Entity\Client
      */
     private $client;
 
@@ -98,10 +98,10 @@ class Jwt
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      * @return Jwt
      */
-    public function setClient(\ZF\OAuth2\Entity\Client $client)
+    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client = $client;
 
@@ -111,7 +111,7 @@ class Jwt
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Entity\Client
+     * @return \ZF\OAuth2\Doctrine\Entity\Client
      */
     public function getClient()
     {

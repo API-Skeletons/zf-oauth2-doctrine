@@ -19,12 +19,15 @@ class RefreshTokenTest extends BaseTest
         $token = $storage->getRefreshToken('refreshtoken');
         $this->assertFalse($token);
 
+        // base new code on existing for user
+        $testRefreshToken = $storage->getRefreshToken('testtoken');
+
         // add new token
         $expires = time() + 20;
         $success = $storage->setRefreshToken(
             'refreshtoken',
             'oauth_test_client',
-            'user_id_is_not_used',
+            $testRefreshToken['user_id'],
             $expires,
             'supportedscope1 supportedscope2'
         );
@@ -38,10 +41,9 @@ class RefreshTokenTest extends BaseTest
         $this->assertArrayHasKey('expires', $token);
         $this->assertEquals($token['refresh_token'], 'refreshtoken');
         $this->assertEquals($token['client_id'], 'oauth_test_client');
-        $this->assertEquals($token['user_id'], '1'); # reference from client
+        $this->assertEquals($token['user_id'], $testRefreshToken['user_id']);
         $this->assertEquals($token['expires'], $expires);
 
-        # should be expreRefreshToken?
         $this->assertTrue($storage->unsetRefreshToken('refreshtoken'));
     }
 }

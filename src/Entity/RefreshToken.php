@@ -25,7 +25,7 @@ class RefreshToken
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Entity\Client
+     * @var \ZF\OAuth2\Doctrine\Entity\Client
      */
     private $client;
 
@@ -155,10 +155,10 @@ class RefreshToken
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      * @return RefreshToken
      */
-    public function setClient(\ZF\OAuth2\Entity\Client $client)
+    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client = $client;
 
@@ -168,7 +168,7 @@ class RefreshToken
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Entity\Client
+     * @return \ZF\OAuth2\Doctrine\Entity\Client
      */
     public function getClient()
     {
@@ -178,10 +178,10 @@ class RefreshToken
     /**
      * Add scope
      *
-     * @param \ZF\OAuth2\Entity\Scope $scope
+     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
      * @return RefreshToken
      */
-    public function addScope(\ZF\OAuth2\Entity\Scope $scope)
+    public function addScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
     {
         $this->scope[] = $scope;
 
@@ -191,9 +191,9 @@ class RefreshToken
     /**
      * Remove scope
      *
-     * @param \ZF\OAuth2\Entity\Scope $scope
+     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
      */
-    public function removeScope(\ZF\OAuth2\Entity\Scope $scope)
+    public function removeScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
     {
         $this->scope->removeElement($scope);
     }

@@ -38,12 +38,15 @@ class AuthorizationCodeTest extends BaseTest
         $code = $storage->getAuthorizationCode('newcode');
         $this->assertFalse($code);
 
+        // base new code on existing for user
+        $testToken = $storage->getAuthorizationCode('testtoken');
+
         // add new code
         $expires = time() + 20;
         $success = $storage->setAuthorizationCode(
             'newcode',
             'oauth_test_client',
-            'user_id_is_not_used',
+            $testToken['user_id'],
             'http://example.com',
             $expires
         );
@@ -58,7 +61,7 @@ class AuthorizationCodeTest extends BaseTest
         $this->assertArrayHasKey('expires', $code);
         $this->assertEquals($code['authorization_code'], 'newcode');
         $this->assertEquals($code['client_id'], 'oauth_test_client');
-        $this->assertEquals($code['user_id'], '1'); # reference from oauth_test_client
+        $this->assertEquals($code['user_id'], $testToken['user_id']);
         $this->assertEquals($code['redirect_uri'], 'http://example.com');
         $this->assertEquals($code['expires'], $expires);
 
@@ -67,7 +70,7 @@ class AuthorizationCodeTest extends BaseTest
         $success = $storage->setAuthorizationCode(
             'newcode',
             'oauth_test_client2',
-            'user_id_is_not_used',
+            $testToken['user_id'],
             'http://example.org',
             $expires
         );
@@ -82,7 +85,7 @@ class AuthorizationCodeTest extends BaseTest
         $this->assertArrayHasKey('expires', $code);
         $this->assertEquals($code['authorization_code'], 'newcode');
         $this->assertEquals($code['client_id'], 'oauth_test_client2');
-        $this->assertEquals($code['user_id'], '2'); # reference from oauth_test_client
+        $this->assertEquals($code['user_id'], $testToken['user_id']);
         $this->assertEquals($code['redirect_uri'], 'http://example.org');
         $this->assertEquals($code['expires'], $expires);
     }
@@ -96,12 +99,15 @@ class AuthorizationCodeTest extends BaseTest
             return;
         }
 
+        // base new code on existing for user
+        $testToken = $storage->getAuthorizationCode('testtoken');
+
         // create a valid code
         $expires = time() + 20;
         $success = $storage->setAuthorizationCode(
             'code-to-expire',
             'oauth_test_client',
-            'user_id_is_not_used',
+            $testToken['user_id'],
             'http://example.com',
             time() + 20
         );

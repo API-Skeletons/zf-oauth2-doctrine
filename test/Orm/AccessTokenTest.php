@@ -19,9 +19,12 @@ class AccessTokenTest extends BaseTest
         $token = $storage->getAccessToken('newtoken');
         $this->assertFalse($token);
 
-        // add new token
+        // add new token; get user from previous token
+        $testToken = $storage->getAccessToken('testtoken');
+
+
         $expires = time() + 20;
-        $success = $storage->setAccessToken('newtoken', 'oauth_test_client', 'user_id_is_not_used', $expires);
+        $success = $storage->setAccessToken('newtoken', 'oauth_test_client', $testToken['user_id'], $expires);
         $this->assertTrue($success);
 
         $token = $storage->getAccessToken('newtoken');
@@ -32,12 +35,12 @@ class AccessTokenTest extends BaseTest
         $this->assertArrayHasKey('expires', $token);
         $this->assertEquals($token['access_token'], 'newtoken');
         $this->assertEquals($token['client_id'], 'oauth_test_client');
-        $this->assertEquals($token['user_id'], '1'); # reference from client
+        $this->assertEquals($token['user_id'], $testToken['user_id']);
         $this->assertEquals($token['expires'], $expires);
 
         // change existing token
         $expires = time() + 42;
-        $success = $storage->setAccessToken('newtoken', 'oauth_test_client2', 'user_id_is_not_used', $expires);
+        $success = $storage->setAccessToken('newtoken', 'oauth_test_client2', $testToken['user_id'], $expires);
         $this->assertTrue($success);
 
         $token = $storage->getAccessToken('newtoken');
@@ -48,7 +51,7 @@ class AccessTokenTest extends BaseTest
         $this->assertArrayHasKey('expires', $token);
         $this->assertEquals($token['access_token'], 'newtoken');
         $this->assertEquals($token['client_id'], 'oauth_test_client2');
-        $this->assertEquals($token['user_id'], '2'); # reference from client
+        $this->assertEquals($token['user_id'], $testToken['user_id']);
         $this->assertEquals($token['expires'], $expires);
     }
 }

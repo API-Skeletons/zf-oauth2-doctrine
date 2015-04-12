@@ -34,8 +34,8 @@ class Module
         if (isset($config['zf-oauth2-doctrine']['storage_settings']['dynamic_mapping'])
             && $config['zf-oauth2-doctrine']['storage_settings']['dynamic_mapping']) {
 
-            $userClientSubscriber = new DynamicMappingSubscriber($config['zf-oauth2']['storage_settings']['dynamic_mapping']);
-            $eventManager = $sm->get($config['zf-oauth2']['storage_settings']['event_manager']);
+            $userClientSubscriber = new DynamicMappingSubscriber($config['zf-oauth2-doctrine']['storage_settings']['dynamic_mapping']);
+            $eventManager = $sm->get($config['zf-oauth2-doctrine']['storage_settings']['event_manager']);
             $eventManager->addEventSubscriber($userClientSubscriber);
         }
     }

@@ -47,8 +47,8 @@ class DoctrineMapperFactory implements AbstractFactoryInterface
         // Validate object is set
         $config = $serviceLocator->get('Config');
 
-        if (!isset($config['zf-oauth2']['storage_settings']['mapping'])
-            || !isset($config['zf-oauth2']['storage_settings']['mapping'][$requestedName])
+        if (!isset($config['zf-oauth2-doctrine']['storage_settings']['mapping'])
+            || !isset($config['zf-oauth2-doctrine']['storage_settings']['mapping'][$requestedName])
         ) {
             $this->lookupCache[$requestedName] = false;
 
@@ -60,7 +60,7 @@ class DoctrineMapperFactory implements AbstractFactoryInterface
         $className = $this->normalizeClassname($className);
 
         $reflection = new \ReflectionClass($className);
-        if (!$reflection->isSubclassOf('\ZF\OAuth2\Mapper\AbstractMapper')) {
+        if (!$reflection->isSubclassOf('\ZF\OAuth2\Doctrine\Mapper\AbstractMapper')) {
             // @codeCoverageIgnoreStart
             throw new ServiceNotFoundException(
                 sprintf(
@@ -73,7 +73,7 @@ class DoctrineMapperFactory implements AbstractFactoryInterface
         // @codeCoverageIgnoreEnd
 
         // Validate object manager
-        $config = $config['zf-oauth2']['storage_settings']['object_manager'];
+        $config = $config['zf-oauth2-doctrine']['storage_settings']['object_manager'];
         if (!isset($config)) {
             // @codeCoverageIgnoreStart
             throw new ServiceNotFoundException(
@@ -103,7 +103,7 @@ class DoctrineMapperFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
-        $mappingConfig = $config['zf-oauth2']['storage_settings']['mapping'][$requestedName];
+        $mappingConfig = $config['zf-oauth2-doctrine']['storage_settings']['mapping'][$requestedName];
 
         $className = $requestedName;
         $className = $this->normalizeClassname($className);
@@ -137,8 +137,8 @@ class DoctrineMapperFactory implements AbstractFactoryInterface
      */
     protected function loadObjectManager(ServiceLocatorInterface $serviceLocator, $config)
     {
-        if ($serviceLocator->has($config['zf-oauth2']['storage_settings']['object_manager'])) {
-            $objectManager = $serviceLocator->get($config['zf-oauth2']['storage_settings']['object_manager']);
+        if ($serviceLocator->has($config['zf-oauth2-doctrine']['storage_settings']['object_manager'])) {
+            $objectManager = $serviceLocator->get($config['zf-oauth2-doctrine']['storage_settings']['object_manager']);
         } else {
             // @codeCoverageIgnoreStart
             throw new ServiceNotCreatedException('The object_manager could not be found.');

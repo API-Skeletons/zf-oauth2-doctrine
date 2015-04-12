@@ -5,6 +5,8 @@ return array(
         'ZF\ContentNegotiation',
         'ZF\\ApiProblem',
         'ZF\\OAuth2',
+        'ZF\\OAuth2\\Doctrine',
+        'ZFTest\\OAuth2\\Doctrine',
         'DoctrineModule',
         'DoctrineORMModule',
     ),
@@ -19,6 +21,7 @@ return array(
             __DIR__ . '/../../../../..',
             __DIR__ . '/../../../../../vendor',
             __DIR__ . '/module',
+            'ZFTest\\OAuth2\\Doctrine' => __DIR__ . '/module/Doctrine',
         ),
 
         // An array of paths from which to glob configuration files after

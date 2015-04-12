@@ -26,7 +26,7 @@ class AccessToken implements ArraySerializableInterface
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Entity\Client
+     * @var \ZF\OAuth2\Doctrine\Entity\Client
      */
     private $client;
 
@@ -156,10 +156,10 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Entity\Client $client
+     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
      * @return AccessToken
      */
-    public function setClient(\ZF\OAuth2\Entity\Client $client)
+    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
     {
         $this->client = $client;
 
@@ -169,7 +169,7 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Entity\Client
+     * @return \ZF\OAuth2\Doctrine\Entity\Client
      */
     public function getClient()
     {
@@ -179,10 +179,10 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Add scope
      *
-     * @param \ZF\OAuth2\Entity\Scope $scope
+     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
      * @return AccessToken
      */
-    public function addScope(\ZF\OAuth2\Entity\Scope $scope)
+    public function addScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
     {
         $this->scope[] = $scope;
 
@@ -192,9 +192,9 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Remove scope
      *
-     * @param \ZF\OAuth2\Entity\Scope $scope
+     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
      */
-    public function removeScope(\ZF\OAuth2\Entity\Scope $scope)
+    public function removeScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
     {
         $this->scope->removeElement($scope);
     }

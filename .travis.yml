@@ -1,8 +1,5 @@
 language: php
 
-services:
-  - mongodb
-
 php:
   - 5.3
   - 5.4
@@ -20,7 +17,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit
-  - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/data --ignore=test/Bootstrap.php --ignore=test/TestAsset src test
+  - ./vendor/bin/phpcs --standard=PSR2
   
 notifications:
   irc: "irc.freenode.org#apigility-dev"

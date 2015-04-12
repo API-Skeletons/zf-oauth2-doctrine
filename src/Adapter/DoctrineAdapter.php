@@ -196,8 +196,10 @@ class DoctrineAdapter implements
     public function checkClientCredentials($client_id, $client_secret = null)
     {
         $config = $this->getConfig();
-        $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
-        $doctrineClientSecretField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_secret']['name'];
+        $doctrineClientIdField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+        $doctrineClientSecretField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_secret']['name'];
 
         $client = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['entity'])
@@ -238,7 +240,8 @@ class DoctrineAdapter implements
     public function isPublicClient($client_id)
     {
         $config = $this->getConfig();
-        $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+        $doctrineClientIdField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
 
         $client = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['entity'])
@@ -285,7 +288,8 @@ class DoctrineAdapter implements
     public function getClientDetails($client_id)
     {
         $config = $this->getConfig();
-        $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+        $doctrineClientIdField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
 
         $client = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['entity'])
@@ -319,7 +323,8 @@ class DoctrineAdapter implements
         $user_id = null
     ) {
         $config = $this->getConfig();
-        $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+        $doctrineClientIdField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
 
         $client = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['entity'])
@@ -340,15 +345,20 @@ class DoctrineAdapter implements
             $scopes->add($this->getObjectManager()
                 ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Scope']['entity'])
                 ->findOneBy(array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Scope']['mapping']['scope']['name'] => $scopeString,
+                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Scope']['mapping']['scope']['name']
+                        => $scopeString,
                 )));
         }
 
         $client->exchangeArray(array(
-            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_secret']['name'] => $client_secret,
-            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['redirect_uri']['name'] => $redirect_uri,
-            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['grant_types']['name'] => $grant_types,
-            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['scope']['name'] => $scopes,
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_secret']['name']
+                => $client_secret,
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['redirect_uri']['name']
+                => $redirect_uri,
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['grant_types']['name']
+                => $grant_types,
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['scope']['name']
+                => $scopes,
         ));
 
         $this->getObjectManager()->flush();
@@ -377,7 +387,8 @@ class DoctrineAdapter implements
     public function checkRestrictedGrantType($client_id, $grant_type)
     {
         $config = $this->getConfig();
-        $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+        $doctrineClientIdField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
 
         $client = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['entity'])
@@ -411,7 +422,8 @@ class DoctrineAdapter implements
     public function getClientScope($client_id)
     {
         $config = $this->getConfig();
-        $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+        $doctrineClientIdField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
 
         $client = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Client']['entity'])
@@ -1024,7 +1036,8 @@ class DoctrineAdapter implements
             );
 
         if ($refreshToken) {
-            $doctrineExpiresField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\RefreshToken']['mapping']['expires']['name'];
+            $doctrineExpiresField =
+                $config['mapping']['ZF\OAuth2\Doctrine\Mapper\RefreshToken']['mapping']['expires']['name'];
             $refreshToken ->exchangeArray(array(
                 $doctrineExpiresField => new DateTime(), # maybe subtract 1 second?
             ));
@@ -1088,7 +1101,8 @@ class DoctrineAdapter implements
     public function getDefaultScope($client_id = null)
     {
         $config = $this->getConfig();
-        $doctrineScopeIsDefaultField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Scope']['mapping']['is_default']['name'];
+        $doctrineScopeIsDefaultField =
+            $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Scope']['mapping']['is_default']['name'];
 
         $scope = $this->getObjectManager()
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Scope']['entity'])
@@ -1292,7 +1306,8 @@ class DoctrineAdapter implements
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['entity'])
             ->findOneBy(
                 array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name'] => $client,
+                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name']
+                        => $client,
                 )
             );
 
@@ -1330,7 +1345,8 @@ class DoctrineAdapter implements
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['entity'])
             ->findOneBy(
                 array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name'] => $client,
+                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name']
+                        => $client,
                 )
             );
 
@@ -1368,7 +1384,8 @@ class DoctrineAdapter implements
             ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['entity'])
             ->findOneBy(
                 array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name'] => $client,
+                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name']
+                        => $client,
                 )
             );
 

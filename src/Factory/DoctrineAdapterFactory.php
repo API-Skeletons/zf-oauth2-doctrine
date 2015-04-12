@@ -23,7 +23,8 @@ class DoctrineAdapterFactory implements FactoryInterface
         $config = $services->get('Config');
 
         $oauth2ServerConfig = array();
-        if (isset($config['zf-oauth2-doctrine']['storage_settings']) && is_array($config['zf-oauth2-doctrine']['storage_settings'])) {
+        if (isset($config['zf-oauth2-doctrine']['storage_settings'])
+            && is_array($config['zf-oauth2-doctrine']['storage_settings'])) {
             $oauth2ServerConfig = $config['zf-oauth2-doctrine']['storage_settings'];
         }
 
@@ -34,7 +35,9 @@ class DoctrineAdapterFactory implements FactoryInterface
             $adapter->setBcryptCost($config['zf-oauth2-doctrine']['storage_settings']['bcrypt_cost']);
         }
 
-        $adapter->setObjectManager($this->loadObjectManager($services, $config['zf-oauth2-doctrine']['storage_settings']));
+        $adapter->setObjectManager(
+            $this->loadObjectManager($services, $config['zf-oauth2-doctrine']['storage_settings'])
+        );
         $adapter->setServiceLocator($services);
 
         return $adapter;

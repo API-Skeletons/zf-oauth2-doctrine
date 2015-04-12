@@ -22,7 +22,11 @@ class AuthorizationCodeTest extends BaseTest
 
         // valid client_id
         $details = $storage->getAuthorizationCode('testtoken');
-        $this->assertNotNull($details);
+        $this->assertTrue(is_array($details->getArrayCopy()));
+        $this->assertEquals('testtoken', $details->getAuthorizationCode());
+        $this->assertEquals('http://redirect', $details->getRedirectUri());
+        $this->assertNotNull($details->getClientId());
+        $this->assertNotNull($details->getUserId());
     }
 
     /** @dataProvider provideStorage */

@@ -14,8 +14,10 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
 {
     public function offsetSet($offset, $value)
     {
+        // @codeCoverageIgnoreStart
         $this->$offset = $value;
     }
+        // CodeCoverageIgnoreEnd
 
     public function offsetExists($offset)
     {
@@ -24,8 +26,10 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
 
     public function offsetUnset($offset)
     {
+        // @codeCoverageIgnoreStart
         throw new \Exception('not implemented');
     }
+        // @codeCoverageIgnoreEnd
 
     public function offsetGet($offset)
     {
@@ -48,7 +52,6 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
 
     public function getAuthorizationCode()
     {
-        die('get auth code ' . $this->authorization_code);
         return $this->authorization_code;
     }
 
@@ -171,9 +174,11 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
                 case 'userid':
                     $this->setUserId($value);
                     break;
+            // @codeCoverageIgnoreStart
                 default:
                     break;
             }
+            // @codeCoverageIgnoreEnd
         }
 
         return $this;
@@ -181,6 +186,8 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
 
     public function validateRequest(RequestInterface $request, ResponseInterface $response)
     {
+        // @codeCoverageIgnoreStart
         throw new \Exception('Not implemented');
     }
+        // @codeCoverageIgnoreEnd
 }

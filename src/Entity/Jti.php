@@ -59,8 +59,10 @@ class Jti
                     $this->setJti($value);
                     break;
                 default:
+        // @codeCoverageIgnoreStart
                     break;
             }
+        // @codeCoverageIgnoreEnd
         }
 
         return $this;

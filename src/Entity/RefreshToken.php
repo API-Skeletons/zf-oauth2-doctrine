@@ -77,8 +77,10 @@ class RefreshToken
                     $this->setUser($value);
                     break;
                 default:
+            // @codeCoverageIgnoreStart
                     break;
             }
+            // @codeCoverageIgnoreEnd
         }
 
         return $this;

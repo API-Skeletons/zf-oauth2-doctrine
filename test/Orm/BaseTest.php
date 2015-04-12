@@ -126,6 +126,7 @@ abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpContro
             $authorizationCode = new Entity\AuthorizationCode();
             $authorizationCode->setAuthorizationCode('testtoken');
             $authorizationCode->setClient($client);
+            $authorizationCode->setRedirectUri('http://redirect');
             $authorizationCode->setExpires(DateTime::createFromFormat('Y-m-d', '2020-01-01'));
             $authorizationCode->setUser($user);
 

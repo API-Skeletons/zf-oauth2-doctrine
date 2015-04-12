@@ -1,18 +1,18 @@
 OAuth2 Server for Doctrine
 ==========================
 
-*** IN DEVELOPMENT ***
-This library is not ready for production use.
+This is an OAuth2 Doctrine Adapter for Apigility.  This provides the database structure and interaction for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
 Requirements
 ------------
 
-Several modules are required through [composer](http://getcomposer.org).  Depending on your use of ORM or ODM you should include ```doctrine/doctrine-orm-module``` and/or ```doctrine/doctrine-mongo-odm-module``` and their supporting libraries.
+At this time only ORM is supported.  For ORM you will require `doctrine/doctrine-orm-module.
 
 
 Suggested Improvements
 ----------------------
 
+These are other libraries which support a Doctrine API:
 ```
 zfcampus/zf-apigility-doctrine
 zfcampus/zf-doctrine-querybuilder
@@ -22,17 +22,17 @@ zfcampus/zf-doctrine-querybuilder
 Entity Relationship Diagram
 ---------------------------
 
-In order to understand how OAuth2 works you should understand the ERD.  This is stored in a [Skipper](http://www.skipper18.com) file.  If you do not have Skipper and you are writing a Doctrine application now would be a good time to consider an upgrade to your practices.
+In order to understand how OAuth2 works you will understand the ERD.  The ERD is stored in [Skipper](http://www.skipper18.com).  If you do not have Skipper and you are writing a Doctrine application now would be a good time to consider an upgrade to your practices.
 
-The ERD is here: https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/OAuth2-orm.skipper
+The ERD is in the media directory.
 
-Because you'll be integrating zf-oauth2-doctrine with your own ERD you may include the externally stored https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/OAuth2-orm.module.xml bundle into your ERD.
+Because you'll be integrating zf-oauth2-doctrine with your own ERD you may include the externally stored OAuth2-orm.module.xml skipper bundle in your ERD.
 
 
 Configuration
 -------------
 
-Copy ```config/oauth2.doctrine-[orm|odm].global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-[orm|odm].global.php``` You will need toedit this file with your User entity which is not provided.
+Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
 
 
 Using Default Entities
@@ -43,10 +43,9 @@ Details for creating your database with the included entities are outside the sc
 By default this module uses the entities provided but you may toggle this and use your own entites (and map them in the mapping config section) by toggling this flag:
 
 ```
-'zf-oauth2' => array(
+'zf-oauth2-doctrine' => array(
     'storage_settings' => array(
         'enable_default_entities' => true,
-        ...
 ```
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\OAuth2\Entity;
+namespace ZF\OAuth2\Doctrine\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

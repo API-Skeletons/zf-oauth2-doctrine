@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<skipper version="3.0.2.1162" mvc="Without MVC" orm="Doctrine2">
-  <module name="OAuth2 ORM" import-format="Doctrine2Xml" import-path="../config/xml" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
+<skipper version="3.1.2.1193" mvc="Without MVC" orm="Doctrine2">
+  <module name="OAuth2 ORM" import-format="Doctrine2Xml" import-path="../config/orm" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
     <entity name="Client" uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="f24288d3-c5ab-4e4f-a251-0bca949873d1"/>
       <field name="clientId" type="string" uuid="5902288a-0d1f-44c0-a02c-19bc92de37b1"/>
@@ -179,7 +179,7 @@
       <entity-ref name="PublicKey"/>
     </region>
     <orm-attributes>
-      <attribute name="namespace">ZF\OAuth2\Entity</attribute>
+      <attribute name="namespace">ZF\OAuth2\Doctrine\Entity</attribute>
     </orm-attributes>
   </module>
   <visual-data>

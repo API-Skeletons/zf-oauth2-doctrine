@@ -18,7 +18,7 @@ class Module
         if (isset($config['zf-oauth2-doctrine']['storage_settings']['default_entities_enable'])
             && $config['zf-oauth2-doctrine']['storage_settings']['default_entities_enable']) {
             $chain = $sm->get($config['zf-oauth2-doctrine']['storage_settings']['driver']);
-            $chain->addDriver(new XmlDriver(__DIR__ . '/config/orm'), 'ZF\OAuth2\Entity');
+            $chain->addDriver(new XmlDriver(__DIR__ . '/config/orm'), 'ZF\OAuth2\Doctrine\Entity');
         }
 
         // Enable default documents
@@ -26,7 +26,7 @@ class Module
             && $config['zf-oauth2-doctrine']['storage_settings']['default_documents_enable']) {
             $driver = $config['zf-oauth2-doctrine']['storage_settings']['default_documents_driver'];
             $chain = $sm->get($config['zf-oauth2-doctrine']['storage_settings']['driver']);
-            $chain->addDriver(new $driver(__DIR__ . '/config/odm'), 'ZF\OAuth2\Document');
+            $chain->addDriver(new $driver(__DIR__ . '/config/odm'), 'ZF\OAuth2\Doctrine\Document');
         }
 
         if (isset($config['zf-oauth2-doctrine']['storage_settings']['dynamic_mapping'])

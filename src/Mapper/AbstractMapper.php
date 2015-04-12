@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\OAuth2\Mapper;
+namespace ZF\OAuth2\Doctrine\Mapper;
 
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;

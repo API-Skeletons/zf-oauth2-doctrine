@@ -24,46 +24,15 @@ Entity Relationship Diagram
 
 In order to understand how OAuth2 works you should understand the ERD.  This is stored in a [Skipper](http://www.skipper18.com) file.  If you do not have Skipper and you are writing a Doctrine application now would be a good time to consider an upgrade to your practices.
 
-The ERD is here: https://github.com/zfcampus/zf-oauth2/blob/master/media/OAuth2.skipper
-If you don't have Skipper yet you can see a PDF here: https://github.com/zfcampus/zf-oauth2/blob/master/media/OAuth2.pdf
+The ERD is here: https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/OAuth2-orm.skipper
 
-Because you'll be integrating zf-oauth2 Doctrine with your own ERD you may include the externally stored https://github.com/zfcampus/zf-oauth2/blob/master/media/ZF%20OAuth2.skipper bundle into your ERD.
+Because you'll be integrating zf-oauth2-doctrine with your own ERD you may include the externally stored https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/OAuth2-orm.module.xml bundle into your ERD.
 
 
 Configuration
 -------------
 
-Copy ```config/oauth2.doctrine.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine.global.php```  If you are using the default doctrine.entitymanager.orm_default you will still need to change this file.
-
-The OAuth2 Doctrine expects a User entity jointed to ZF\OAuth2\Entity\Client.  Because your ERD includes but does not associate your custom User entity to ZF\OAuth2\Entity\Client an association is made dynamically.  This is configured in the ```oauth2.doctrine.global.php``` file:
-
-```
-'zf-oauth2' => array(
-    'storage' => 'ZF\OAuth2\Adapter\DoctrineAdapter',
-    'storage_settings' => array(
-        ...
-        // Dynamically map the user_entity to the client_entity
-        'dynamic_mapping' => array(
-            'user_entity' => array(
-                'entity' => 'RollNApi\Entity\User',
-                'field' => 'user',
-            ),
-            'client_entity' => array(
-                'entity' => 'ZF\OAuth2\Entity\Client',
-                'field' => 'client',
-            ),
-        ),
-        ...
-```
-
-Change the dynamic_mapping to your custom User entity and be sure it includes $client, addClient, and removeClient.
-
-Next change the
-```
-        'mapping' => array(
-            'ZF\OAuth2\Mapper\User' => array(
-```
-section and define your user there.  Only id, username, and password are required.  The mappings are customizable for example you may map the username to an email if you choose.
+Copy ```config/oauth2.doctrine-[orm|odm].global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-[orm|odm].global.php``` You will need toedit this file with your User entity which is not provided.
 
 
 Using Default Entities

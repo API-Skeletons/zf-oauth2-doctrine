@@ -6,7 +6,7 @@
 $userEntity = 'DoctrineOAuth2\Entity\User';
 
 return array(
-    'zf-oauth2' => array(
+    'zf-oauth2-doctrine' => array(
         'storage' => 'ZF\OAuth2\Adapter\DoctrineAdapter',
         'storage_settings' => array(
             'object_manager' => 'doctrine.entitymanager.orm_default',

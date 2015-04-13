@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
+[![Latest Stable Version](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/v/stable.svg)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) [![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads.svg)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) [![Latest Unstable Version](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/v/unstable.svg)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) [![License](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/license.svg)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
 
 OAuth2 Server for Doctrine
 ==========================

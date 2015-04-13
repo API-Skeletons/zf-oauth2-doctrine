@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
+
 OAuth2 Server for Doctrine
 ==========================
 

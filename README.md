@@ -45,7 +45,7 @@ This library supplies every entity you need to implement OAuth2 except the User 
 
 The User entity must implement `ZF/OAuth2/Doctrine/Entity/UserInterface.php`
 
-The User entitiy for the unit test for this module is a good template to start from: (https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)[https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php]
+The User entitiy for the unit test for this module is a good template to start from: [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
 
 
 Using Default Entities

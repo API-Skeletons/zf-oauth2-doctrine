@@ -49,7 +49,7 @@ If you are using zf-oauth2 you will want to change the UserId Provider by adding
 ```
 
 
-The User Enity
+The User Entity
 --------------
 
 This library supplies every entity you need to implement OAuth2 except the User entity.  The reason is so the User entity can be decoupled from the OAuth2 library instead to be linked dynamically at run time.  This allows, among other benefits, the ability to create an ERD without modifying the OAuth2-rm.module.xml module.

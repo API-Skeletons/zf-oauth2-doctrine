@@ -37,6 +37,17 @@ Configuration
 
 Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
 
+If you are using zf-oauth2 you will want to change the UserId Provider by adding this section to your config:
+
+```
+    'service_manager' => array(
+        'aliases' => array(
+            'ZF\OAuth2\Provider\UserId' => 
+                'ZF\OAuth2\Provider\UserId\AuthenticationService',
+        ),
+    ),
+```
+
 
 The User Enity
 --------------

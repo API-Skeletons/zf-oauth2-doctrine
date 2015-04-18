@@ -9,7 +9,7 @@ This is an OAuth2 Doctrine Adapter for Apigility.  This provides the database st
 Requirements
 ------------
 
-At this time only ORM is supported.  For ORM you will require `doctrine/doctrine-orm-module.
+At this time only ORM is supported.  For ORM you will require `doctrine/doctrine-orm-module` through composer.
 
 
 Suggested Improvements
@@ -36,6 +36,16 @@ Configuration
 -------------
 
 Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
+
+
+The User Enity
+--------------
+
+This library supplies every entity you need to implement OAuth2 except the User entity.  The reason is so the User entity can be decoupled from the OAuth2 library instead to be linked dynamically at run time.  This allows, among other benefits, the ability to create an ERD without modifying the OAuth2-rm.module.xml module.
+
+The User entity must implement `ZF/OAuth2/Doctrine/Entity/UserInterface.php`
+
+The User entitiy for the unit test for this module is a good template to start from: (https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)[https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php]
 
 
 Using Default Entities

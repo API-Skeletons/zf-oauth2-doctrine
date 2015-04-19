@@ -6,11 +6,21 @@ OAuth2 Server for Doctrine
 
 This is an OAuth2 Doctrine Adapter for Apigility.  This provides the database structure and interaction for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
+
 Requirements
 ------------
 
 At this time only ORM is supported.  For ORM you will require `doctrine/doctrine-orm-module` through composer.
 
+
+Installation
+------------
+
+Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
+
+```sh
+$ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.1"
+```
 
 Suggested Improvements
 ----------------------
@@ -93,5 +103,5 @@ class DefaultOrm extends ZFDefaultOrm
 
 ```
 
-See (zfcampus/zf-apigility-doctrine)[https://github.com/zfcampus/zf-apigility-doctrine] for more details on Query Providers.
+See [zfcampus/zf-apigility-doctrine](https://github.com/zfcampus/zf-apigility-doctrine) for more details on Query Providers.
 

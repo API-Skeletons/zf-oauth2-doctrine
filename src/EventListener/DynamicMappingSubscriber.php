@@ -66,13 +66,34 @@ class DynamicMappingSubscriber implements EventSubscriber
                 break;
 
             case $this->config['client_entity']['entity']:
+                $metadata->mapManyToOne(array(
+                    'targetEntity' => $this->config['user_entity']['entity'],
+                    'fieldName' => $this->config['user_entity']['field'],
+                    'inversedBy' => $this->config['client_entity']['field'],
+                ));
+                break;
             case $this->config['access_token_entity']['entity']:
+                $metadata->mapManyToOne(array(
+                    'targetEntity' => $this->config['user_entity']['entity'],
+                    'fieldName' => $this->config['user_entity']['field'],
+                    'inversedBy' => $this->config['access_token_entity']['field'],
+                ));
+                break;
             case $this->config['authorization_code_entity']['entity']:
+                $metadata->mapManyToOne(array(
+                    'targetEntity' => $this->config['user_entity']['entity'],
+                    'fieldName' => $this->config['user_entity']['field'],
+                    'inversedBy' => $this->config['authorization_code_entity']['field'],
+                ));
+                break;
             case $this->config['refresh_token_entity']['entity']:
                 $metadata->mapManyToOne(array(
                     'targetEntity' => $this->config['user_entity']['entity'],
                     'fieldName' => $this->config['user_entity']['field'],
+                    'inversedBy' => $this->config['refresh_token_entity']['field'],
                 ));
+                break;
+            default:
                 break;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RefreshToken
@@ -25,7 +25,7 @@ class RefreshToken
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Doctrine\Entity\Client
+     * @var Client
      */
     private $client;
 
@@ -44,7 +44,7 @@ class RefreshToken
      */
     public function __construct()
     {
-        $this->scope = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->scope = new ArrayCollection();
     }
 
     public function exchangeArray(array $array)
@@ -157,10 +157,10 @@ class RefreshToken
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      * @return RefreshToken
      */
-    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -170,7 +170,7 @@ class RefreshToken
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Doctrine\Entity\Client
+     * @return Client
      */
     public function getClient()
     {
@@ -180,10 +180,10 @@ class RefreshToken
     /**
      * Add scope
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
+     * @param Scope $scope
      * @return RefreshToken
      */
-    public function addScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
+    public function addScope(Scope $scope)
     {
         $this->scope[] = $scope;
 
@@ -193,9 +193,9 @@ class RefreshToken
     /**
      * Remove scope
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
+     * @param Scope $scope
      */
-    public function removeScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
+    public function removeScope(Scope $scope)
     {
         $this->scope->removeElement($scope);
     }

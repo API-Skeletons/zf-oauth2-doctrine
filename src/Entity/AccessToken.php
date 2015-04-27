@@ -2,8 +2,8 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\ArraySerializableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * AccessToken
@@ -26,7 +26,7 @@ class AccessToken implements ArraySerializableInterface
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Doctrine\Entity\Client
+     * @var Client
      */
     private $client;
 
@@ -45,7 +45,7 @@ class AccessToken implements ArraySerializableInterface
      */
     public function __construct()
     {
-        $this->scope = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->scope = new ArrayCollection();
     }
 
     public function getArrayCopy()
@@ -156,10 +156,10 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      * @return AccessToken
      */
-    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -169,7 +169,7 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Doctrine\Entity\Client
+     * @return Client
      */
     public function getClient()
     {
@@ -179,10 +179,10 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Add scope
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
+     * @param Scope $scope
      * @return AccessToken
      */
-    public function addScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
+    public function addScope(Scope $scope)
     {
         $this->scope[] = $scope;
 
@@ -192,9 +192,9 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Remove scope
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
+     * @param Scope $scope
      */
-    public function removeScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
+    public function removeScope(Scope $scope)
     {
         $this->scope->removeElement($scope);
     }

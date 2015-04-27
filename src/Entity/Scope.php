@@ -2,7 +2,7 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Scope
@@ -49,10 +49,10 @@ class Scope
      */
     public function __construct()
     {
-        $this->client = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->authorizationCode = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->refreshToken = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->accessToken = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->client = new ArrayCollection();
+        $this->authorizationCode = new ArrayCollection();
+        $this->refreshToken = new ArrayCollection();
+        $this->accessToken = new ArrayCollection();
     }
 
     public function getArrayCopy()
@@ -123,10 +123,10 @@ class Scope
     /**
      * Add client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      * @return Scope
      */
-    public function addClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function addClient(Client $client)
     {
         $this->client[] = $client;
 
@@ -136,9 +136,9 @@ class Scope
     /**
      * Remove client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      */
-    public function removeClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function removeClient(Client $client)
     {
         $this->client->removeElement($client);
     }
@@ -156,10 +156,10 @@ class Scope
     /**
      * Add authorizationCode
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode
+     * @param AuthorizationCode $authorizationCode
      * @return Scope
      */
-    public function addAuthorizationCode(\ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode)
+    public function addAuthorizationCode(AuthorizationCode $authorizationCode)
     {
         $this->authorizationCode[] = $authorizationCode;
 
@@ -169,9 +169,9 @@ class Scope
     /**
      * Remove authorizationCode
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode
+     * @param AuthorizationCode $authorizationCode
      */
-    public function removeAuthorizationCode(\ZF\OAuth2\Doctrine\Entity\AuthorizationCode $authorizationCode)
+    public function removeAuthorizationCode(AuthorizationCode $authorizationCode)
     {
         $this->authorizationCode->removeElement($authorizationCode);
     }
@@ -189,10 +189,10 @@ class Scope
     /**
      * Add refreshToken
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken
+     * @param RefreshToken $refreshToken
      * @return Scope
      */
-    public function addRefreshToken(\ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken)
+    public function addRefreshToken(RefreshToken $refreshToken)
     {
         $this->refreshToken[] = $refreshToken;
 
@@ -202,9 +202,9 @@ class Scope
     /**
      * Remove refreshToken
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken
+     * @param RefreshToken $refreshToken
      */
-    public function removeRefreshToken(\ZF\OAuth2\Doctrine\Entity\RefreshToken $refreshToken)
+    public function removeRefreshToken(RefreshToken $refreshToken)
     {
         $this->refreshToken->removeElement($refreshToken);
     }
@@ -222,10 +222,10 @@ class Scope
     /**
      * Add accessToken
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken
+     * @param AccessToken $accessToken
      * @return Scope
      */
-    public function addAccessToken(\ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken)
+    public function addAccessToken(AccessToken $accessToken)
     {
         $this->accessToken[] = $accessToken;
 
@@ -235,9 +235,9 @@ class Scope
     /**
      * Remove accessToken
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken
+     * @param AccessToken $accessToken
      */
-    public function removeAccessToken(\ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken)
+    public function removeAccessToken(AccessToken $accessToken)
     {
         $this->accessToken->removeElement($accessToken);
     }

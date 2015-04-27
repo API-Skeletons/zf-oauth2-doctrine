@@ -1,6 +1,6 @@
 {
     "name": "zfcampus/zf-oauth2-doctrine",
-    "description": "Doctrine OAuth2 Server Adapter",
+    "description": "Doctrine OAuth2 Server Adapter for Apigility",
     "license": "BSD-3-Clause",
     "keywords": [
         "oauth2",

@@ -2,8 +2,6 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * PublicKey
  */
@@ -30,7 +28,7 @@ class PublicKey
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Doctrine\Entity\Client
+     * @var Client
      */
     private $client;
 
@@ -127,10 +125,10 @@ class PublicKey
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      * @return PublicKey
      */
-    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -140,7 +138,7 @@ class PublicKey
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Doctrine\Entity\Client
+     * @return Client
      */
     public function getClient()
     {

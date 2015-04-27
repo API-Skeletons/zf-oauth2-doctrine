@@ -2,8 +2,8 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\ArraySerializableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Client
@@ -76,6 +76,7 @@ class Client implements ArraySerializableInterface
     private $scope;
 
     /**
+     * UserInterface
      * @var User
      */
     private $user;
@@ -85,13 +86,13 @@ class Client implements ArraySerializableInterface
      */
     public function __construct()
     {
-        $this->accessToken = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->refreshToken = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->authorizationCode = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->jwt = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->jti = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->publicKey = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->scope = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->accessToken = new ArrayCollection();
+        $this->refreshToken = new ArrayCollection();
+        $this->authorizationCode = new ArrayCollection();
+        $this->jwt = new ArrayCollection();
+        $this->jti = new ArrayCollection();
+        $this->publicKey = new ArrayCollection();
+        $this->scope = new ArrayCollection();
     }
 
     public function getArrayCopy()
@@ -275,10 +276,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add accessToken
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken
+     * @param AccessToken $accessToken
      * @return Client
      */
-    public function addAccessToken(\ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken)
+    public function addAccessToken(AccessToken $accessToken)
     {
         $this->accessToken[] = $accessToken;
 
@@ -288,9 +289,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove accessToken
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken
+     * @param AccessToken $accessToken
      */
-    public function removeAccessToken(\ZF\OAuth2\Doctrine\Entity\AccessToken $accessToken)
+    public function removeAccessToken(AccessToken $accessToken)
     {
         $this->accessToken->removeElement($accessToken);
     }
@@ -308,10 +309,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add refreshToken
      *
-     * @param \ZF\OAuth2\Entity\RefreshToken $refreshToken
+     * @param RefreshToken $refreshToken
      * @return Client
      */
-    public function addRefreshToken(\ZF\OAuth2\Entity\RefreshToken $refreshToken)
+    public function addRefreshToken(RefreshToken $refreshToken)
     {
         $this->refreshToken[] = $refreshToken;
 
@@ -321,9 +322,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove refreshToken
      *
-     * @param \ZF\OAuth2\Entity\RefreshToken $refreshToken
+     * @param RefreshToken $refreshToken
      */
-    public function removeRefreshToken(\ZF\OAuth2\Entity\RefreshToken $refreshToken)
+    public function removeRefreshToken(RefreshToken $refreshToken)
     {
         $this->refreshToken->removeElement($refreshToken);
     }
@@ -341,10 +342,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add authorizationCode
      *
-     * @param \ZF\OAuth2\Entity\AuthorizationCode $authorizationCode
+     * @param AuthorizationCode $authorizationCode
      * @return Client
      */
-    public function addAuthorizationCode(\ZF\OAuth2\Entity\AuthorizationCode $authorizationCode)
+    public function addAuthorizationCode(AuthorizationCode $authorizationCode)
     {
         $this->authorizationCode[] = $authorizationCode;
 
@@ -354,9 +355,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove authorizationCode
      *
-     * @param \ZF\OAuth2\Entity\AuthorizationCode $authorizationCode
+     * @param AuthorizationCode $authorizationCode
      */
-    public function removeAuthorizationCode(\ZF\OAuth2\Entity\AuthorizationCode $authorizationCode)
+    public function removeAuthorizationCode(AuthorizationCode $authorizationCode)
     {
         $this->authorizationCode->removeElement($authorizationCode);
     }
@@ -374,10 +375,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add jwt
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Jwt $jwt
+     * @param Jwt $jwt
      * @return Client
      */
-    public function addJwt(\ZF\OAuth2\Doctrine\Entity\Jwt $jwt)
+    public function addJwt(Jwt $jwt)
     {
         $this->jwt[] = $jwt;
 
@@ -387,9 +388,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove jwt
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Jwt $jwt
+     * @param Jwt $jwt
      */
-    public function removeJwt(\ZF\OAuth2\Doctrine\Entity\Jwt $jwt)
+    public function removeJwt(Jwt $jwt)
     {
         $this->jwt->removeElement($jwt);
     }
@@ -407,10 +408,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add jti
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Jti $jti
+     * @param Jti $jti
      * @return Client
      */
-    public function addJti(\ZF\OAuth2\Doctrine\Entity\Jti $jti)
+    public function addJti(Jti $jti)
     {
         $this->jti[] = $jti;
 
@@ -420,9 +421,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove jti
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Jti $jti
+     * @param Jti $jti
      */
-    public function removeJti(\ZF\OAuth2\Doctrine\Entity\Jti $jti)
+    public function removeJti(Jti $jti)
     {
         $this->jti->removeElement($jti);
     }
@@ -440,10 +441,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add publicKey
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\PublicKey $publicKey
+     * @param PublicKey $publicKey
      * @return Client
      */
-    public function addPublicKey(\ZF\OAuth2\Doctrine\Entity\PublicKey $publicKey)
+    public function addPublicKey(PublicKey $publicKey)
     {
         $this->publicKey[] = $publicKey;
 
@@ -453,9 +454,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove publicKey
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\PublicKey $publicKey
+     * @param PublicKey $publicKey
      */
-    public function removePublicKey(\ZF\OAuth2\Doctrine\Entity\PublicKey $publicKey)
+    public function removePublicKey(PublicKey $publicKey)
     {
         $this->publicKey->removeElement($publicKey);
     }
@@ -473,10 +474,10 @@ class Client implements ArraySerializableInterface
     /**
      * Add scope
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
+     * @param Scope $scope
      * @return Client
      */
-    public function addScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
+    public function addScope(Scope $scope)
     {
         $this->scope[] = $scope;
 
@@ -486,9 +487,9 @@ class Client implements ArraySerializableInterface
     /**
      * Remove scope
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Scope $scope
+     * @param Scope $scope
      */
-    public function removeScope(\ZF\OAuth2\Doctrine\Entity\Scope $scope)
+    public function removeScope(Scope $scope)
     {
         $this->scope->removeElement($scope);
     }
@@ -509,7 +510,7 @@ class Client implements ArraySerializableInterface
      * @param $user
      * @return Client
      */
-    public function setUser($user = null)
+    public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
 

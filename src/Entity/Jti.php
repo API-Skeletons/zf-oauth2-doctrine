@@ -2,8 +2,6 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Jti
  */
@@ -35,7 +33,7 @@ class Jti
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Doctrine\Entity\Client
+     * @var Client
      */
     private $client;
 
@@ -185,10 +183,10 @@ class Jti
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      * @return Jti
      */
-    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -198,7 +196,7 @@ class Jti
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Doctrine\Entity\Client
+     * @return Client
      */
     public function getClient()
     {

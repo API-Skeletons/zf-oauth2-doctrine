@@ -2,8 +2,6 @@
 
 namespace ZF\OAuth2\Doctrine\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Jwt
  */
@@ -25,7 +23,7 @@ class Jwt
     private $id;
 
     /**
-     * @var \ZF\OAuth2\Doctrine\Entity\Client
+     * @var Client
      */
     private $client;
 
@@ -98,10 +96,10 @@ class Jwt
     /**
      * Set client
      *
-     * @param \ZF\OAuth2\Doctrine\Entity\Client $client
+     * @param Client $client
      * @return Jwt
      */
-    public function setClient(\ZF\OAuth2\Doctrine\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -111,7 +109,7 @@ class Jwt
     /**
      * Get client
      *
-     * @return \ZF\OAuth2\Doctrine\Entity\Client
+     * @return Client
      */
     public function getClient()
     {

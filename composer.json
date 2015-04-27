@@ -1,23 +1,12 @@
 {
     "name": "zfcampus/zf-oauth2-doctrine",
-    "description": "Doctrine OAuth2 Server",
+    "description": "Doctrine OAuth2 Server Adapter",
     "license": "BSD-3-Clause",
     "keywords": [
-        "api",
         "oauth2",
-        "framework",
-        "zf2",
-        "doctrine"
+        "doctrine",
+        "apigility"
     ],
-    "repositories": [
-        { "type": "composer", "url": "https://packages.zendframework.com/" }
-    ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.0-dev",
-            "dev-develop": "0.0-dev"
-        }
-    },
     "require": {
         "php": ">=5.3.23",
         "zfcampus/zf-oauth2": "~1",

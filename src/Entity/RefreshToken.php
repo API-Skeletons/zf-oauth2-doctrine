@@ -35,6 +35,7 @@ class RefreshToken
     private $scope;
 
     /**
+     * UserInterface
      * @var object
      */
     private $user;
@@ -217,7 +218,7 @@ class RefreshToken
      * @param $user
      * @return AuthorizationCode
      */
-    public function setUser($user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
 

@@ -76,6 +76,7 @@ class Client implements ArraySerializableInterface
     private $scope;
 
     /**
+     * UserInterface
      * @var User
      */
     private $user;
@@ -509,7 +510,7 @@ class Client implements ArraySerializableInterface
      * @param $user
      * @return Client
      */
-    public function setUser($user = null)
+    public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
 

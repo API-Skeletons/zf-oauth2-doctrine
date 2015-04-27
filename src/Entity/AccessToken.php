@@ -36,6 +36,7 @@ class AccessToken implements ArraySerializableInterface
     private $scope;
 
     /**
+     * UserInterface
      * @var object
      */
     private $user;
@@ -215,7 +216,7 @@ class AccessToken implements ArraySerializableInterface
      * @param $user
      * @return AuthorizationCode
      */
-    public function setUser($user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
 

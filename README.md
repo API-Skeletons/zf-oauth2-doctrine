@@ -1,13 +1,13 @@
-[![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
-[![Coverage Status](https://coveralls.io/repos/TomHAnderson/zf-oauth2-doctrine/badge.svg)](https://coveralls.io/r/TomHAnderson/zf-oauth2-doctrine)
-[![Latest Stable Version](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/v/stable)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
-[![Latest Unstable Version](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/v/unstable)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
-[![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
-[![License](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/license)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
-
-
 OAuth2 Doctrine Adapter for Apigility
 =====================================
+
+[![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
+[![Coverage Status](https://coveralls.io/repos/TomHAnderson/zf-oauth2-doctrine/badge.svg)](https://coveralls.io/r/TomHAnderson/zf-oauth2-doctrine)
+[![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
+
+
+About
+-----
 
 This provides the database structure and interaction for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
@@ -16,6 +16,7 @@ Requirements
 ------------
 
 For ORM you will require `doctrine/doctrine-orm-module` through composer.
+ODM is not supported at this time.
 
 
 Installation
@@ -27,28 +28,18 @@ Installation of this module uses composer. For composer documentation, please re
 $ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.1"
 ```
 
+Add this module to your application's configuration:
 
-Entity Relationship Diagram
----------------------------
-
-In order to understand how the OAuth2 Adapter works you will understand the ERD.  The ERD is stored in [Skipper](http://www.skipper18.com).  If you do not have Skipper and you are writing a Doctrine application now would be a good time to consider an upgrade to your practices.  The ERD is in the media directory.
-
-Because you'll be integrating zf-oauth2-doctrine with your own ERD you may include the externally stored OAuth2-orm.module.xml skipper bundle in your ERD.
+```php
+'modules' => array(
+   ...
+   'ZF\OAuth2\Doctrine',
+),
+```
 
 
 Configuration
 -------------
-
-Add the module to `config/application.config.php`
-```php
-return array(
-    'modules' => array(
-       /* ...  */
-       'ZF\OAuth2\Doctrine',
-       /* ...  */
-   )
-)
-```
 
 Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
 
@@ -61,6 +52,14 @@ This repository supplies every entity you need to implement OAuth2 except the Us
 The User entity must implement `ZF\OAuth2\Doctrine\Entity\UserInterface`
 
 The User entitiy for the unit test for this module is a good template to start from: [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
+
+
+Entity Relationship Diagram
+---------------------------
+
+In order to understand how the OAuth2 Adapter works you will understand the ERD.  The ERD is stored in [Skipper](http://www.skipper18.com).  If you do not have Skipper and you are writing a Doctrine application now would be a good time to consider an upgrade to your practices.  The ERD is in the media directory.
+
+Because you'll be integrating zf-oauth2-doctrine with your own ERD you may include the externally stored OAuth2-orm.module.xml skipper bundle in your ERD.
 
 
 Using Default Entities

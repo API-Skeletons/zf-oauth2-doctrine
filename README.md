@@ -4,6 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
 [![License](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/license)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
 
+
 OAuth2 Doctrine Adapter for Apigility
 =====================================
 
@@ -13,7 +14,7 @@ This provides the database structure and interaction for all aspects of OAuth2 i
 Requirements
 ------------
 
-At this time only ORM is supported.  For ORM you will require `doctrine/doctrine-orm-module` through composer.
+For ORM you will require `doctrine/doctrine-orm-module` through composer.
 
 
 Installation
@@ -37,8 +38,6 @@ Because you'll be integrating zf-oauth2-doctrine with your own ERD you may inclu
 Configuration
 -------------
 
-Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
-
 Add the module to `config/application.config.php`
 ```php
 return array(
@@ -50,11 +49,13 @@ return array(
 )
 ```
 
+Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
+
 
 The User Entity
 --------------
 
-This library supplies every entity you need to implement OAuth2 except the User entity.  The reason is so the User entity can be decoupled from the OAuth2 library instead to be linked dynamically at run time.  This allows, among other benefits, the ability to create an ERD without modifying the OAuth2-rm.module.xml module.
+This repository supplies every entity you need to implement OAuth2 except the User entity.  The reason is so the User entity can be decoupled from the OAuth2 Doctrine repository instead to be linked dynamically at run time.  This allows, among other benefits, the ability to create an ERD without modifying the `OAuth2-rm.module.xml` module.
 
 The User entity must implement `ZF\OAuth2\Doctrine\Entity\UserInterface`
 
@@ -73,38 +74,3 @@ By default this module uses the entities provided but you may toggle this and us
     'storage_settings' => array(
         'enable_default_entities' => true,
 ```
-
-
-Securing Resources with zf-apigility-doctrine
-------------------------------------------
-
-This module is supported directly by zf-apigility-doctrine.  To add security to your resources create a DefaultOrm Query Provider and include:
-
-```
-use ZF\Apigility\Doctrine\Server\Query\Provider\DefaultOrm as ZFDefaultOrm;
-use ZF\Rest\ResourceEvent;
-use OAuth2\Server as OAuth2Server;
-use ZF\ApiProblem\ApiProblem;
-
-class DefaultOrm extends ZFDefaultOrm
-{
-    public function createQuery(ResourceEvent $event, $entityClass, $parameters)
-    {
-        $validate = $this->validateOAuth2();
-        if ($validate instanceof ApiProblem) {
-            return $validate;
-        }
-
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder();
-        $queryBuilder->select('row')
-            ->from($entityClass, 'row')
-            ;
-
-        return $queryBuilder;
-    }
-}
-
-```
-
-See [zfcampus/zf-apigility-doctrine](https://github.com/zfcampus/zf-apigility-doctrine) for more details on Query Providers.
-

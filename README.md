@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
+[![Coverage Status](https://coveralls.io/repos/TomHAnderson/zf-oauth2-doctrine/badge.svg)](https://coveralls.io/r/TomHAnderson/zf-oauth2-doctrine)
 [![Latest Stable Version](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/v/stable)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
 [![Latest Unstable Version](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/v/unstable)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
 [![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
@@ -74,3 +75,4 @@ By default this module uses the entities provided but you may toggle this and us
     'storage_settings' => array(
         'enable_default_entities' => true,
 ```
+

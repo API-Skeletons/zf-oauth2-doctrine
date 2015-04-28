@@ -16,8 +16,12 @@ before_script:
   - composer install --dev --prefer-source
 
 script:
+  - mkdir -p build/logs
   - ./vendor/bin/phpunit
   - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php src test
+
+after_script:
+- php vendor/bin/coveralls
   
 notifications:
   irc: "irc.freenode.org#apigility-dev"

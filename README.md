@@ -48,14 +48,6 @@ The User entity must implement `ZF\OAuth2\Doctrine\Entity\UserInterface`
 The User entitiy for the unit test for this module is a good template to start from: [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
 
 
-Entity Relationship Diagram
----------------------------
-
-In order to understand how the OAuth2 Adapter works you will understand the ERD.  The ERD is stored in [Skipper](http://www.skipper18.com).  If you do not have Skipper and you are writing a Doctrine application now would be a good time to consider an upgrade to your practices.  The ERD is in the media directory.
-
-Because you'll be integrating zf-oauth2-doctrine with your own ERD you may include the externally stored OAuth2-orm.module.xml skipper bundle in your ERD.
-
-
 Using Default Entities
 ----------------------
 

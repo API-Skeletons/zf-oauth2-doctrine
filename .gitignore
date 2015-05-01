@@ -3,3 +3,4 @@ composer.phar
 composer.lock
 test/coverage
 build
+.DS_Store

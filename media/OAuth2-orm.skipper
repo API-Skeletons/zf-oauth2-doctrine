@@ -26,7 +26,7 @@
     <entity uuid="9c143447-a1f4-4187-a5f9-45e768f78ebb" bg-color="4294967295" hdr-color="4292006610" position-x="52" position-y="41" size-x="0" size-x2="93" size-y="0" size-y2="73"/>
     <association uuid="9daca6d8-8f09-4f97-bbfd-6db05bdf3e58" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="b6562bcc-4fca-413e-a560-91da4d75dc9f" bg-color="4294967295" hdr-color="4292006610" position-x="50" position-y="126" size-x="0" size-x2="134" size-y="0" size-y2="87"/>
-    <project uuid="b7638313-3ca8-4389-9163-d2bb1c15f725" size-x="32" size-x2="1123" size-y="40" size-y2="738"/>
+    <project uuid="b7638313-3ca8-4389-9163-d2bb1c15f725" size-x="32" size-x2="1066" size-y="40" size-y2="688"/>
     <entity uuid="d25ad9b3-1751-49e7-901d-a92fae42a8b2" bg-color="4294967295" hdr-color="4292006610" position-x="23" position-y="90" size-x="0" size-x2="127" size-y="0" size-y2="60"/>
     <many-to-many-association-entity uuid="d69ad79d-983f-4cda-905f-1e084aefaff1" center-position-x="0" center-position-y="0"/>
     <many-to-many-association uuid="d6c88e38-48c1-43d7-b5e9-b6902ee48e7c" color="4288059030"/>

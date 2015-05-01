@@ -10,12 +10,12 @@
     "require": {
         "php": ">=5.3.23",
         "zfcampus/zf-oauth2": "~1",
-        "doctrine/doctrine-module": "~0.8"
+        "doctrine/doctrine-module": "~0.8",
+        "doctrine/doctrine-orm-module": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
         "squizlabs/php_codesniffer": "~2",
-        "doctrine/doctrine-orm-module": "*",
         "zendframework/zend-config": "~2.3",
         "zendframework/zend-form": "~2.3",
         "zendframework/zend-loader": "~2.3",

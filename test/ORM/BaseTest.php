@@ -1,6 +1,6 @@
 <?php
 
-namespace ZFTest\OAuth2\Doctrine\Orm;
+namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use Doctrine\ORM\Tools\SchemaTool;
 use ZF\OAuth2\Doctrine\Entity;

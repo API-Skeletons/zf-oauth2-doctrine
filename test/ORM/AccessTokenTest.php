@@ -1,6 +1,6 @@
 <?php
 
-namespace ZFTest\OAuth2\Doctrine\Orm;
+namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\AccessTokenInterface;
 

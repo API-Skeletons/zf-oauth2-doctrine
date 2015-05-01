@@ -1,7 +1,0 @@
-ZF\OAuth2\Document\AccessTokenToScope:
-  type: document
-  fields:
-    Scope_id:
-      type: integer
-    AccessToken_id:
-      type: integer

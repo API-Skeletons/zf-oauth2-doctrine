@@ -5,7 +5,7 @@
     </logging>
     <testsuites>
         <testsuite name="orm">
-            <directory>./test/Orm</directory>
+            <directory>./test/ORM</directory>
         </testsuite>
         <testsuite name="odm">
         </testsuite>

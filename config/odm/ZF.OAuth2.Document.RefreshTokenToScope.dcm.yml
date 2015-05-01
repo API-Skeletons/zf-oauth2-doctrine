@@ -1,7 +1,0 @@
-ZF\OAuth2\Document\RefreshTokenToScope:
-  type: document
-  fields:
-    Scope_id:
-      type: integer
-    RefreshToken_id:
-      type: integer

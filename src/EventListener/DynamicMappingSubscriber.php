@@ -66,33 +66,65 @@ class DynamicMappingSubscriber implements EventSubscriber
                 break;
 
             case $this->config['client_entity']['entity']:
-                $metadata->mapManyToOne(array(
+                $joinMap = array(
                     'targetEntity' => $this->config['user_entity']['entity'],
                     'fieldName' => $this->config['user_entity']['field'],
                     'inversedBy' => $this->config['client_entity']['field'],
-                ));
+                );
+                if (isset($this->config['client_entity']['additional_mapping_data'])) {
+                    $joinMap = array_merge(
+                        $joinMap,
+                        $this->config['client_entity']['additional_mapping_data']
+                    );
+                }
+                $metadata->mapManyToOne($joinMap);
                 break;
+
             case $this->config['access_token_entity']['entity']:
-                $metadata->mapManyToOne(array(
+                $joinMap = array(
                     'targetEntity' => $this->config['user_entity']['entity'],
                     'fieldName' => $this->config['user_entity']['field'],
                     'inversedBy' => $this->config['access_token_entity']['field'],
-                ));
+                );
+                if (isset($this->config['access_token_entity']['additional_mapping_data'])) {
+                    $joinMap = array_merge(
+                        $joinMap,
+                        $this->config['access_token_entity']['additional_mapping_data']
+                    );
+                }
+                $metadata->mapManyToOne($joinMap);
                 break;
+
             case $this->config['authorization_code_entity']['entity']:
-                $metadata->mapManyToOne(array(
+                $joinMap = array(
                     'targetEntity' => $this->config['user_entity']['entity'],
                     'fieldName' => $this->config['user_entity']['field'],
                     'inversedBy' => $this->config['authorization_code_entity']['field'],
-                ));
+                );
+                if (isset($this->config['authorization_code_entity']['additional_mapping_data'])) {
+                    $joinMap = array_merge(
+                        $joinMap,
+                        $this->config['authorization_code_entity']['additional_mapping_data']
+                    );
+                }
+                $metadata->mapManyToOne($joinMap);
                 break;
+
             case $this->config['refresh_token_entity']['entity']:
-                $metadata->mapManyToOne(array(
+                $joinMap = array(
                     'targetEntity' => $this->config['user_entity']['entity'],
                     'fieldName' => $this->config['user_entity']['field'],
                     'inversedBy' => $this->config['refresh_token_entity']['field'],
-                ));
+                );
+                if (isset($this->config['refresh_token_entity']['additional_mapping_data'])) {
+                    $joinMap = array_merge(
+                        $joinMap,
+                        $this->config['refresh_token_entity']['additional_mapping_data']
+                    );
+                }
+                $metadata->mapManyToOne($joinMap);
                 break;
+
             default:
                 break;
         }

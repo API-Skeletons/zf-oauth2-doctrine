@@ -125,7 +125,7 @@ class Client implements ArraySerializableInterface
                     $this->setGrantType($value);
                     break;
                 case 'user':
-                    $this->setUser($user);
+                    $this->setUser($value);
                     break;
                 case 'scope':
                     // Clear old collection

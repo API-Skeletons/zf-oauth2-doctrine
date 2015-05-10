@@ -61,3 +61,25 @@ By default this module uses the entities provided but you may toggle this and us
         'enable_default_entities' => true,
 ```
 
+
+Customizing Many to One Mapping
+-------------------------------
+
+If you need to customize the call to mapManyToOne, which creates the dynamic joins to the User entity from the default entites, you may add any parameters to the `['dynamic_mapping']['default_entity']['additional_mapping_data']` element.  An example for a User entity with a primary key of user_id which does not conform to the metadata naming strategy is added to each entity:
+
+```php
+'refresh_token_entity' => array(
+    'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
+    'field' => 'refreshToken',
+    'additional_mapping_data' => array(
+        'joinColumns' => array(
+            array(
+                'name' => 'user_id',
+                'referencedColumnName' => 'user_id',
+            ),
+        ),
+    ),
+),
+
+```
+

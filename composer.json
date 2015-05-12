@@ -35,5 +35,8 @@
         "classmap": [
             "Module.php"
         ]
+    },
+    "suggest": {
+        "bushbaby/zf-oauth2-doctrine-mutatetablenames": "Allows configuration of the table names that this module uses"
     }
 }

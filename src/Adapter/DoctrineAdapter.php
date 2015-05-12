@@ -760,10 +760,12 @@ class DoctrineAdapter implements
             ->setParameter('username', $username);
 
         foreach ($config['auth_identity_fields'] as $field) {
-            $qb->orWhere(sprintf(
-                    "u.%s = :username",
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'])
-            );
+            if (isset($config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'])) {
+                $doctrineField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'];
+            } else {
+                $doctrineField = $field;
+            }
+            $qb->orWhere(sprintf("u.%s = :username", $doctrineField));
         }
 
         if ($user = $qb->getQuery()->getOneOrNullResult()) {
@@ -799,10 +801,12 @@ class DoctrineAdapter implements
             ->setParameter('username', $username);
 
         foreach ($config['auth_identity_fields'] as $field) {
-            $qb->orWhere(sprintf(
-                    "u.%s = :username",
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'])
-            );
+            if (isset($config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'])) {
+                $doctrineField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'];
+            } else {
+                $doctrineField = $field;
+            }
+            $qb->orWhere(sprintf("u.%s = :username", $doctrineField));
         }
 
         if ($user = $qb->getQuery()->getOneOrNullResult()) {

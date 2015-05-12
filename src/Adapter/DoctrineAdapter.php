@@ -745,17 +745,20 @@ class DoctrineAdapter implements
     public function checkUserCredentials($username, $password)
     {
         $config = $this->getConfig();
-        $doctrineUsernameField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping']['username']['name'];
+        $qb     = $this->getObjectManager()->createQueryBuilder();
 
-        $user = $this->getObjectManager()
-            ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['entity'])
-            ->findOneBy(
-                array(
-                    $doctrineUsernameField => $username,
-                )
+        $qb->select(array('u'))
+            ->from($config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['entity'], 'u')
+            ->setParameter('username', $username);
+
+        foreach ($config['auth_identity_fields'] as $field) {
+            $qb->orWhere(sprintf(
+                    "u.%s = :username",
+                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'])
             );
+        }
 
-        if ($user) {
+        if ($user = $qb->getQuery()->getOneOrNullResult()) {
             $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\User')->reset();
             $mapper->exchangeDoctrineArray($user->getArrayCopy());
 
@@ -781,17 +784,20 @@ class DoctrineAdapter implements
     public function getUserDetails($username)
     {
         $config = $this->getConfig();
-        $doctrineUsernameField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping']['username']['name'];
+        $qb     = $this->getObjectManager()->createQueryBuilder();
 
-        $user = $this->getObjectManager()
-            ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['entity'])
-            ->findOneBy(
-                array(
-                    $doctrineUsernameField => $username,
-                )
+        $qb->select(array('u'))
+            ->from($config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['entity'], 'u')
+            ->setParameter('username', $username);
+
+        foreach ($config['auth_identity_fields'] as $field) {
+            $qb->orWhere(sprintf(
+                    "u.%s = :username",
+                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\User']['mapping'][$field]['name'])
             );
+        }
 
-        if ($user) {
+        if ($user = $qb->getQuery()->getOneOrNullResult()) {
             $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\User')->reset();
             $mapper->exchangeDoctrineArray($user->getArrayCopy());
 

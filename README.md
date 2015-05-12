@@ -55,7 +55,7 @@ Details for creating your database with the included entities are outside the sc
 
 By default this module uses the entities provided but you may toggle this and use your own entites (and map them in the mapping config section) by toggling this flag:
 
-```
+```php
 'zf-oauth2-doctrine' => array(
     'storage_settings' => array(
         'enable_default_entities' => true,

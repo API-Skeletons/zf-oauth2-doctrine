@@ -45,7 +45,7 @@ This repository supplies every entity you need to implement OAuth2 except the Us
 
 The User entity must implement `ZF\OAuth2\Doctrine\Entity\UserInterface`
 
-The User entitiy for the unit test for this module is a good template to start from: [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
+The User entity for the unit test for this module is a good template to start from: [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
 
 
 Using Default Entities
@@ -55,7 +55,7 @@ Details for creating your database with the included entities are outside the sc
 
 By default this module uses the entities provided but you may toggle this and use your own entites (and map them in the mapping config section) by toggling this flag:
 
-```
+```php
 'zf-oauth2-doctrine' => array(
     'storage_settings' => array(
         'enable_default_entities' => true,
@@ -81,5 +81,18 @@ If you need to customize the call to mapManyToOne, which creates the dynamic joi
     ),
 ),
 
+```
+
+Identity field on User entity
+-----------------------------
+
+By default the DoctrineAdapter for OAuth2 retrieves the user by 'username' field on the entity. If you need to use a different or multiple fields you can do that via the 'auth_identity_fields' key. For example; ZfcUser allows users to authenticate by username and/or email fields.
+
+example : match ZfcUser `auth_identity_fields` configuration
+
+```php
+'zf-oauth2-doctrine' => array(
+    'storage_settings' => array(
+        'auth_identity_fields' => array('username', 'email'), // defaults to array('username')
 ```
 

@@ -83,3 +83,16 @@ If you need to customize the call to mapManyToOne, which creates the dynamic joi
 
 ```
 
+Identity field on User entity
+-----------------------------
+
+By default the DoctrineAdapter for OAuth2 retrieves the user by 'username' field on the entity. If you need to use a different or multiple fields you can do that via the 'auth_identity_fields' key. For example; ZfcUser allows users to authenticate by username and/or email fields.
+
+example : match ZfcUser `auth_identity_fields` configuration
+
+```php
+'zf-oauth2-doctrine' => array(
+    'storage_settings' => array(
+        'auth_identity_fields' => array('username', 'email'), // defaults to array('username')
+```
+

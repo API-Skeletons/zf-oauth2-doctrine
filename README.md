@@ -96,3 +96,11 @@ example : match ZfcUser `auth_identity_fields` configuration
         'auth_identity_fields' => array('username', 'email'), // defaults to array('username')
 ```
 
+
+Extensions
+----------
+
+This is a list of other modules which extend the functionality this repository provides.
+
+* [zf-oauth2-doctrine-mutabletablenames](https://github.com/basz/zf-oauth2-doctrine-mutatetablenames) - If you do not want to use the default table names provided with the default entities this module lets you customize them.
+

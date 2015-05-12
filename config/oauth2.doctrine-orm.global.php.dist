@@ -14,6 +14,7 @@ return array(
             'driver' => 'doctrine.driver.orm_default',
             'enable_default_entities' => true,
             'bcrypt_cost' => 14, # match zfcuser
+            'auth_identity_fields' => array('username'),
             // Dynamically map the user_entity to the client_entity
             'dynamic_mapping' => array(
                 'user_entity' => array(

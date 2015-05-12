@@ -167,10 +167,12 @@ class DoctrineAdapter implements
     {
         $this->config = array_merge($this->config, $config);
 
+        // Used to be hardcoded as plain string.
         if (!isset($this->config['auth_identity_fields'])) {
             $this->config['auth_identity_fields'] = 'username';
         }
 
+        // To prevent BC issues with configurations now we wrap the singular default into an array
         if (!is_array($this->config['auth_identity_fields'])) {
             $this->config['auth_identity_fields'] = array($this->config['auth_identity_fields']);
         }
@@ -768,7 +770,9 @@ class DoctrineAdapter implements
             $qb->orWhere(sprintf("u.%s = :username", $doctrineField));
         }
 
-        if ($user = $qb->getQuery()->getOneOrNullResult()) {
+        $user = $qb->getQuery()->getOneOrNullResult();
+
+        if ($user) {
             $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\User')->reset();
             $mapper->exchangeDoctrineArray($user->getArrayCopy());
 
@@ -809,7 +813,9 @@ class DoctrineAdapter implements
             $qb->orWhere(sprintf("u.%s = :username", $doctrineField));
         }
 
-        if ($user = $qb->getQuery()->getOneOrNullResult()) {
+        $user = $qb->getQuery()->getOneOrNullResult();
+
+        if ($user) {
             $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\User')->reset();
             $mapper->exchangeDoctrineArray($user->getArrayCopy());
 

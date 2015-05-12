@@ -167,6 +167,14 @@ class DoctrineAdapter implements
     {
         $this->config = array_merge($this->config, $config);
 
+        if (!isset($this->config['auth_identity_fields'])) {
+            $this->config['auth_identity_fields'] = 'username';
+        }
+
+        if (!is_array($this->config['auth_identity_fields'])) {
+            $this->config['auth_identity_fields'] = array($this->config['auth_identity_fields']);
+        }
+
         return $this;
     }
 

@@ -253,7 +253,7 @@ return array(
                             'name' => 'audience',
                             'datatype' => 'string',
                         ),
-                        'expiration' => array(
+                        'expires' => array(
                             'type' => 'field',
                             'name' => 'expires',
                             'datatype' => 'datetime',

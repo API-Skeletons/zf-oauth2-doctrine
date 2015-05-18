@@ -24,18 +24,46 @@ return array(
                 'client_entity' => array(
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                     'field' => 'client',
+                    'additional_mapping_data' => array(
+                        'joinColumns' => array(
+                            array(
+                                'onDelete' => 'CASCADE'
+                            ),
+                        ),
+                    ),
                 ),
                 'access_token_entity' => array(
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\AccessToken',
                     'field' => 'accessToken',
+                    'additional_mapping_data' => array(
+                        'joinColumns' => array(
+                            array(
+                                'onDelete' => 'CASCADE'
+                            ),
+                        ),
+                    ),
                 ),
                 'authorization_code_entity' => array(
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\AuthorizationCode',
                     'field' => 'authorizationCode',
+                    'additional_mapping_data' => array(
+                        'joinColumns' => array(
+                            array(
+                                'onDelete' => 'CASCADE'
+                            ),
+                        ),
+                    ),
                 ),
                 'refresh_token_entity' => array(
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
                     'field' => 'refreshToken',
+                    'additional_mapping_data' => array(
+                        'joinColumns' => array(
+                            array(
+                                'onDelete' => 'CASCADE'
+                            ),
+                        ),
+                    ),
                 ),
             ),
             'mapping' => array(

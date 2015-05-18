@@ -8,7 +8,7 @@
     <field name="expires" type="datetime" nullable="true"/>
     <many-to-one field="client" target-entity="ZF\OAuth2\Doctrine\Entity\Client" inversed-by="accessToken">
       <join-columns>
-        <join-column name="client_id" referenced-column-name="id" nullable="false"/>
+        <join-column name="client_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
       </join-columns>
     </many-to-one>
     <many-to-many field="scope" target-entity="ZF\OAuth2\Doctrine\Entity\Scope" mapped-by="accessToken"/>

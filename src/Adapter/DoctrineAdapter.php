@@ -1233,14 +1233,14 @@ class DoctrineAdapter implements
         $client_id,
         $subject,
         $audience,
-        $expiration,
+        $expires,
         $jti
     ) {
         $config = $this->getConfig();
         $doctrineClientIdField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['mapping']['client_id']['name'];
         $doctrineSubjectField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['mapping']['subject']['name'];
         $doctrineAudienceField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['mapping']['audience']['name'];
-        $doctrineExpirationField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['mapping']['expiration']['name'];
+        $doctrineExpirationField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['mapping']['expires']['name'];
         $doctrineJtiField = $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['mapping']['jti']['name'];
 
         $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\Jti')->reset();
@@ -1248,7 +1248,7 @@ class DoctrineAdapter implements
             'client_id' => $client_id,
             'subject' => $subject,
             'audience' => $audience,
-            'expiration' => $expiration,
+            'expires' => $expires,
             'jti' => $jti,
         ));
 

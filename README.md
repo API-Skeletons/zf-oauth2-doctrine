@@ -9,7 +9,7 @@ OAuth2 Doctrine Adapter for Apigility
 About
 -----
 
-This provides the ORM entity definitions for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
+This provides a Doctrine adapter for [zfcampus/zf-oauth2](https://github.com/zfcampus/zf-oauth2) and entity definitions for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
 ![Entity Relationship Diagram](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/oauth2-doctrine-erd.png)
 
@@ -51,9 +51,9 @@ The User entity for the unit test for this module is a good template to start fr
 Using Default Entities
 ----------------------
 
-Details for creating your database with the included entities are outside the scope of this project.  Generally this is done through doctrine-orm-module with ```php public/index.php orm:schema-tool:create```
+Details for creating your database with the included entities are outside the scope of this project.  Generally this is done through [doctrine/doctrine-orm-module](https://github.com/doctrine/DoctrineORMModule) with ```php public/index.php orm:schema-tool:create```
 
-By default this module uses the entities provided but you may toggle this and use your own entites (and map them in the mapping config section) by toggling this flag:
+By default this module uses the entities provided but you may the adapter with your own entites (and map them in the mapping config section) by toggling this flag:
 
 ```php
 'zf-oauth2-doctrine' => array(
@@ -86,10 +86,9 @@ If you need to customize the call to mapManyToOne, which creates the dynamic joi
 Identity field on User entity
 -----------------------------
 
-By default the DoctrineAdapter for OAuth2 retrieves the user by 'username' field on the entity. If you need to use a different or multiple fields you can do that via the 'auth_identity_fields' key. For example; ZfcUser allows users to authenticate by username and/or email fields.
+By default this Doctrine adapter retrieves the user by the `username` field on the configured User entity. If you need to use a different or multiple fields you may do so via the 'auth_identity_fields' key. For example, ZfcUser allows users to authenticate by username and/or email fields.
 
-example : match ZfcUser `auth_identity_fields` configuration
-
+An example to match ZfcUser `auth_identity_fields` configuration:
 ```php
 'zf-oauth2-doctrine' => array(
     'storage_settings' => array(

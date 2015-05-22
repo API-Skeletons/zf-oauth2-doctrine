@@ -1256,7 +1256,13 @@ class DoctrineAdapter implements
         $query = $mapper->getDoctrineArrayCopy();
 
         $jti= $this->getObjectManager()->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['entity'])
-            ->findOneBy($query);
+            ->findOneBy(array(
+                $doctrineClientIdField => $query['client'],
+                $doctrineSubjectField => $query['subject'],
+                $doctrineAudienceField => $query['audience'],
+                $doctrineExpirationField => $query['expires'],
+                $doctrineJtiField => $query['jti'],
+            ));
 
         if (!$jti) {
             return false;
@@ -1280,13 +1286,13 @@ class DoctrineAdapter implements
      * @param $audience
      * The audience to insert.
      *
-     * @param $expiration
+     * @param $expires
      * The expiration of the jti.
      *
      * @param $jti
      * The jti to insert.
      */
-    public function setJti($client_id, $subject, $audience, $expiration, $jti)
+    public function setJti($client_id, $subject, $audience, $expires, $jti)
     {
         $config = $this->getConfig();
         $jtiEntity = new $config['mapping']['ZF\OAuth2\Doctrine\Mapper\Jti']['entity'];
@@ -1296,7 +1302,7 @@ class DoctrineAdapter implements
             'client_id'  => $client_id,
             'subject'    => $subject,
             'audience'   => $audience,
-            'expiration' => $expiration,
+            'expires'    => $expires,
             'jti'        => $jti,
         ));
 

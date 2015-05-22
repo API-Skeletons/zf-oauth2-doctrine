@@ -105,7 +105,7 @@ return array(
                         'access_token' => array(
                             'type' => 'field',
                             'name' => 'accessToken',
-                            'datatype' => 'string',
+                            'datatype' => 'text',
                         ),
                         'expires' => array(
                             'type' => 'field',

@@ -4,7 +4,7 @@
     <id name="id" type="integer">
       <generator strategy="AUTO"/>
     </id>
-    <field name="accessToken" type="string" nullable="true"/>
+    <field name="accessToken" type="text" nullable="true"/>
     <field name="expires" type="datetime" nullable="true"/>
     <many-to-one field="client" target-entity="ZF\OAuth2\Doctrine\Entity\Client" inversed-by="accessToken">
       <join-columns>

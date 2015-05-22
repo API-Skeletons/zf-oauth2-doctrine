@@ -3,7 +3,7 @@ OAuth2 Doctrine Adapter for Apigility
 
 [![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
 [![Coverage Status](https://coveralls.io/repos/TomHAnderson/zf-oauth2-doctrine/badge.svg)](https://coveralls.io/r/TomHAnderson/zf-oauth2-doctrine)
-[![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
+[![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
 
 
 About
@@ -19,7 +19,7 @@ Installation
 Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 
 ```sh
-$ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.2"
+$ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.3"
 ```
 
 Add this module to your application's configuration:

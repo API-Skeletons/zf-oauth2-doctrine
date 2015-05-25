@@ -53,7 +53,7 @@ Using Default Entities
 
 Details for creating your database with the included entities are outside the scope of this project.  Generally this is done through [doctrine/doctrine-orm-module](https://github.com/doctrine/DoctrineORMModule) with ```php public/index.php orm:schema-tool:create```
 
-By default this module uses the entities provided but you may the adapter with your own entites (and map them in the mapping config section) by toggling this flag:
+By default this module uses the entities provided but you may use the adapter with your own entites (and map them in the mapping config section) by toggling this flag:
 
 ```php
 'zf-oauth2-doctrine' => array(
@@ -101,11 +101,11 @@ Command Line Tools
 
 To make JWT easier to test command line tools are included.
 
-* `oauth2:jwt:create` Create a new JWT for a given client.  This JWT will be used by an oauth2 connection requesting a grant_type of `urn:ietf:params:oauth:grant-type:jwt-bearer`.  Creating the JWT puts the oauth2 connection requet's public key in place in the OAuth2 tables.
+* `oauth2:jwt:create` Create a new JWT for a given client.  This JWT will be used by an oauth2 connection requesting a grant_type of `urn:ietf:params:oauth:grant-type:jwt-bearer`.  Creating the JWT puts the oauth2 connection request's public key in place in the OAuth2 tables.
 
 * `oauth2:public-key:create` Create the public/private key record for the given client.  This data is used to sign JWT access tokens.  Each client may have only one key pair.
 
-For the connecting side `zf-oauth2-client` provides a command line tool to generate a JWT reqeust.  See also http://bshaffer.github.io/oauth2-server-php-docs/grant-types/jwt-bearer/
+For the connecting side [zf-oauth2-client](https://github.com/TomHAnderson/zf-oauth2-client) provides a command line tool to generate a JWT reqeust.  See also http://bshaffer.github.io/oauth2-server-php-docs/grant-types/jwt-bearer/
 
 
 Extensions

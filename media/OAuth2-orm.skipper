@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.0.1219" name="zf-oauth2" mvc="Without MVC" orm="Doctrine2" uuid="b7638313-3ca8-4389-9163-d2bb1c15f725">
+<skipper version="3.2.1.1222" name="zf-oauth2" mvc="Without MVC" orm="Doctrine2" uuid="b7638313-3ca8-4389-9163-d2bb1c15f725">
   <external-module storage-path="OAuth2-orm.module.xml"/>
   <visual-data>
     <comment uuid="05a610e1-fad6-4e65-8b59-c09ed14d78bb" bg-color="4294967264" position-x="25" position-y="364" size-x="0" size-x2="198" size-y="0" size-y2="92" txt-color="4278190080"/>

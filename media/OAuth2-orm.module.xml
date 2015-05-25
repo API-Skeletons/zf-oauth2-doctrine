@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.0.1219" mvc="Without MVC" orm="Doctrine2">
+<skipper version="3.2.1.1222" mvc="Without MVC" orm="Doctrine2">
   <module name="\OAuth2 ORM" local-name="OAuth2 ORM" namespace="\ZF\OAuth2\Doctrine\Entity" local-namespace="ZF\OAuth2\Doctrine\Entity" export-format="Doctrine2Xml" export-path="../config/orm" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
     <entity name="\ZF\OAuth2\Doctrine\Entity\Client" local-name="Client" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="f24288d3-c5ab-4e4f-a251-0bca949873d1"/>

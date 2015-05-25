@@ -5,9 +5,24 @@ namespace ZF\OAuth2\Doctrine;
 use Zend\ModuleManager\ModuleManager;
 use ZF\OAuth2\Doctrine\EventListener\DynamicMappingSubscriber;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as Console;
 
-class Module
+class Module implements
+    AutoloaderProviderInterface,
+    ConfigProviderInterface,
+    ConsoleUsageProviderInterface
 {
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            'oauth2:jwt:create' => 'Create a JWT for a given client',
+            'oauth2:public-key:create' => 'Create the PublicKey data for a given client',
+        );
+    }
+
     public function onBootstrap($e)
     {
         $app     = $e->getParam('application');

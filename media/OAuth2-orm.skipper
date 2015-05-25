@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.1.1222" name="zf-oauth2" mvc="Without MVC" orm="Doctrine2" uuid="b7638313-3ca8-4389-9163-d2bb1c15f725">
+<skipper version="3.2.0.1219" name="zf-oauth2" mvc="Without MVC" orm="Doctrine2" uuid="b7638313-3ca8-4389-9163-d2bb1c15f725">
   <external-module storage-path="OAuth2-orm.module.xml"/>
   <visual-data>
     <comment uuid="05a610e1-fad6-4e65-8b59-c09ed14d78bb" bg-color="4294967264" position-x="25" position-y="364" size-x="0" size-x2="198" size-y="0" size-y2="92" txt-color="4278190080"/>
@@ -25,7 +25,7 @@
     <entity uuid="8cc40580-9611-471f-a6c7-9a64ec3b2869" bg-color="4294967295" hdr-color="4292006610" position-x="208" position-y="172" size-x="0" size-x2="99" size-y="0" size-y2="59"/>
     <region uuid="98a49ed5-e644-4a4e-9b59-d5421643572a" bg-color="4292931823" position-x="675" position-y="122" size-x="16" size-x2="319" size-y="0" size-y2="404"/>
     <entity uuid="9c143447-a1f4-4187-a5f9-45e768f78ebb" bg-color="4294967295" hdr-color="4292006610" position-x="20" position-y="241" size-x="0" size-x2="93" size-y="0" size-y2="73"/>
-    <association uuid="9daca6d8-8f09-4f97-bbfd-6db05bdf3e58" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="9daca6d8-8f09-4f97-bbfd-6db05bdf3e58" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <entity uuid="b6562bcc-4fca-413e-a560-91da4d75dc9f" bg-color="4294967295" hdr-color="4292006610" position-x="18" position-y="33" size-x="0" size-x2="134" size-y="0" size-y2="87"/>
     <project uuid="b7638313-3ca8-4389-9163-d2bb1c15f725" size-x="32" size-x2="1066" size-y="40" size-y2="688"/>
     <entity uuid="d25ad9b3-1751-49e7-901d-a92fae42a8b2" bg-color="4294967295" hdr-color="4292006610" position-x="146" position-y="310" size-x="0" size-x2="127" size-y="0" size-y2="60"/>

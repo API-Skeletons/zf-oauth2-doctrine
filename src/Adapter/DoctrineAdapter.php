@@ -1328,25 +1328,12 @@ class DoctrineAdapter implements
                 )
             );
 
-        if (!$client) {
-            return false;
-        }
-
-        $publicKey = $this->getObjectManager()
-            ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['entity'])
-            ->findOneBy(
-                array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name']
-                        => $client,
-                )
-            );
-
-        if (!$publicKey) {
+        if (!$client || !$client->getPublicKey()) {
             return false;
         }
 
         $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\PublicKey')->reset();
-        $mapper->exchangeDoctrineArray($publicKey->getArrayCopy());
+        $mapper->exchangeDoctrineArray($client->getPublicKey()->getArrayCopy());
 
         $publicKeyOAuth2 = $mapper->getOAuth2ArrayCopy();
 
@@ -1367,25 +1354,12 @@ class DoctrineAdapter implements
                 )
             );
 
-        if (!$client) {
-            return false;
-        }
-
-        $publicKey = $this->getObjectManager()
-            ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['entity'])
-            ->findOneBy(
-                array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name']
-                        => $client,
-                )
-            );
-
-        if (!$publicKey) {
+        if (!$client || !$client->getPublicKey()) {
             return false;
         }
 
         $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\PublicKey')->reset();
-        $mapper->exchangeDoctrineArray($publicKey->getArrayCopy());
+        $mapper->exchangeDoctrineArray($client->getPublicKey()->getArrayCopy());
 
         $publicKeyOAuth2 = $mapper->getOAuth2ArrayCopy();
 
@@ -1406,25 +1380,12 @@ class DoctrineAdapter implements
                 )
             );
 
-        if (!$client) {
-            return false;
-        }
-
-        $publicKey = $this->getObjectManager()
-            ->getRepository($config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['entity'])
-            ->findOneBy(
-                array(
-                    $config['mapping']['ZF\OAuth2\Doctrine\Mapper\PublicKey']['mapping']['client_id']['name']
-                        => $client,
-                )
-            );
-
-        if (!$publicKey) {
+        if (!$client || !$client->getPublicKey()) {
             return false;
         }
 
         $mapper = $this->getServiceLocator()->get('ZF\OAuth2\Doctrine\Mapper\PublicKey')->reset();
-        $mapper->exchangeDoctrineArray($publicKey->getArrayCopy());
+        $mapper->exchangeDoctrineArray($client->getPublicKey()->getArrayCopy());
 
         $publicKeyOAuth2 = $mapper->getOAuth2ArrayCopy();
 

@@ -96,6 +96,18 @@ An example to match ZfcUser `auth_identity_fields` configuration:
 ```
 
 
+Command Line Tools
+------------------
+
+To make JWT easier to test command line tools are included.
+
+* `oauth2:jwt:create` Create a new JWT for a given client.  This JWT will be used by an oauth2 connection requesting a grant_type of `urn:ietf:params:oauth:grant-type:jwt-bearer`.  Creating the JWT puts the oauth2 connection requet's public key in place in the OAuth2 tables.
+
+* `oauth2:public-key:create` Create the public/private key record for the given client.  This data is used to sign JWT access tokens.  Each client may have only one key pair.
+
+For the connecting side `zf-oauth2-client` provides a command line tool to generate a JWT reqeust.  See also http://bshaffer.github.io/oauth2-server-php-docs/grant-types/jwt-bearer/
+
+
 Extensions
 ----------
 

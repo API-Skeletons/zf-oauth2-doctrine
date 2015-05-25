@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.1.1222" mvc="Without MVC" orm="Doctrine2">
+<skipper version="3.2.0.1219" mvc="Without MVC" orm="Doctrine2">
   <module name="\OAuth2 ORM" local-name="OAuth2 ORM" namespace="\ZF\OAuth2\Doctrine\Entity" local-namespace="ZF\OAuth2\Doctrine\Entity" export-format="Doctrine2Xml" export-path="../config/orm" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
     <entity name="\ZF\OAuth2\Doctrine\Entity\Client" local-name="Client" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="f24288d3-c5ab-4e4f-a251-0bca949873d1"/>
@@ -160,7 +160,7 @@
         <field name="publicKey" type="text" uuid="25e4e0a0-f374-462e-acb1-80335f0f995a"/>
         <field name="privateKey" type="text" uuid="f20479d1-190f-42da-a99d-214515ccef6a"/>
         <field name="encryptionAlgorithm" type="string" uuid="83593e76-ad34-4103-b524-37898567ede8"/>
-        <field name="client_id" type="integer" required="true" uuid="8bbf535b-14cb-432c-921f-c9cf693db8e2"/>
+        <field name="client_id" type="integer" required="true" unique="true" uuid="8bbf535b-14cb-432c-921f-c9cf693db8e2"/>
         <orm-attributes>
           <attribute name="table">PublicKey_OAuth2</attribute>
         </orm-attributes>
@@ -179,7 +179,7 @@
         <attribute name="on-delete">CASCADE</attribute>
       </orm-attributes>
     </association>
-    <association from="\ZF\OAuth2\Doctrine\Entity\PublicKey" to="\ZF\OAuth2\Doctrine\Entity\Client" owner-alias="publicKey" inverse-alias="client" many-owner="true" many-inverse="false" parent-required="true" uuid="9daca6d8-8f09-4f97-bbfd-6db05bdf3e58">
+    <association from="\ZF\OAuth2\Doctrine\Entity\PublicKey" to="\ZF\OAuth2\Doctrine\Entity\Client" owner-alias="publicKey" inverse-alias="client" many-owner="false" many-inverse="false" parent-required="true" uuid="9daca6d8-8f09-4f97-bbfd-6db05bdf3e58">
       <association-field from="client_id" to="id"/>
       <orm-attributes>
         <attribute name="on-delete">CASCADE</attribute>

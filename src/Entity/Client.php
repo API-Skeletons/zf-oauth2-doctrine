@@ -66,7 +66,7 @@ class Client implements ArraySerializableInterface
     private $jti;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \ZF\OAuth2\Doctrine\Entity\PublicKey
      */
     private $publicKey;
 
@@ -91,7 +91,6 @@ class Client implements ArraySerializableInterface
         $this->authorizationCode = new ArrayCollection();
         $this->jwt = new ArrayCollection();
         $this->jti = new ArrayCollection();
-        $this->publicKey = new ArrayCollection();
         $this->scope = new ArrayCollection();
     }
 
@@ -439,36 +438,23 @@ class Client implements ArraySerializableInterface
     }
 
     /**
-     * Add publicKey
-     *
-     * @param PublicKey $publicKey
-     * @return Client
-     */
-    public function addPublicKey(PublicKey $publicKey)
-    {
-        $this->publicKey[] = $publicKey;
-
-        return $this;
-    }
-
-    /**
-     * Remove publicKey
-     *
-     * @param PublicKey $publicKey
-     */
-    public function removePublicKey(PublicKey $publicKey)
-    {
-        $this->publicKey->removeElement($publicKey);
-    }
-
-    /**
      * Get publicKey
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return PublicKey
      */
     public function getPublicKey()
     {
         return $this->publicKey;
+    }
+
+    /**
+     * Set publicKey
+     */
+    public function setPublicKey(PublicKey $value)
+    {
+        $this->publicKey = $value;
+
+        return $this;
     }
 
     /**

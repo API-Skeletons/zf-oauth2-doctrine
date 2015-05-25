@@ -16,7 +16,7 @@
     <one-to-many field="authorizationCode" target-entity="ZF\OAuth2\Doctrine\Entity\AuthorizationCode" mapped-by="client"/>
     <one-to-many field="jwt" target-entity="ZF\OAuth2\Doctrine\Entity\Jwt" mapped-by="client"/>
     <one-to-many field="jti" target-entity="ZF\OAuth2\Doctrine\Entity\Jti" mapped-by="client"/>
-    <one-to-many field="publicKey" target-entity="ZF\OAuth2\Doctrine\Entity\PublicKey" mapped-by="client"/>
+    <one-to-one field="publicKey" target-entity="ZF\OAuth2\Doctrine\Entity\PublicKey" mapped-by="client"/>
     <many-to-many field="scope" target-entity="ZF\OAuth2\Doctrine\Entity\Scope" mapped-by="client"/>
   </entity>
 </doctrine-mapping>

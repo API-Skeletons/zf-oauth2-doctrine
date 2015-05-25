@@ -3,13 +3,13 @@ OAuth2 Doctrine Adapter for Apigility
 
 [![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg?branch=0.1.0)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
 [![Coverage Status](https://coveralls.io/repos/TomHAnderson/zf-oauth2-doctrine/badge.svg)](https://coveralls.io/r/TomHAnderson/zf-oauth2-doctrine)
-[![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine) 
+[![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
 
 
 About
 -----
 
-This provides the ORM entity definitions for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
+This provides a Doctrine adapter for [zfcampus/zf-oauth2](https://github.com/zfcampus/zf-oauth2) and entity definitions for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
 ![Entity Relationship Diagram](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/oauth2-doctrine-erd.png)
 
@@ -19,7 +19,7 @@ Installation
 Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 
 ```sh
-$ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.2"
+$ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.3"
 ```
 
 Add this module to your application's configuration:
@@ -51,9 +51,9 @@ The User entity for the unit test for this module is a good template to start fr
 Using Default Entities
 ----------------------
 
-Details for creating your database with the included entities are outside the scope of this project.  Generally this is done through doctrine-orm-module with ```php public/index.php orm:schema-tool:create```
+Details for creating your database with the included entities are outside the scope of this project.  Generally this is done through [doctrine/doctrine-orm-module](https://github.com/doctrine/DoctrineORMModule) with ```php public/index.php orm:schema-tool:create```
 
-By default this module uses the entities provided but you may toggle this and use your own entites (and map them in the mapping config section) by toggling this flag:
+By default this module uses the entities provided but you may the adapter with your own entites (and map them in the mapping config section) by toggling this flag:
 
 ```php
 'zf-oauth2-doctrine' => array(
@@ -86,15 +86,26 @@ If you need to customize the call to mapManyToOne, which creates the dynamic joi
 Identity field on User entity
 -----------------------------
 
-By default the DoctrineAdapter for OAuth2 retrieves the user by 'username' field on the entity. If you need to use a different or multiple fields you can do that via the 'auth_identity_fields' key. For example; ZfcUser allows users to authenticate by username and/or email fields.
+By default this Doctrine adapter retrieves the user by the `username` field on the configured User entity. If you need to use a different or multiple fields you may do so via the 'auth_identity_fields' key. For example, ZfcUser allows users to authenticate by username and/or email fields.
 
-example : match ZfcUser `auth_identity_fields` configuration
-
+An example to match ZfcUser `auth_identity_fields` configuration:
 ```php
 'zf-oauth2-doctrine' => array(
     'storage_settings' => array(
         'auth_identity_fields' => array('username', 'email'), // defaults to array('username')
 ```
+
+
+Command Line Tools
+------------------
+
+To make JWT easier to test command line tools are included.
+
+* `oauth2:jwt:create` Create a new JWT for a given client.  This JWT will be used by an oauth2 connection requesting a grant_type of `urn:ietf:params:oauth:grant-type:jwt-bearer`.  Creating the JWT puts the oauth2 connection requet's public key in place in the OAuth2 tables.
+
+* `oauth2:public-key:create` Create the public/private key record for the given client.  This data is used to sign JWT access tokens.  Each client may have only one key pair.
+
+For the connecting side `zf-oauth2-client` provides a command line tool to generate a JWT reqeust.  See also http://bshaffer.github.io/oauth2-server-php-docs/grant-types/jwt-bearer/
 
 
 Extensions

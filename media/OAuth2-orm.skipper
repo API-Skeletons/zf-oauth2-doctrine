@@ -4,7 +4,7 @@
   <visual-data>
     <comment uuid="05a610e1-fad6-4e65-8b59-c09ed14d78bb" bg-color="4294967264" position-x="25" position-y="364" size-x="0" size-x2="198" size-y="0" size-y2="92" txt-color="4278190080"/>
     <entity uuid="0cef011b-fcdf-4e6e-a813-2a8d49ba4748" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="62" position-y="185" size-x="0" size-x2="106" size-y="0" size-y2="73"/>
-    <entity uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a" bg-color="4294967295" hdr-color="4292006610" position-x="300" position-y="203" size-x="0" size-x2="93" size-y="0" size-y2="87"/>
+    <entity uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="300" position-y="203" size-x="0" size-x2="93" size-y="0" size-y2="87"/>
     <many-to-many-association-entity uuid="1a2f2f70-ba2a-49c8-a50c-ffe2206b4013" split="1"/>
     <association uuid="1a897fc1-617e-4cc3-82b7-54f564d3335d" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="1b40f6a9-e21a-49d3-8d44-604e36d28d35" bg-color="4294967295" hdr-color="4292006610" position-x="57" position-y="30" size-x="0" size-x2="127" size-y="0" size-y2="101"/>
@@ -16,6 +16,7 @@
     <many-to-many-association-entity uuid="438b279b-99ed-4a90-9352-79845961ace6" split="1"/>
     <entity uuid="4f5f9113-1ca7-472d-ba02-7b178329ced8" bg-color="4294967295" hdr-color="4292006610" position-x="27" position-y="191" size-x="0" size-x2="127" size-y="0" size-y2="60"/>
     <many-to-many-association-entity uuid="5a9f1849-17bf-4479-9c06-dcd5e1784e90" center-position-x="0" center-position-y="-16"/>
+    <comment uuid="5e19d4fc-7756-4a50-9d4d-91a05aeabac2" bg-color="#FFFFE0" position-x="286" position-y="397" size-x="0" size-x2="124" size-y="0" size-y2="129" txt-color="#000000"/>
     <many-to-many-association uuid="609e9b50-11d4-4ba4-8e4e-37a0286c0358" color="4288059030"/>
     <entity uuid="654eac84-7c6d-4280-9138-1658291dfb7e" bg-color="4294967295" hdr-color="4292006610" position-x="27" position-y="99" size-x="0" size-x2="148" size-y="0" size-y2="60"/>
     <comment uuid="664daa50-d4a6-4d82-a35f-5eb5e2e8e7ca" bg-color="4294967264" position-x="39" position-y="5" size-x="0" size-x2="264" size-y="0" size-y2="72" txt-color="4278190080"/>

@@ -14,10 +14,12 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 class DynamicMappingSubscriber implements EventSubscriber
 {
     protected $config = array();
+    protected $mapping = array();
 
-    public function __construct($config)
+    public function __construct($config, $mapping)
     {
         $this->config = $config;
+        $this->mapping = $mapping;
     }
 
     /**
@@ -66,6 +68,13 @@ class DynamicMappingSubscriber implements EventSubscriber
                 break;
 
             case $this->config['client_entity']['entity']:
+                // Add unique constriant for clientId based on column
+                // See https://github.com/TomHAnderson/zf-oauth2-doctrine/issues/24
+                $clientIdField = $this->mapping['ZF\OAuth2\Doctrine\Mapper\Client']['mapping']['client_id']['name'];
+                $clientIdColumn = $metadata->columnNames[$clientIdField];
+                $metadata->table['uniqueConstraints']['idx_' . $clientIdColumn . '_unique']['columns'][] =
+                    $clientIdColumn;
+
                 $joinMap = array(
                     'targetEntity' => $this->config['user_entity']['entity'],
                     'fieldName' => $this->config['user_entity']['field'],

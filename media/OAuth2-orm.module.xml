@@ -7,14 +7,12 @@
       <field name="secret" type="string" uuid="1b0c7264-2fce-4217-9011-ddc42ee9afd2"/>
       <field name="redirectUri" type="text" uuid="e419d490-b93f-4a8b-b21b-03f3fc6a75ae"/>
       <field name="grantType" type="array" uuid="475c289c-1057-4314-a146-955108acb56a"/>
-      <index name="idx_clientId_unique" unique="true">
-        <index-field name="clientId"/>
-      </index>
       <orm-attributes>
         <attribute name="table">Client_OAuth2</attribute>
       </orm-attributes>
     </entity>
     <comment caption="Disconnected User" description="The ZF\OAuth2\Entity\User does not exist and should be replaced with a custom user entity with a client relation to dynamically assoicate them.  This is dynamically mapped and defined in the config." uuid="664daa50-d4a6-4d82-a35f-5eb5e2e8e7ca"/>
+    <comment caption="Unique clientId" description="A unique index for clientId is required and added dynamically through the metadata subscriber.  It is not in the schema to allow for custom naming strategies." uuid="5e19d4fc-7756-4a50-9d4d-91a05aeabac2"/>
     <region namespace="\ZF\OAuth2\Doctrine\Entity" caption="Scope" uuid="98a49ed5-e644-4a4e-9b59-d5421643572a">
       <entity name="\ZF\OAuth2\Doctrine\Entity\Scope" local-name="Scope" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="8cc40580-9611-471f-a6c7-9a64ec3b2869">
         <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c8033880-f92f-47e6-bbf8-e9f8a99299fb"/>
@@ -189,7 +187,7 @@
   <visual-data>
     <comment uuid="05a610e1-fad6-4e65-8b59-c09ed14d78bb" bg-color="4294967264" position-x="25" position-y="364" size-x="0" size-x2="198" size-y="0" size-y2="92" txt-color="4278190080"/>
     <entity uuid="0cef011b-fcdf-4e6e-a813-2a8d49ba4748" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="62" position-y="185" size-x="0" size-x2="106" size-y="0" size-y2="73"/>
-    <entity uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a" bg-color="4294967295" hdr-color="4292006610" position-x="300" position-y="203" size-x="0" size-x2="93" size-y="0" size-y2="87"/>
+    <entity uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="300" position-y="203" size-x="0" size-x2="93" size-y="0" size-y2="87"/>
     <many-to-many-association-entity uuid="1a2f2f70-ba2a-49c8-a50c-ffe2206b4013" split="1"/>
     <entity uuid="1b40f6a9-e21a-49d3-8d44-604e36d28d35" bg-color="4294967295" hdr-color="4292006610" position-x="57" position-y="30" size-x="0" size-x2="127" size-y="0" size-y2="101"/>
     <many-to-many-association uuid="1d7e8cae-9456-4602-a095-f2048b9303c4" color="4288059030"/>
@@ -198,6 +196,7 @@
     <many-to-many-association-entity uuid="438b279b-99ed-4a90-9352-79845961ace6" split="1"/>
     <entity uuid="4f5f9113-1ca7-472d-ba02-7b178329ced8" bg-color="4294967295" hdr-color="4292006610" position-x="27" position-y="191" size-x="0" size-x2="127" size-y="0" size-y2="60"/>
     <many-to-many-association-entity uuid="5a9f1849-17bf-4479-9c06-dcd5e1784e90" center-position-x="0" center-position-y="-16"/>
+    <comment uuid="5e19d4fc-7756-4a50-9d4d-91a05aeabac2" bg-color="#FFFFE0" position-x="286" position-y="397" size-x="0" size-x2="124" size-y="0" size-y2="129" txt-color="#000000"/>
     <many-to-many-association uuid="609e9b50-11d4-4ba4-8e4e-37a0286c0358" color="4288059030"/>
     <entity uuid="654eac84-7c6d-4280-9138-1658291dfb7e" bg-color="4294967295" hdr-color="4292006610" position-x="27" position-y="99" size-x="0" size-x2="148" size-y="0" size-y2="60"/>
     <comment uuid="664daa50-d4a6-4d82-a35f-5eb5e2e8e7ca" bg-color="4294967264" position-x="39" position-y="5" size-x="0" size-x2="264" size-y="0" size-y2="72" txt-color="4278190080"/>

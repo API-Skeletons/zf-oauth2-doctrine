@@ -8,9 +8,6 @@
     <field name="secret" type="string" nullable="true"/>
     <field name="redirectUri" type="text" nullable="true"/>
     <field name="grantType" type="array" nullable="true"/>
-    <unique-constraints>
-      <unique-constraint name="idx_clientId_unique" columns="clientId"/>
-    </unique-constraints>
     <one-to-many field="accessToken" target-entity="ZF\OAuth2\Doctrine\Entity\AccessToken" mapped-by="client"/>
     <one-to-many field="refreshToken" target-entity="ZF\OAuth2\Doctrine\Entity\RefreshToken" mapped-by="client"/>
     <one-to-many field="authorizationCode" target-entity="ZF\OAuth2\Doctrine\Entity\AuthorizationCode" mapped-by="client"/>

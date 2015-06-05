@@ -3,6 +3,7 @@
 namespace ZF\OAuth2\Doctrine\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use RuntimeException;
 
 /**
  * AuthorizationCode
@@ -277,8 +278,13 @@ class AuthorizationCode
      * @param $user
      * @return AuthorizationCode
      */
-    public function setUser(UserInterface $user)
+    public function setUser($user)
     {
+        if (!is_null($user) && !$user instanceof UserInterface) {
+            throw new RuntimeException('Argument passed to setUser() '
+                . 'must implement interface ZF\OAuth2\Doctrine\Entity\UserInterface');
+        }
+
         $this->user = $user;
 
         return $this;

@@ -4,6 +4,7 @@ namespace ZF\OAuth2\Doctrine\Entity;
 
 use Zend\Stdlib\ArraySerializableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use RuntimeException;
 
 /**
  * Client
@@ -496,8 +497,13 @@ class Client implements ArraySerializableInterface
      * @param $user
      * @return Client
      */
-    public function setUser(UserInterface $user = null)
+    public function setUser($user)
     {
+        if (!is_null($user) && !$user instanceof UserInterface) {
+            throw new RuntimeException('Argument passed to setUser() '
+                . 'must implement interface ZF\OAuth2\Doctrine\Entity\UserInterface');
+        }
+
         $this->user = $user;
 
         return $this;

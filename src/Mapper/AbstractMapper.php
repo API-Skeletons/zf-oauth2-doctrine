@@ -214,6 +214,8 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
                             if (isset($config['mapping'][$key]['allow_null'])
                                 && $config['mapping'][$key]['allow_null']) {
                             } else {
+                                print_r($config['mapping']);
+                                die('relation not found');
                                 throw new Exception("Relation was not found: $key: $value");
                             }
                         }

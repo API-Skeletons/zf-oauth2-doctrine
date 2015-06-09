@@ -277,7 +277,7 @@ class AuthorizationCode
      * @param $user
      * @return AuthorizationCode
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
 

@@ -94,6 +94,13 @@ An example to match ZfcUser `auth_identity_fields` configuration:
         'auth_identity_fields' => array('username', 'email'), // defaults to array('username')
 ```
 
+
+Validate zf-apigility-doctrine resources
+----------------------------------------
+
+To validate the OAuth2 session with Query Create Filters and Query Providers implement `ZF\OAuth2\Doctrine\OAuth2ServerInterface` and use `ZF\OAuth2\Doctrine\OAuth2ServerTrait`.  Then call `$result = $this->validateOAuth2($scope);` in the filter function.
+
+
 Extensions
 ----------
 

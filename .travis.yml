@@ -1,28 +1,38 @@
+sudo: false
+
 language: php
 
-php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
-
-matrix:
-  allow_failures:
+matrix: 
+  fast_finish: true
+  include:
+    - php: 5.5
+      env:
+        EXECUTE_CS_CHECK=true
+    - php: 5.6
+      env:
+        EXECUTE_COVERAGE=true
+    - php: 7
     - php: hhvm
-    - php: 7.0
+  allow_failures:
+    - php: 7
+    - php: hhvm
 
-before_script:
+notifications:
+  irc: "irc.freenode.org#apigility-dev"
+  email: false
+
+before_install:
+  - if [[ $EXECUTE_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - composer self-update
-  - composer install --dev --prefer-source
+  - chmod -R +rwX test/asset/data
+
+install:
+  - travis_retry composer install --no-interaction --ignore-platform-reqs --prefer-source
 
 script:
   - mkdir -p build/logs
   - ./vendor/bin/phpunit
-  - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php src test
+  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php src test; fi
 
 after_script:
 - php vendor/bin/coveralls
-  
-notifications:
-  irc: "irc.freenode.org#apigility-dev"
-  email: false

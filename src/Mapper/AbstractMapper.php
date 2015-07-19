@@ -127,7 +127,8 @@ abstract class AbstractMapper implements
                         $queryBuilder->select('row')
                             ->from($this->getConfig()->mapping->$key->entity, 'row')
                             ->andwhere(
-                                $queryBuilder->expr()->in('row.' . $this->getConfig()->mapping->$key->name, $fieldValues)
+                                $queryBuilder->expr()->in('row.'
+                                    . $this->getConfig()->mapping->$key->name, $fieldValues)
                             );
 
                         $oAuth2Data[$key] = $value;
@@ -237,10 +238,11 @@ abstract class AbstractMapper implements
                             $doctrineArray = $relation->getArrayCopy();
                             $oAuth2Value = $doctrineArray[$this->getConfig()->mapping->$key->entity_field_name];
                         } else {
-                            $relation = $this->getObjectManager()->getRepository($this->getConfig()->mapping->$key->entity)
-                            ->findOneBy(array(
-                                $this->getConfig()->mapping->$key->entity_field_name => $value,
-                            ));
+                            $relation = $this->getObjectManager()
+                                ->getRepository($this->getConfig()->mapping->$key->entity)
+                                ->findOneBy([
+                                    $this->getConfig()->mapping->$key->entity_field_name => $value,
+                                ]);
                         }
 
                         if (!$relation) {

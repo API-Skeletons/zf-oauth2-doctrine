@@ -27,7 +27,8 @@ class MapperManager extends AbstractPluginManager implements
         return $this->config;
     }
 
-    public function get($resourceName) {
+    public function get($resourceName)
+    {
         $resource = parent::get($resourceName);
         $resource->setConfig($this->getConfig()->$resourceName);
         $resource->setObjectManager($this->getObjectManager());

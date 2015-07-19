@@ -8,7 +8,9 @@ OAuth2 Doctrine Adapter for Apigility
 About
 -----
 
-This provides a Doctrine adapter for [zfcampus/zf-oauth2](https://github.com/zfcampus/zf-oauth2) and entity definitions for all aspects of OAuth2 including Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
+This provides a Doctrine adapter for [zfcampus/zf-mvc-auth](https://github.com/zfcampus/zf-oauth2)
+and entity definitions for all aspects of OAuth2 including
+Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
 ![Entity Relationship Diagram](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/oauth2-doctrine-erd.png)
 
@@ -18,45 +20,85 @@ Installation
 Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 
 ```sh
-$ php composer.phar require zfcampus/zf-oauth2-doctrine "~0.3"
+$ php composer.phar require zfcampus/zf-oauth2-doctrine "^1.0"
 ```
 
 Add this module to your application's configuration:
 
 ```php
-'modules' => array(
+'modules' => [
    ...
    'ZF\OAuth2\Doctrine',
-),
+],
 ```
 
 
 Configuration
 -------------
 
-Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and rename to ```oauth2.doctrine-orm.global.php``` You will need to edit this file with at least your User entity, which is not provided.
+Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and
+rename to ```oauth2.doctrine-orm.global.php``` This config has multiple sections for multiple
+adapters.  Out of the box this module provides a `default` adapter.  You will need to edit this file with
+at least your User entity, which is not provided.
 
 
 The User Entity
 --------------
 
-This repository supplies every entity you need to implement OAuth2 except the User entity.  The reason is so the User entity can be decoupled from the OAuth2 Doctrine repository instead to be linked dynamically at run time.  This allows, among other benefits, the ability to create an ERD without modifying the `OAuth2-orm.module.xml` module.
+This repository supplies every entity you need to implement OAuth2 except the User entity.
+The reason is so the User entity can be decoupled from the OAuth2 Doctrine repository
+instead to be linked dynamically at run time.  This allows, among other benefits, the
+ability to create an ERD without modifying the `OAuth2-orm.module.xml` module.
 
 The User entity must implement `ZF\OAuth2\Doctrine\Entity\UserInterface`
 
-The User entity for the unit test for this module is a good template to start from: [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
+The User entity for the unit test for this module is a good template to start from:
+[https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
+
+
+Configuration with zf-mvc-auth
+------------------------------
+
+By default this module includes a `oauth2.doctrineadapter.default` adapter.
+The adapter is used to create storage from services:
+
+```php
+'zf-mvc-auth' => [
+    'authentication' => [
+        'map' => [
+            'Api\\V1' => 'oauth2_doctrine',
+        ],
+    ],
+],
+
+'zf-mvc-auth' => [
+    'authentication' => [
+        'adapters' => [
+            'oauth2_doctrine' => [
+                'adapter' => 'ZF\\MvcAuth\\Authentication\\OAuth2Adapter',
+                'storage' => [
+                    'default' => 'oauth2.doctrineadapter.default',
+                ],
+            ],
+        ],
+    ],
+],
+```
 
 
 Using Default Entities
 ----------------------
 
-Details for creating your database with the included entities are outside the scope of this project.  Generally this is done through [doctrine/doctrine-orm-module](https://github.com/doctrine/DoctrineORMModule) with ```php public/index.php orm:schema-tool:create```
+Details for creating your database with the included entities are outside the scope of this project.
+Generally this is done through [doctrine/doctrine-orm-module](https://github.com/doctrine/DoctrineORMModule)
+with ```php public/index.php orm:schema-tool:create```
 
-By default this module uses the entities provided but you may use the adapter with your own entites (and map them in the mapping config section) by toggling this flag:
+By default this module uses the entities provided but you may use the adapter with your own entites
+(and map them in the mapping config section) by toggling this flag:
 
 ```php
-'zf-oauth2-doctrine' => array(
-    'storage_settings' => array(
+'zf-oauth2-doctrine' => [
+    'default' => [
         'enable_default_entities' => true,
 ```
 
@@ -64,41 +106,49 @@ By default this module uses the entities provided but you may use the adapter wi
 Customizing Many to One Mapping
 -------------------------------
 
-If you need to customize the call to mapManyToOne, which creates the dynamic joins to the User entity from the default entites, you may add any parameters to the `['dynamic_mapping']['default_entity']['additional_mapping_data']` element.  An example for a User entity with a primary key of user_id which does not conform to the metadata naming strategy is added to each entity:
+If you need to customize the call to mapManyToOne, which creates the dynamic joins to the User
+entity from the default entites, you may add any parameters to the
+`['dynamic_mapping']['default_entity']['additional_mapping_data']` element.  An example for a
+User entity with a primary key of user_id which does not conform to the metadata naming strategy
+is added to each entity:
 
 ```php
-'refresh_token_entity' => array(
+'refresh_token_entity' => [
     'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
     'field' => 'refreshToken',
-    'additional_mapping_data' => array(
-        'joinColumns' => array(
-            array(
+    'additional_mapping_data' => [
+        'joinColumns' => [
+            [
                 'name' => 'user_id',
                 'referencedColumnName' => 'user_id',
-            ),
-        ),
-    ),
-),
+            ],
+        ],
+    ],
+],
 
 ```
 
 Identity field on User entity
 -----------------------------
 
-By default this Doctrine adapter retrieves the user by the `username` field on the configured User entity. If you need to use a different or multiple fields you may do so via the 'auth_identity_fields' key. For example, ZfcUser allows users to authenticate by username and/or email fields.
+By default this Doctrine adapter retrieves the user by the `username` field on the configured
+User entity. If you need to use a different or multiple fields you may do so via the
+'auth_identity_fields' key. For example, ZfcUser allows users to authenticate by username and/or email fields.
 
 An example to match ZfcUser `auth_identity_fields` configuration:
 ```php
-'zf-oauth2-doctrine' => array(
-    'storage_settings' => array(
-        'auth_identity_fields' => array('username', 'email'), // defaults to array('username')
+'zf-oauth2-doctrine' => [
+    'default' => [
+        'auth_identity_fields' => ['username', 'email'],
 ```
 
 
 Validate zf-apigility-doctrine resources
 ----------------------------------------
 
-To validate the OAuth2 session with Query Create Filters and Query Providers implement `ZF\OAuth2\Doctrine\OAuth2ServerInterface` and use `ZF\OAuth2\Doctrine\OAuth2ServerTrait`.  Then call `$result = $this->validateOAuth2($scope);` in the filter function.
+To validate the OAuth2 session with Query Create Filters and Query Providers implement
+`ZF\OAuth2\Doctrine\OAuth2ServerInterface` and use `ZF\OAuth2\Doctrine\OAuth2ServerTrait`.
+Then call `$result = $this->validateOAuth2($scope);` in the filter function.
 
 
 Extensions
@@ -106,6 +156,7 @@ Extensions
 
 This is a list of other modules which extend the functionality this repository provides.
 
-* [zf-oauth2-doctrine-mutabletablenames](https://github.com/basz/zf-oauth2-doctrine-mutatetablenames) - If you do not want to use the default table names provided with the default entities this module lets you customize them.
+* [zf-oauth2-doctrine-mutabletablenames](https://github.com/basz/zf-oauth2-doctrine-mutatetablenames) -
+If you do not want to use the default table names provided with the default entities this module lets you customize them.
 
-* [zf-oauth2-doctrine-console](https://github.com/StukiOrg/zf-oauth2-doctrine-console) - Console management of an Apigility Doctrine OAuth2 server 
+* [zf-oauth2-doctrine-console](https://github.com/API-Skeletons) - Console management of an Apigility Doctrine OAuth2 server

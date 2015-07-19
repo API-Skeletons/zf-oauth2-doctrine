@@ -3,46 +3,21 @@
 namespace ZF\OAuth2\Doctrine\Mapper;
 
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTrait;
 use Doctrine\Common\Persistence\ObjectManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Config\Config;
 use DateTime;
 use Exception;
 
-abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLocatorAwareInterface
+abstract class AbstractMapper implements
+    ObjectManagerAwareInterface,
+    ServiceLocatorAwareInterface
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator = null;
-
-    /**
-     * Set service locator
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-
-        return $this;
-    }
-
-    /**
-     * Get service locator
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
+    use ServiceLocatorAwareTrait;
+    use ProvidesObjectManagerTrait;
 
     /**
      * Specific config for the current mapper
@@ -50,11 +25,6 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
      * @var array
      */
     protected $config;
-
-    /**
-     * Application config for recursive lookups ([user_id])
-     */
-    protected $applicationConfig;
 
     /**
      * @var data
@@ -65,34 +35,6 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
      * @var data
      */
     protected $doctrineData = array();
-
-    public function reset()
-    {
-        $this->oauth2Data = array();
-        $this->doctrineData = array();
-
-        return $this;
-    }
-
-    /**
-     * Set the object manager
-     *
-     * @param ObjectManager $objectManager
-     */
-    public function setObjectManager(ObjectManager $objectManager)
-    {
-        $this->objectManager = $objectManager;
-    }
-
-    /**
-     * Get the object manager
-     *
-     * @return ObjectManager
-     */
-    public function getObjectManager()
-    {
-        return $this->objectManager;
-    }
 
     protected function getOAuth2Data()
     {
@@ -118,25 +60,13 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
         return $this;
     }
 
-    public function setApplicationConfig(array $config)
-    {
-        $this->applicationConfig = $config;
-
-        return $this;
-    }
-
-    public function getApplicationConfig()
-    {
-        return $this->applicationConfig;
-    }
-
     /**
      * Set the mapping config
      *
      * @param array
      * @return this
      */
-    public function setConfig(array $config)
+    public function setConfig(Config $config)
     {
         $this->config = $config;
 
@@ -164,28 +94,28 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
             $config = $this->getConfig();
 
             foreach ($array as $key => $value) {
-                if (!isset($config['mapping'][$key])) {
+                if (!isset($this->getConfig()->mapping->$key)) {
                     continue;
                 }
 
-                switch ($config['mapping'][$key]['type']) {
+                switch ($this->getConfig()->mapping->$key->type) {
                     // Set the value in data
                     case 'field':
-                        switch ($config['mapping'][$key]['datatype']) {
+                        switch ($this->getConfig()->mapping->$key->datatype) {
                             case 'datetime':
                                 // Dates coming from OAuth2 are timestamps
                                 $oAuth2Data[$key] = $value;
                                 $date = new DateTime();
                                 $date->setTimestamp($value);
-                                $doctrineData[$config['mapping'][$key]['name']] = $date;
+                                $doctrineData[$this->getConfig()->mapping->$key->name] = $date;
                                 break;
                             case 'boolean':
                                 $oAuth2Data[$key] = (int) (bool) $value;
-                                $doctrineData[$config['mapping'][$key]['name']] = (bool) $value;
+                                $doctrineData[$this->getConfig()->mapping->$key->name] = (bool) $value;
                                 break;
                             default:
                                 $oAuth2Data[$key] = $value;
-                                $doctrineData[$config['mapping'][$key]['name']] = $value;
+                                $doctrineData[$this->getConfig()->mapping->$key->name] = $value;
                                 break;
                         }
                         break;
@@ -195,24 +125,25 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
 
                         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
                         $queryBuilder->select('row')
-                                 ->from($config['mapping'][$key]['entity'], 'row')
-                                 ->andwhere(
-                                     $queryBuilder->expr()->in('row.' . $config['mapping'][$key]['name'], $fieldValues)
-                                 );
+                            ->from($this->getConfig()->mapping->$key->entity, 'row')
+                            ->andwhere(
+                                $queryBuilder->expr()->in('row.' . $this->getConfig()->mapping->$key->name, $fieldValues)
+                            );
 
                         $oAuth2Data[$key] = $value;
-                        $doctrineData[$config['mapping'][$key]['name']] = $queryBuilder->getQuery()->getResult();
+                        $doctrineData[$this->getConfig()->mapping->$key->name] = $queryBuilder->getQuery()->getResult();
                         break;
                     // Find the relation for the given value and assign to data
                     case 'relation':
-                        $relation = $this->getObjectManager()->getRepository($config['mapping'][$key]['entity'])
+#                    die($this->getConfig()->mapping->$key->entity);
+                        $relation = $this->getObjectManager()->getRepository($this->getConfig()->mapping->$key->entity)
                         ->findOneBy(array(
-                            $config['mapping'][$key]['entity_field_name'] => $value,
+                            $this->getConfig()->mapping->$key->entity_field_name => $value,
                         ));
 
                         if (!$relation) {
-                            if (isset($config['mapping'][$key]['allow_null'])
-                                && $config['mapping'][$key]['allow_null']) {
+                            if (isset($this->getConfig()->mapping->$key->allow_null)
+                                && $this->getConfig()->mapping->$key->allow_null) {
                             } else {
                                 throw new Exception("Relation was not found: $key: $value");
                             }
@@ -220,11 +151,11 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
 
                         if ($relation) {
                             $oAuth2Data[$key] = $value;
-                            $doctrineData[$config['mapping'][$key]['name']] = $relation;
+                            $doctrineData[$this->getConfig()->mapping->$key->name] = $relation;
 
                         } else {
                             $oAuth2Data[$key] = null;
-                            $doctrineData[$config['mapping'][$key]['name']] = null;
+                            $doctrineData[$this->getConfig()->mapping->$key->name] = null;
                         }
 
                         break;
@@ -254,8 +185,8 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
                 // Find the field config key from doctrine field name
                 $key = '';
 
-                foreach ($config['mapping'] as $oAuth2FieldName => $oAuth2Config) {
-                    if ($oAuth2Config['name'] == $doctrineKey) {
+                foreach ($this->getConfig()->mapping as $oAuth2FieldName => $oAuth2Config) {
+                    if ($oAuth2Config->name == $doctrineKey) {
                         $key = $oAuth2FieldName;
                         break;
                     }
@@ -265,57 +196,56 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
                     continue;
                 }
 
-                switch ($config['mapping'][$key]['type']) {
+                switch ($this->getConfig()->mapping->$key->type) {
                     // Set the value in data
                     case 'field':
-                        switch ($config['mapping'][$key]['datatype']) {
+                        switch ($this->getConfig()->mapping->$key->datatype) {
                             case 'datetime':
                                 // Dates coming from Doctrine are datetimes
                                 $oAuth2Data[$key] = $value->format('U');
-                                $doctrineData[$config['mapping'][$key]['name']] = $value;
+                                $doctrineData[$this->getConfig()->mapping->$key->name] = $value;
                                 break;
                             case 'boolean':
                                 $oAuth2Data[$key] = (int) $value;
-                                $doctrineData[$config['mapping'][$key]['name']] = (bool) $value;
+                                $doctrineData[$this->getConfig()->mapping->$key->name] = (bool) $value;
                                 break;
                             default:
                                 $oAuth2Data[$key] = $value;
-                                $doctrineData[$config['mapping'][$key]['name']] = $value;
+                                $doctrineData[$this->getConfig()->mapping->$key->name] = $value;
                                 break;
                         }
                         break;
                     case 'collection':
                         $oAuth2String = array();
                         foreach ($value as $entity) {
-                            $mapper = $this->getServiceLocator()->get($config['mapping'][$key]['mapper'])->reset();
+                            $mapper = $this->getServiceLocator()->get($this->getConfig()->mapping->$key->mapper);
 
                             $mapper->exchangeDoctrineArray($entity->getArrayCopy());
                             $data = $mapper->getOAuth2ArrayCopy();
 
-                            $oAuth2String[] = $data[$config['mapping'][$key]['name']];
+                            $oAuth2String[] = $data[$this->getConfig()->mapping->$key->name];
                         }
                         $oAuth2Data[$key] = implode(' ', $oAuth2String);
-                        $doctrineData[$config['mapping'][$key]['name']] = $value;
+                        $doctrineData[$this->getConfig()->mapping->$key->name] = $value;
                         break;
                     // Find the relation for the given value and assign to data
                     case 'relation':
-                        $entity = $config['mapping'][$key]['entity'];
+                        $entity = $this->getConfig()->mapping->$key->entity;
 
                         if ($value instanceof $entity) {
                             $relation = $value;
                             $doctrineArray = $relation->getArrayCopy();
-                            $oAuth2Value = $doctrineArray[$config['mapping'][$key]['entity_field_name']];
-
+                            $oAuth2Value = $doctrineArray[$this->getConfig()->mapping->$key->entity_field_name];
                         } else {
-                            $relation = $this->getObjectManager()->getRepository($config['mapping'][$key]['entity'])
+                            $relation = $this->getObjectManager()->getRepository($this->getConfig()->mapping->$key->entity)
                             ->findOneBy(array(
-                                $config['mapping'][$key]['entity_field_name'] => $value,
+                                $this->getConfig()->mapping->$key->entity_field_name => $value,
                             ));
                         }
 
                         if (!$relation) {
-                            if (isset($config['mapping'][$key]['allow_null'])
-                                && $config['mapping'][$key]['allow_null']) {
+                            if (isset($this->getConfig()->mapping->$key->allow_null)
+                                && $this->getConfig()->mapping->$key->allow_null) {
                             } else {
                                 throw new Exception(
                                     "Null value found for " . $key . " in mapper.  Should the reference be allow_null?"
@@ -324,30 +254,29 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
                         }
 
                         if ($relation) {
-                            $applicationConfig = $this->getApplicationConfig();
                             $oAuth2Data[$key] = $oAuth2Value;
-                            $doctrineData[$config['mapping'][$key]['name']] = $relation;
+                            $doctrineData[$this->getConfig()->mapping->$key->name] = $relation;
 
                             // Recursively map relation data.  This should handle the user_id
                             // whenever the client_id is included.
-                            foreach ($applicationConfig['zf-oauth2-doctrine']['storage_settings']['mapping'] as
-                                $mapper => $mapperConfig) {
-                                if ($relation instanceof $mapperConfig['entity']) {
-                                    foreach ($mapperConfig['mapping'] as $oAuth2Field => $mapperFieldConfig) {
-                                        if ($mapperFieldConfig['type'] == 'relation') {
+                            foreach ($this->getServiceLocator()->getAll() as $mapper) {
+                                $entityClass = $mapper->getConfig()->entity;
+                                if ($relation instanceof $entityClass) {
+                                    foreach ($mapper->getConfig()->mapping as $oAuth2Field => $mapperFieldConfig) {
+                                        if ($mapperFieldConfig->type == 'relation') {
                                             $foundRecursiveMapping = true;
                                             $doctrineData = $relation->getArrayCopy();
-                                            $recursiveEntity = $doctrineData[$mapperFieldConfig['name']];
+                                            $recursiveEntity = $doctrineData[$mapperFieldConfig->name];
 
                                             if ($recursiveEntity) {
                                                 $recursiveEntityData = $recursiveEntity->getArrayCopy();
                                                 $oAuth2Data[$oAuth2Field] =
-                                                    $recursiveEntityData[$mapperFieldConfig['entity_field_name']];
+                                                    $recursiveEntityData[$mapperFieldConfig->entity_field_name];
 
-                                                $doctrineData[$mapperFieldConfig['name']] = $recursiveEntity;
+                                                $doctrineData[$mapperFieldConfig->name] = $recursiveEntity;
                                             }
 
-                                            $doctrineData[$mapperFieldConfig['name']] = $recursiveEntity;
+                                            $doctrineData[$mapperFieldConfig->name] = $recursiveEntity;
                                         }
                                     }
                                 }
@@ -357,7 +286,7 @@ abstract class AbstractMapper implements ObjectManagerAwareInterface, ServiceLoc
                             // If the relation entity is the dynamically mapped client entity then
                         } else {
                             $oAuth2Data[$key] = null;
-                            $doctrineData[$config['mapping'][$key]['name']] = null;
+                            $doctrineData[$this->getConfig()->mapping->$key->name] = null;
                         }
                         break;
                     default:

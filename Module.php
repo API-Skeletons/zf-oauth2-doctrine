@@ -12,18 +12,6 @@ class Module implements
     AutoloaderProviderInterface,
     ConfigProviderInterface
 {
-    public function init(ModuleManager $moduleManager)
-    {
-        $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
-        $serviceListener = $serviceManager->get('ServiceListener');
-        $serviceListener->addServiceManager(
-            'ZF\OAuth2\Doctrine\Mapper\MapperManager',
-            'oauth2-doctrineadapter-mappermanager',
-            'ZF\OAuth2\Doctrine\Mapper\MapperAbstract',
-            'getOAuth2DoctrineMapperConfig'
-        );
-    }
-
     /**
      * Retrieve autoloader configuration
      *

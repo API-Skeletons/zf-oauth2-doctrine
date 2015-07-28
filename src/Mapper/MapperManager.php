@@ -15,6 +15,25 @@ class MapperManager extends AbstractPluginManager implements
 
     protected $config;
 
+    protected $shareByDefault = false;
+
+    /**
+     * Default set of plugins
+     *
+     * @var array
+     */
+    protected $invokableClasses = array(
+        'user' => 'ZF\OAuth2\Doctrine\Mapper\User',
+        'client' => 'ZF\OAuth2\Doctrine\Mapper\Client',
+        'accesstoken' => 'ZF\OAuth2\Doctrine\Mapper\AccessToken',
+        'refreshtoken' => 'ZF\OAuth2\Doctrine\Mapper\RefreshToken',
+        'authorizationcode' => 'ZF\OAuth2\Doctrine\Mapper\AuthorizationCode',
+        'jwt' => 'ZF\OAuth2\Doctrine\Mapper\Jwt',
+        'jti' => 'ZF\OAuth2\Doctrine\Mapper\Jti',
+        'scope' => 'ZF\OAuth2\Doctrine\Mapper\Scope',
+        'publickey' => 'ZF\OAuth2\Doctrine\Mapper\PublicKey',
+    );
+
     public function setConfig(Config $config)
     {
         $this->config = $config;
@@ -27,13 +46,13 @@ class MapperManager extends AbstractPluginManager implements
         return $this->config;
     }
 
-    public function get($resourceName)
+    public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
-        $resource = parent::get($resourceName);
-        $resource->setConfig($this->getConfig()->$resourceName);
-        $resource->setObjectManager($this->getObjectManager());
+        $plugin = parent::get($name, $options, $usePeeringServiceManagers);
+        $plugin->setConfig($this->getConfig()->$name);
+        $plugin->setObjectManager($this->getObjectManager());
 
-        return $resource;
+        return $plugin;
     }
 
     public function getAll()

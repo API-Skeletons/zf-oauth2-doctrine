@@ -63,26 +63,19 @@ By default this module includes a `oauth2.doctrineadapter.default` adapter.
 The adapter is used to create storage from services:
 
 ```php
-'zf-mvc-auth' => [
-    'authentication' => [
-        'map' => [
-            'Api\\V1' => 'oauth2_doctrine',
-        ],
-    ],
-],
-
-'zf-mvc-auth' => [
-    'authentication' => [
-        'adapters' => [
-            'oauth2_doctrine' => [
-                'adapter' => 'ZF\\MvcAuth\\Authentication\\OAuth2Adapter',
-                'storage' => [
-                    'default' => 'oauth2.doctrineadapter.default',
-                ],
-            ],
-        ],
-    ],
-],
+    'zf-mvc-auth' => array(
+        'authentication' => array(
+            'adapters' => array(
+                'oauth2_doctrine' => array(
+                    'adapter' => 'ZF\\MvcAuth\\Authentication\\OAuth2Adapter',
+                    'storage' => array(
+                        'storage' => 'oauth2.doctrineadapter.default',
+                        'route' => '/oauth',
+                    ),
+                ),
+            ),
+        ),
+    ),
 ```
 
 

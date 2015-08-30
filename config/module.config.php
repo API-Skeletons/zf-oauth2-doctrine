@@ -8,6 +8,10 @@ return [
             'ZF\OAuth2\Doctrine\Mapper\MapperManager' =>
                 'ZF\OAuth2\Doctrine\Mapper\MapperManager',
         ],
+        'shared' => [
+            'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory' => false,
+            'ZF\OAuth2\Doctrine\Mapper\MapperManager' => false,
+        ],
     ],
 
     'zf-apigility-doctrine-query-create-filter' => [

@@ -4,6 +4,7 @@ return array(
     'modules' => array(
         'ZF\ContentNegotiation',
         'ZF\\ApiProblem',
+        'ZF\\MvcAuth',
         'ZF\\OAuth2',
         'ZF\\OAuth2\\Doctrine',
         'ZFTest\\OAuth2\\Doctrine',

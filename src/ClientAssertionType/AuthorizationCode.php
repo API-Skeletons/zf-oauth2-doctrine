@@ -5,12 +5,16 @@ namespace ZF\OAuth2\Doctrine\ClientAssertionType;
 use OAuth2\RequestInterface;
 use OAuth2\ResponseInterface;
 use OAuth2\ClientAssertionType\ClientAssertionTypeInterface;
+use Zend\Stdlib\ArraySerializableInterface;
 use ArrayAccess;
 
 /**
  * Interface for all OAuth2 Client Assertion Types
  */
-class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
+class AuthorizationCode implements
+    ArrayAccess,
+    ArraySerializableInterface,
+    ClientAssertionTypeInterface
 {
     public function offsetSet($offset, $value)
     {
@@ -136,7 +140,7 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'authorization_code' => $this->getAuthorizationCode(),
             'redirect_uri' => $this->getRedirectUri(),
             'expires' => $this->getExpires(),
@@ -144,10 +148,10 @@ class AuthorizationCode implements ArrayAccess, ClientAssertionTypeInterface
             'id_token' => $this->getIdToken(),
             'client_id' => $this->getClientId(),
             'user_id' => $this->getUserId(),
-        );
+        ];
     }
 
-    public function exchangeArray($array)
+    public function exchangeArray(array $array)
     {
         foreach ($array as $key => $value) {
             $key = strtolower($key);

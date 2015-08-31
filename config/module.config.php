@@ -1,23 +1,28 @@
 <?php
 
-return array(
-    'service_manager' => array(
-        'abstract_factories' => array(
-            'ZF\OAuth2\Doctrine\Factory\DoctrineMapperFactory',
-        ),
-        'factories' => array(
-            'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter' =>
-                'ZF\OAuth2\Doctrine\Factory\DoctrineAdapterFactory',
-        ),
-    ),
-    'zf-apigility-doctrine-query-create-filter' => array(
-        'initializers' => array(
+return [
+    'service_manager' => [
+        'invokables' => [
+            'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory' =>
+                'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory',
+            'ZF\OAuth2\Doctrine\Mapper\MapperManager' =>
+                'ZF\OAuth2\Doctrine\Mapper\MapperManager',
+        ],
+        'shared' => [
+            'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory' => false,
+            'ZF\OAuth2\Doctrine\Mapper\MapperManager' => false,
+        ],
+    ],
+
+    'zf-apigility-doctrine-query-create-filter' => [
+        'initializers' => [
             'ZF\OAuth2\Doctrine\Query\OAuth2ServerInitializer',
-        ),
-    ),
-    'zf-apigility-doctrine-query-provider' => array(
-        'initializers' => array(
+        ],
+    ],
+
+    'zf-apigility-doctrine-query-provider' => [
+        'initializers' => [
             'ZF\OAuth2\Doctrine\Query\OAuth2ServerInitializer',
-        ),
-    ),
-);
+        ],
+    ],
+];

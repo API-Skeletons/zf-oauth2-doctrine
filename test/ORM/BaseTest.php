@@ -17,7 +17,7 @@ abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpContro
 
         $serviceManager = $this->getApplication()->getServiceManager();
         $config = $this->getApplication()->getConfig();
-        $doctrineAdapter = $serviceManager->get($config['zf-oauth2-doctrine']['storage']);
+        $doctrineAdapter = $serviceManager->get('oauth2.doctrineadapter.default');
 
         return array(array($doctrineAdapter));
     }

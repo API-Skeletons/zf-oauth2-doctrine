@@ -34,15 +34,6 @@ Add this module to your application's configuration:
 ```
 
 
-Configuration
--------------
-
-Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and
-rename to ```oauth2.doctrine-orm.global.php``` This config has multiple sections for multiple
-adapters.  Out of the box this module provides a `default` adapter.  You will need to edit this file with
-at least your User entity, which is not provided.
-
-
 The User Entity
 --------------
 
@@ -57,7 +48,17 @@ The User entity for the unit test for this module is a good template to start fr
 [https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
 
 
-Configuration with zf-mvc-auth
+
+Module Configuration
+-------------
+
+Copy ```config/oauth2.doctrine-orm.global.php.dist``` to your autoload directory and
+rename to ```oauth2.doctrine-orm.global.php``` This config has multiple sections for multiple
+adapters.  Out of the box this module provides a `default` adapter.  You will need to edit this file with
+at least your User entity, which is not provided.
+
+
+Configuration With zfcampus/zf-mvc-auth
 ------------------------------
 
 By default this module includes a `oauth2.doctrineadapter.default` adapter.
@@ -78,6 +79,18 @@ The adapter is used to create storage from services:
         ),
     ),
 ```
+
+Configuration with zfcampus/zf-oauth2
+-------------------------------------
+
+Add the default storage adapter to the zf-oauth default storage:
+
+```php
+'zf-oauth2' => array(
+    'storage' => 'oauth2.doctrineadapter.default',
+```
+
+It is possible to use this library with a second set of entities for a second OAuth2 server in the same application using two or more APIs.
 
 
 Using Default Entities

@@ -94,7 +94,7 @@ class DynamicMappingSubscriber implements EventSubscriber
                 if (isset($this->getConfig()->client_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
-                        $this->getConfig()->client_entity->additional_mapping_data
+                        $this->getConfig()->client_entity->additional_mapping_data->toArray()
                     );
                 }
                 $metadata->mapManyToOne($joinMap);
@@ -124,7 +124,7 @@ class DynamicMappingSubscriber implements EventSubscriber
                 if (isset($this->getConfig()->authorization_code_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
-                        $this->getConfig()->authorization_code_entity->additional_mapping_data
+                        $this->getConfig()->authorization_code_entity->additional_mapping_data->toArray()
                     );
                 }
                 $metadata->mapManyToOne($joinMap);
@@ -139,7 +139,7 @@ class DynamicMappingSubscriber implements EventSubscriber
                 if (isset($this->getConfig()->refresh_token_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
-                        $this->getConfig()->refresh_token_entity->additional_mapping_data
+                        $this->getConfig()->refresh_token_entity->additional_mapping_data->toArray()
                     );
                 }
                 $metadata->mapManyToOne($joinMap);

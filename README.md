@@ -1,7 +1,7 @@
 OAuth2 Doctrine Adapter for Apigility
 =====================================
 
-[![Build Status](https://travis-ci.org/zfcampus/zf-apigility-doctrine.svg)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
+[![Build Status](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine.svg)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
 [![Total Downloads](https://poser.pugx.org/zfcampus/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
 
 

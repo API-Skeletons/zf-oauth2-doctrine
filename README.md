@@ -161,9 +161,8 @@ Then call `$result = $this->validateOAuth2($scope);` in the filter function.
 Extensions
 ----------
 
-This is a list of other modules which extend the functionality this repository provides.
+Other module(s) which extend the functionality this repository provides.
 
 * [zf-oauth2-doctrine-mutabletablenames](https://github.com/basz/zf-oauth2-doctrine-mutatetablenames) -
 If you do not want to use the default table names provided with the default entities this module lets you customize them.
 
-* [zf-oauth2-doctrine-console](https://github.com/API-Skeletons) - Console management of an Apigility Doctrine OAuth2 server

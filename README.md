@@ -1,7 +1,7 @@
 OAuth2 Doctrine Adapter for Apigility
 =====================================
 
-[![Build Status](https://travis-ci.org/api-skeletons/zf-oauth2-doctrine.svg)](https://travis-ci.org/TomHAnderson/zf-oauth2-doctrine)
+[![Build Status](https://travis-ci.org/api-skeletons/zf-oauth2-doctrine.svg)](https://travis-ci.org/api-skeletons/zf-oauth2-doctrine)
 [![Total Downloads](https://poser.pugx.org/api-skeletons/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/zfcampus/zf-oauth2-doctrine)
 
 
@@ -12,7 +12,7 @@ This provides a Doctrine adapter for [zfcampus/zf-mvc-auth](https://github.com/z
 and entity definitions for all aspects of OAuth2 including
 Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
-![Entity Relationship Diagram](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/media/oauth2-doctrine-erd.png)
+![Entity Relationship Diagram](https://github.com/api-skeletons/zf-oauth2-doctrine/blob/master/media/oauth2-doctrine-erd.png)
 Entity Relationship Diagram created with [Skipper](https://skipper18.com)
 
 Installation
@@ -45,7 +45,7 @@ ability to create an ERD without modifying the `OAuth2-orm.module.xml` module.
 The User entity must implement `ZF\OAuth2\Doctrine\Entity\UserInterface`
 
 The User entity for the unit test for this module is a good template to start from:
-[https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/TomHAnderson/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
+[https://github.com/api-skeletons/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php](https://github.com/api-skeletons/zf-oauth2-doctrine/blob/master/test/asset/module/Doctrine/src/Entity/User.php)
 
 
 

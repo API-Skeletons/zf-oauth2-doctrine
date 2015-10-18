@@ -163,9 +163,9 @@ Extensions
 
 Other module(s) which extend the functionality this repository provides.
 
-* [zf-oauth2-doctrine-mutabletablenames](https://github.com/basz/zf-oauth2-doctrine-mutatetablenames) -
-If you do not want to use the default table names provided with the default entities this module lets you customize them.
+* [api-skeletons/zf-oauth2-doctrine-console](https://github.com/API-Skeletons/zf-oauth2-doctrine-console) -
+Console management of a default zf-oauth2-doctrine installation.
 
-* [zf-oauth2-doctrine-console](https://github.com/API-Skeletons/zf-oauth2-doctrine-console) -
-Console management of zf-oauth2-doctrine.
+* [basz/zf-oauth2-doctrine-mutabletablenames](https://github.com/basz/zf-oauth2-doctrine-mutatetablenames) -
+If you do not want to use the default table names provided with the default entities this module lets you customize them.
 

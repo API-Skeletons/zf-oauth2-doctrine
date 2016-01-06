@@ -7,6 +7,8 @@ return [
                 'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory',
             'ZF\OAuth2\Doctrine\Mapper\MapperManager' =>
                 'ZF\OAuth2\Doctrine\Mapper\MapperManager',
+            'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter' =>
+                'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter',    
         ],
         'shared' => [
             'ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory' => false,

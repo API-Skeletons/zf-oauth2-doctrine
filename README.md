@@ -12,7 +12,7 @@ This provides a Doctrine adapter for [zfcampus/zf-mvc-auth](https://github.com/z
 and entity definitions for all aspects of OAuth2 including
 Authorization Code, Access Tokens, Refresh Tokens, JWT & JTI, and Scopes.
 
-![Entity Relationship Diagram](https://github.com/api-skeletons/zf-oauth2-doctrine/blob/master/media/oauth2-doctrine-erd.png)
+![Entity Relationship Diagram](https://raw.githubusercontent.com/API-Skeletons/zf-oauth2-doctrine/master/media/oauth2-doctrine-erd.png)
 Entity Relationship Diagram created with [Skipper](https://skipper18.com)
 
 Installation

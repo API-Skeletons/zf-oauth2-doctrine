@@ -10,22 +10,22 @@
     "require": {
         "php": ">=5.5",
         "zfcampus/zf-oauth2": "^1.3",
-        "doctrine/doctrine-module": "^0.9",
+        "doctrine/doctrine-module": "^0.8",
         "doctrine/doctrine-orm-module": "*",
         "zfcampus/zf-mvc-auth": "^1.3",
-        "zendframework/zend-config": "^2.5",
-        "zendframework/zend-modulemanager": "^2.5",
-        "zendframework/zend-i18n": "^2.5"
+        "zendframework/zend-config": "^2.4",
+        "zendframework/zend-modulemanager": "^2.4",
+        "zendframework/zend-i18n": "^2.4"
     },
     "require-dev": {
         "phpunit/phpunit": "~4",
         "squizlabs/php_codesniffer": "~2",
-        "zendframework/zend-form": "^2.5",
-        "zendframework/zend-loader": "^2.5",
-        "zendframework/zend-log": "^2.5",
-        "zendframework/zend-serializer": "^2.5",
-        "zendframework/zend-test": "^2.5",
-        "zendframework/zend-authentication": "^2.5",
+        "zendframework/zend-form": "^2.4",
+        "zendframework/zend-loader": "^2.4",
+        "zendframework/zend-log": "^2.4",
+        "zendframework/zend-serializer": "^2.4",
+        "zendframework/zend-test": "^2.4",
+        "zendframework/zend-authentication": "^2.4",
         "mockery/mockery": "0.9.*",
         "satooshi/php-coveralls": "0.6.*"
     },

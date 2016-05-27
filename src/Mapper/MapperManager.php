@@ -8,10 +8,17 @@ use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTra
 use Zend\Config\Config;
 use Zend\ServiceManager\Exception;
 
-class MapperManager extends AbstractPluginManager implements
+class MapperManager implements
     ObjectManagerAwareInterface
 {
     use ProvidesObjectManagerTrait;
+
+    public function __construct($services)
+    {
+        $this->services = $services;
+    }
+
+    protected $services;
 
     protected $config;
 
@@ -48,11 +55,12 @@ class MapperManager extends AbstractPluginManager implements
 
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
-        $plugin = parent::get($name, $options, $usePeeringServiceManagers);
-        $plugin->setConfig($this->getConfig()->$name);
-        $plugin->setObjectManager($this->getObjectManager());
+        $instance = new $this->invokableClasses[strtolower($name)];
+        $instance->setConfig($this->getConfig()->$name);
+        $instance->setObjectManager($this->getObjectManager());
+        $instance->setMapperManager($this);
 
-        return $plugin;
+        return $instance;
     }
 
     public function getAll()

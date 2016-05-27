@@ -5,19 +5,19 @@ namespace ZF\OAuth2\Doctrine\Mapper;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTrait;
 use Doctrine\Common\Persistence\ObjectManager;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Config\Config;
 use DateTime;
 use Exception;
 
-abstract class AbstractMapper implements
-    ObjectManagerAwareInterface,
-    ServiceLocatorAwareInterface
+class AbstractMapper implements
+    ObjectManagerAwareInterface
 {
-    use ServiceLocatorAwareTrait;
     use ProvidesObjectManagerTrait;
+
+    /**
+     * @var ZF\OAuth2\Doctrine\Mapper\MapperManager
+     */
+    protected $mapperManager;
 
     /**
      * Specific config for the current mapper
@@ -35,6 +35,18 @@ abstract class AbstractMapper implements
      * @var data
      */
     protected $doctrineData = array();
+
+    public function setMapperManager(MapperManager $mapperManager)
+    {
+        $this->mapperManager = $mapperManager;
+
+        return $this;
+    }
+
+    public function getMapperManager()
+    {
+        return $this->mapperManager;
+    }
 
     protected function getOAuth2Data()
     {
@@ -225,7 +237,7 @@ abstract class AbstractMapper implements
                 case 'collection':
                     $oAuth2String = array();
                     foreach ($value as $entity) {
-                        $mapper = $this->getServiceLocator()->get($this->getConfig()->mapping->$key->mapper);
+                        $mapper = $this->getMapperManager()->get($this->getConfig()->mapping->$key->mapper);
 
                         $mapper->exchangeDoctrineArray($entity->getArrayCopy());
                         $data = $mapper->getOAuth2ArrayCopy();
@@ -270,7 +282,7 @@ abstract class AbstractMapper implements
 
                         // Recursively map relation data.  This should handle the user_id
                         // whenever the client_id is included.
-                        foreach ($this->getServiceLocator()->getAll() as $mapper) {
+                        foreach ($this->getMapperManager()->getAll() as $mapper) {
                             $entityClass = $mapper->getConfig()->entity;
                             if ($relation instanceof $entityClass) {
                                 foreach ($mapper->getConfig()->mapping as $oAuth2Field => $mapperFieldConfig) {

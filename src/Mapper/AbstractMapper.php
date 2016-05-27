@@ -171,7 +171,6 @@ class AbstractMapper implements
                     if ($relation) {
                         $oAuth2Data[$key] = $value;
                         $doctrineData[$this->getConfig()->mapping->$key->name] = $relation;
-
                     } else {
                         $oAuth2Data[$key] = null;
                         $doctrineData[$this->getConfig()->mapping->$key->name] = null;
@@ -181,7 +180,6 @@ class AbstractMapper implements
                 default:
                     break;
             }
-
         }
 
         $this->setOAuth2Data($oAuth2Data);

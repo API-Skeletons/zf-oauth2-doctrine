@@ -68,7 +68,7 @@ class DoctrineAdapterFactory implements FactoryInterface
     protected function loadMapperManager(ServiceLocatorInterface $services, Config $config)
     {
         if ($services->has('ZF\OAuth2\Doctrine\Mapper\MapperManager')) {
-            $mapperManager = $services->get('ZF\OAuth2\Doctrine\Mapper\MapperManager');
+            $mapperManager = new \ZF\OAuth2\Doctrine\Mapper\MapperManager($services);
         } else {
             // @codeCoverageIgnoreStart
             throw new ServiceNotCreatedException('The MapperManager '

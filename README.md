@@ -62,7 +62,7 @@ Configuration With zfcampus/zf-mvc-auth
 ------------------------------
 
 By default this module includes a `oauth2.doctrineadapter.default` adapter.
-The adapter is used to create storage from services:
+The adapter is used to create storage from services.  Add this configuration to your `config/autoload/zf-mvc-auth-oauth2-override.global.php`
 
 ```php
     'zf-mvc-auth' => array(
@@ -83,14 +83,14 @@ The adapter is used to create storage from services:
 Configuration with zfcampus/zf-oauth2
 -------------------------------------
 
-Add the default storage adapter to the zf-oauth default storage:
+Add the default storage adapter to the zf-oauth default storage.  `zfcampus/zf-oauth2` provides an `oauth2.local.php` file.  This repository's recommendation is to create a new `config/autoload/oauth2.global.php` file and set the following configuration as well as any OAuth2 server sesstings e.g. `allow_implicit`.
 
 ```php
 'zf-oauth2' => array(
     'storage' => 'oauth2.doctrineadapter.default',
 ```
 
-It is possible to use this library with a second set of entities for a second OAuth2 server in the same application using two or more APIs.
+It is possible to use this library with a second set of entities for a second OAuth2 server in the same application using two or more APIs.  See http://blog.tomhanderson.com/2015/08/using-zf-oauth2-doctrine-for-multiple.html
 
 
 Using Default Entities

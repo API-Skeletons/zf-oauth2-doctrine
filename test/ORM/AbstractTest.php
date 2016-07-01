@@ -9,7 +9,7 @@ use Zend\Crypt\Password\Bcrypt;
 use Datetime;
 use Exception;
 
-abstract class BaseTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
+abstract class AbstractTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
 {
     public function provideStorage()
     {

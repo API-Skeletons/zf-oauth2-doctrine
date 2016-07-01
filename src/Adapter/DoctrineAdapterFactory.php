@@ -10,6 +10,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\Config\Config;
+use ZF\OAuth2\Doctrine\Delegator\DelegatorInterface;
 
 class DoctrineAdapterFactory implements FactoryInterface
 {

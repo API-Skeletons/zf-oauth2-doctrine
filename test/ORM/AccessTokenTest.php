@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\AccessTokenInterface;
 
-class AccessTokenTest extends BaseTest
+class AccessTokenTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testSetAccessToken(AccessTokenInterface $storage)
@@ -53,5 +53,8 @@ class AccessTokenTest extends BaseTest
         $this->assertEquals($token['client_id'], 'oauth_test_client2');
         $this->assertEquals($token['user_id'], $testToken['user_id']);
         $this->assertEquals($token['expires'], $expires);
+
+        $this->assertTrue($storage->setAccessToken('event_stop_propagation', '', '', '', ''));
+        $this->assertTrue($storage->getAccessToken('event_stop_propagation'));
     }
 }

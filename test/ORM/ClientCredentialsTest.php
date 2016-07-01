@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\ClientCredentialsInterface;
 
-class ClientCredentialsTest extends BaseTest
+class ClientCredentialsTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testCheckClientCredentials(ClientCredentialsInterface $storage)
@@ -26,5 +26,7 @@ class ClientCredentialsTest extends BaseTest
         // valid credentials
         $pass = $storage->checkClientCredentials('oauth_test_client', 'testpass');
         $this->assertTrue($pass);
+
+        $this->assertTrue($storage->checkClientCredentials('event_stop_propagation', ''));
     }
 }

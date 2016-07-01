@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\ClientInterface;
 
-class ClientTest extends BaseTest
+class ClientTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testGetClientDetails(ClientInterface $storage)
@@ -25,6 +25,8 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('client_id', $details);
         $this->assertArrayHasKey('client_secret', $details);
         $this->assertArrayHasKey('redirect_uri', $details);
+
+        $this->assertTrue($storage->getClientDetails('event_stop_propagation'));
     }
 
     /** @dataProvider provideStorage */
@@ -45,6 +47,8 @@ class ClientTest extends BaseTest
         $this->assertTrue($pass);
 
         $this->assertFalse($storage->checkRestrictedGrantType('invalidclient', 'implicit'));
+
+        $this->assertTrue($storage->checkRestrictedGrantType('event_stop_propagation', ''));
     }
 
     /** @dataProvider provideStorage */
@@ -63,6 +67,8 @@ class ClientTest extends BaseTest
         // valid client_id
         $details = $storage->getAccessToken('testtoken');
         $this->assertNotNull($details);
+
+        $this->assertTrue($storage->getAccessToken('event_stop_propagation'));
     }
 
     /** @dataProvider provideStorage */
@@ -92,6 +98,8 @@ class ClientTest extends BaseTest
         $this->assertEquals($details['redirect_uri'], 'http://test.com');
         $this->assertEquals($details['grant_types'], 'client_credentials');
         $this->assertEquals($details['scope'], 'clientscope1');
+
+        $this->assertTrue($storage->setClientDetails('event_stop_propagation', '', '', '', ''));
     }
 
     /** @dataProvider provideStorage */
@@ -100,6 +108,8 @@ class ClientTest extends BaseTest
         $this->assertFalse($storage->isPublicClient('oauth_test_client'));
         $this->assertTrue($storage->isPublicClient('oauth_test_client3'));
         $this->assertFalse($storage->isPublicClient('invalidclient'));
+
+        $this->assertTrue($storage->isPublicClient('event_stop_propagation'));
     }
 
     /** @dataProvider provideStorage */
@@ -107,5 +117,7 @@ class ClientTest extends BaseTest
     {
         $this->assertEquals('clientscope1', $storage->getClientScope('oauth_test_client'));
         $this->assertFalse($storage->getClientScope('invalidclient'));
+
+        $this->assertTrue($storage->getClientScope('event_stop_propagation'));
     }
 }

@@ -5,7 +5,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 use OAuth2\Scope;
 use OAuth2\Storage\ScopeInterface;
 
-class ScopeTest extends BaseTest
+class ScopeTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testScopeExists($storage)
@@ -27,6 +27,8 @@ class ScopeTest extends BaseTest
         $this->assertTrue($scopeUtil->scopeExists('supportedscope1 supportedscope2 supportedscope3'));
         $this->assertFalse($scopeUtil->scopeExists('fakescope'));
         $this->assertFalse($scopeUtil->scopeExists('supportedscope1 supportedscope2 supportedscope3 fakescope'));
+
+        $this->assertTrue($storage->scopeExists('event_stop_propagation'));
     }
 
     /** @dataProvider provideStorage */
@@ -50,5 +52,7 @@ class ScopeTest extends BaseTest
         sort($expected);
         sort($actual);
         $this->assertEquals($expected, $actual);
+
+        $this->assertTrue($storage->getDefaultScope('event_stop_propagation'));
     }
 }

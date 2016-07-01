@@ -5,7 +5,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 use OAuth2\Storage\AuthorizationCodeInterface;
 use OAuth2\Storage\AccessTokenInterface;
 
-class AuthorizationCodeTest extends BaseTest
+class AuthorizationCodeTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testGetAuthorizationCode(AuthorizationCodeInterface $storage)
@@ -27,6 +27,8 @@ class AuthorizationCodeTest extends BaseTest
         $this->assertEquals('http://redirect', $details->getRedirectUri());
         $this->assertNotNull($details->getClientId());
         $this->assertNotNull($details->getUserId());
+
+        $this->assertTrue($storage->getAuthorizationCode('event_stop_propagation'));
     }
 
     /** @dataProvider provideStorage */
@@ -92,6 +94,8 @@ class AuthorizationCodeTest extends BaseTest
         $this->assertEquals($code['user_id'], $testToken['user_id']);
         $this->assertEquals($code['redirect_uri'], 'http://example.org');
         $this->assertEquals($code['expires'], $expires);
+
+        $this->assertTrue($storage->setAuthorizationCode('event_stop_propagation', '', '', '', ''));
     }
 
         /** @dataProvider provideStorage */
@@ -129,5 +133,7 @@ class AuthorizationCodeTest extends BaseTest
         $storage->expireAuthorizationCode('code-to-expire');
         $code = $storage->getAuthorizationCode('code-to-expire');
         $this->assertFalse($code);
+
+        $this->assertTrue($storage->expireAuthorizationCode('event_stop_propagation'));
     }
 }

@@ -27,6 +27,9 @@ use Zend\Config\Config;
 use Exception;
 use DateTime;
 
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
+
 /**
  * Doctrine storage for OAuth2
  *
@@ -43,9 +46,11 @@ class DoctrineAdapter implements
     PublicKeyInterface,
     OpenIDUserClaimsInterface,
     OpenIDAuthorizationCodeInterface,
-    ObjectManagerAwareInterface
+    ObjectManagerAwareInterface,
+    EventManagerAwareInterface
 {
     use ProvidesObjectManagerTrait;
+    use EventManagerAwareTrait;
 
     /**
      * @var MapperManager
@@ -179,6 +184,18 @@ class DoctrineAdapter implements
      */
     public function checkClientCredentials($client_id, $client_secret = null)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+                'client_secret' => $client_secret,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField =
             $this->getConfig()->mapping->Client->mapping->client_id->name;
         $doctrineClientSecretField =
@@ -222,6 +239,17 @@ class DoctrineAdapter implements
      */
     public function isPublicClient($client_id)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField =
             $this->getConfig()->mapping->Client->mapping->client_id->name;
 
@@ -269,6 +297,17 @@ class DoctrineAdapter implements
      */
     public function getClientDetails($client_id)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField =
             $this->getConfig()->mapping->Client->mapping->client_id->name;
 
@@ -303,6 +342,22 @@ class DoctrineAdapter implements
         $scope = null,
         $user_id = null
     ) {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+                'client_secret' => $client_secret,
+                'redirect_uri' => $redirect_uri,
+                'grant_types' => $grant_types,
+                'scope' => $scope,
+                'user_id' => $user_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField =
             $this->getConfig()->mapping->Client->mapping->client_id->name;
 
@@ -367,6 +422,18 @@ class DoctrineAdapter implements
      */
     public function checkRestrictedGrantType($client_id, $grant_type)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+                'grant_type' => $grant_type,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField =
             $this->getConfig()->mapping->Client->mapping->client_id->name;
 
@@ -401,6 +468,17 @@ class DoctrineAdapter implements
      */
     public function getClientScope($client_id)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField =
             $this->getConfig()->mapping->Client->mapping->client_id->name;
 
@@ -445,6 +523,17 @@ class DoctrineAdapter implements
      */
     public function getAccessToken($access_token)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'access_token' => $access_token,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineAccessTokenField =
             $this->getConfig()->mapping->AccessToken->mapping->access_token->name;
 
@@ -488,6 +577,21 @@ class DoctrineAdapter implements
         $expires,
         $scope = null
     ) {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'access_token' => $access_token,
+                'client_id' => $client_id,
+                'user_id' => $user_id,
+                'expires' => $expires,
+                'scope' => $scope,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineAccessTokenField =
             $this->getConfig()->mapping->AccessToken->mapping->access_token->name;
 
@@ -551,6 +655,17 @@ class DoctrineAdapter implements
      */
     public function getAuthorizationCode($code)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'code' => $code,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineAuthorizationCode =
             $this->getConfig()->mapping->AuthorizationCode->mapping->authorization_code->name;
         $doctrineExpiresField =
@@ -614,6 +729,23 @@ class DoctrineAdapter implements
         $scope = null,
         $id_token = null
     ) {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'code' => $code,
+                'client_id' => $client_id,
+                'user_id' => $user_id,
+                'redirect_uri' => $redirect_uri,
+                'expires' => $expires,
+                'scope ' => $scope,
+                'id_token ' => $id_token,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineAuthorizationCodeField =
             $this->getConfig()->mapping->AuthorizationCode->mapping->authorization_code->name;
 
@@ -665,6 +797,17 @@ class DoctrineAdapter implements
      */
     public function expireAuthorizationCode($code)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'code' => $code,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineAuthorizationCodeField =
             $this->getConfig()->mapping->AuthorizationCode->mapping->authorization_code->name;
 
@@ -715,6 +858,18 @@ class DoctrineAdapter implements
      */
     public function checkUserCredentials($username, $password)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'username' => $username,
+                'password' => $password,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $qb = $this->getObjectManager()->createQueryBuilder();
 
         $qb->select(array('u'))
@@ -753,6 +908,17 @@ class DoctrineAdapter implements
      */
     public function getUserDetails($username)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'username' => $username,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $qb = $this->getObjectManager()->createQueryBuilder();
 
         $qb->select(array('u'))
@@ -797,6 +963,18 @@ class DoctrineAdapter implements
      */
     public function getUserClaims($username, $scope)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'username' => $username,
+                'scope' => $scope,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineUsernameField = $this->getConfig()->mapping->User->mapping->username->name;
 
         $user = $this->getObjectManager()
@@ -872,6 +1050,17 @@ class DoctrineAdapter implements
     # If expired return null
     public function getRefreshToken($refresh_token)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'refresh_token' => $refresh_token,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineRefreshTokenField =
             $this->getConfig()->mapping->RefreshToken->mapping->refresh_token->name;
         $doctrineExpiresField =
@@ -932,6 +1121,21 @@ class DoctrineAdapter implements
         $expires,
         $scope = null
     ) {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'refresh_token' => $refresh_token,
+                'client_id' => $client_id,
+                'user_id' => $user_id,
+                'expires' => $expires,
+                'scope ' => $scope,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineRefreshTokenField =
             $this->getConfig()->mapping->RefreshToken->mapping->refresh_token->name;
 
@@ -995,6 +1199,17 @@ class DoctrineAdapter implements
      */
     public function unsetRefreshToken($refresh_token)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'refresh_token' => $refresh_token,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineRefreshTokenCodeField =
             $this->getConfig()->mapping->RefreshToken->mapping->refresh_token->name;
 
@@ -1031,6 +1246,17 @@ class DoctrineAdapter implements
      */
     public function scopeExists($scope)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'scope ' => $scope,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $scopeArray = explode(' ', $scope);
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
@@ -1070,6 +1296,17 @@ class DoctrineAdapter implements
      */
     public function getDefaultScope($client_id = null)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineScopeIsDefaultField =
             $this->getConfig()->mapping->Scope->mapping->is_default->name;
 
@@ -1105,6 +1342,18 @@ class DoctrineAdapter implements
      */
     public function getClientKey($client_id, $subject)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+                'subject' => $subject,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField = $this->getConfig()->mapping->Client->mapping->client_id->name;
 
         $client = $this->getObjectManager()
@@ -1180,6 +1429,21 @@ class DoctrineAdapter implements
         $expires,
         $jti
     ) {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+                'subject' => $subject,
+                'audience' => $audience,
+                'expires' => $expires,
+                'jti' => $jti,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField = $this->getConfig()->mapping->Jti->mapping->client_id->name;
         $doctrineSubjectField = $this->getConfig()->mapping->Jti->mapping->subject->name;
         $doctrineAudienceField = $this->getConfig()->mapping->Jti->mapping->audience->name;
@@ -1237,6 +1501,21 @@ class DoctrineAdapter implements
      */
     public function setJti($client_id, $subject, $audience, $expires, $jti)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+                'subject' => $subject,
+                'audience' => $audience,
+                'expires' => $expires,
+                'jti' => $jti,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $jtiEntityClass = $this->getConfig()->mapping->Jti->entity;
         $jtiEntity = new $jtiEntityClass;
 
@@ -1257,9 +1536,20 @@ class DoctrineAdapter implements
         return true;
     }
 
-    /* OAuth2\Storate\PublicKeyInterface */
+    /* OAuth2\Storage\PublicKeyInterface */
     public function getPublicKey($client_id = null)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField = $this->getConfig()->mapping->Client->mapping->client_id->name;
 
         $client = $this->getObjectManager()
@@ -1282,9 +1572,20 @@ class DoctrineAdapter implements
         return $publicKeyOAuth2['public_key'];
     }
 
-    /* OAuth2\Storate\PublicKeyInterface */
+    /* OAuth2\Storage\PublicKeyInterface */
     public function getPrivateKey($client_id = null)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField = $this->getConfig()->mapping->Client->mapping->client_id->name;
 
         $client = $this->getObjectManager()
@@ -1307,9 +1608,20 @@ class DoctrineAdapter implements
         return $publicKeyOAuth2['private_key'];
     }
 
-    /* OAuth2\Storate\PublicKeyInterface */
+    /* OAuth2\Storage\PublicKeyInterface */
     public function getEncryptionAlgorithm($client_id = null)
     {
+        $results = $this->getEventManager()->trigger(
+            __FUNCTION__,
+            $this,
+            [
+                'client_id' => $client_id,
+            ]
+        );
+        if ($results->stopped()) {
+            return $results->last();
+        }
+
         $doctrineClientIdField = $this->getConfig()->mapping->Client->mapping->client_id->name;
 
         $client = $this->getObjectManager()

@@ -1,8 +1,12 @@
 <?php
 
-namespace Blitzy;
-
 return array(
+    'service_manager' => array(
+        'invokables' => array(
+            'ZFTest\OAuth2\Doctrine\Listener\TestEvents'
+                => 'ZFTest\OAuth2\Doctrine\Listener\TestEvents'
+        ),
+    ),
     'doctrine' => array(
         'driver' => array(
             'orm_driver' => array(

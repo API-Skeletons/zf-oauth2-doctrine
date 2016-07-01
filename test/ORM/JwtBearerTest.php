@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\JwtBearerInterface;
 
-class JwtBearerTest extends BaseTest
+class JwtBearerTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testGetClientKey(JwtBearerInterface $storage)
@@ -33,5 +33,7 @@ fvEER7Yr++VIidOUHkas3cHO1TVoERO3s0THOobw0OzghPnMJL6ayelYOESwfnqR
 WfuEMSaWaW0G38QPzwIDAQAB
 -----END PUBLIC KEY-----
 ");
+
+        $this->assertTrue($storage->getClientKey('event_stop_propagation', ''));
     }
 }

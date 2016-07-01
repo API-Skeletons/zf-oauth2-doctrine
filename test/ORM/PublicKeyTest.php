@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\PublicKeyInterface;
 
-class PublicKeyTest extends BaseTest
+class PublicKeyTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testSetAccessToken($storage)
@@ -47,5 +47,9 @@ M4pYQmuiDXJbwYcf+2ECQCB3s5z9niG6oxVicCfK/l6VJNPifhtr8N48jO0ejWeB
 
         $this->assertFalse($storage->getEncryptionAlgorithm('invalidclient'));
         $this->assertFalse($storage->getEncryptionAlgorithm('oauth_test_client2'));
+
+        $this->assertTrue($storage->getPublicKey('event_stop_propagation'));
+        $this->assertTrue($storage->getPrivateKey('event_stop_propagation'));
+        $this->assertTrue($storage->getEncryptionAlgorithm('event_stop_propagation'));
     }
 }

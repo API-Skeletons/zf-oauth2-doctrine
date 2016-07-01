@@ -80,6 +80,7 @@ The adapter is used to create storage from services.  Add this configuration to 
     ),
 ```
 
+
 Configuration with zfcampus/zf-oauth2
 -------------------------------------
 
@@ -156,6 +157,12 @@ Validate zf-apigility-doctrine resources
 To validate the OAuth2 session with Query Create Filters and Query Providers implement
 `ZF\OAuth2\Doctrine\OAuth2ServerInterface` and use `ZF\OAuth2\Doctrine\OAuth2ServerTrait`.
 Then call `$result = $this->validateOAuth2($scope);` in the filter function.
+
+
+Events
+------
+
+Zend Framework 2 events are fully supported.  Return values are used if propagation is stopped allowing you to write your own handlers for any OAuth2 Adapter method.
 
 
 Extensions

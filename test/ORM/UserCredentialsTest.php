@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\UserCredentialsInterface;
 
-class UserCredentialsTest extends BaseTest
+class UserCredentialsTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testCheckUserCredentials(UserCredentialsInterface $storage)
@@ -21,6 +21,10 @@ class UserCredentialsTest extends BaseTest
         $this->assertFalse($storage->checkUserCredentials('oauth_test_user', 'wronpass'));
         // invalid username
         $this->assertFalse($storage->checkUserCredentials('wrongusername', 'testpass'));
+
+        // delegator
+        $this->assertTrue($storage->checkUserCredentials('test_event_true', ''));
+        $this->assertFalse($storage->checkUserCredentials('test_event_false', ''));
 
         // invalid username
         $this->assertFalse($storage->getUserDetails('wrongusername'));
@@ -49,5 +53,7 @@ class UserCredentialsTest extends BaseTest
 
         $this->assertFalse($storage->getUserClaims('oauth_test_user', 'invalid'));
         $this->assertFalse($storage->getUserClaims('invalid', 'invalid'));
+
+        $this->assertTrue($storage->getUserClaims('event_stop_propagation', ''));
     }
 }

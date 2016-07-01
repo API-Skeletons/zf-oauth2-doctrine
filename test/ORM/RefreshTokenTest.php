@@ -4,7 +4,7 @@ namespace ZFTest\OAuth2\Doctrine\ORM;
 
 use OAuth2\Storage\RefreshTokenInterface;
 
-class RefreshTokenTest extends BaseTest
+class RefreshTokenTest extends AbstractTest
 {
     /** @dataProvider provideStorage */
     public function testSetRefreshToken(RefreshTokenInterface $storage)
@@ -45,5 +45,9 @@ class RefreshTokenTest extends BaseTest
         $this->assertEquals($token['expires'], $expires);
 
         $this->assertTrue($storage->unsetRefreshToken('refreshtoken'));
+
+        $this->assertTrue($storage->setRefreshToken('event_stop_propagation', '', '', '', ''));
+        $this->assertTrue($storage->getRefreshToken('event_stop_propagation'));
+        $this->assertTrue($storage->unsetRefreshToken('event_stop_propagation'));
     }
 }

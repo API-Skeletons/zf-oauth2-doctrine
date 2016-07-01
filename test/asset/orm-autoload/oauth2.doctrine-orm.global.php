@@ -5,7 +5,6 @@
  */
 $userEntity = 'ZFTest\OAuth2\Doctrine\Entity\User';
 
-
 return array(
     'zf-oauth2-doctrine' => array(
         'default' => array(

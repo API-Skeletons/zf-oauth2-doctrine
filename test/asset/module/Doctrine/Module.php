@@ -31,7 +31,8 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $e) {
+    public function onBootstrap(MvcEvent $e)
+    {
         $doctrineAdapter = $serviceManager = $e->getParam('application')
             ->getServiceManager()
             ->get('oauth2.doctrineadapter.default')

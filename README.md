@@ -84,7 +84,7 @@ The adapter is used to create storage from services.  Add this configuration to 
 Configuration with zfcampus/zf-oauth2
 -------------------------------------
 
-Add the default storage adapter to the zf-oauth default storage.  `zfcampus/zf-oauth2` provides an `oauth2.local.php` file.  This repository's recommendation is to create a new `config/autoload/oauth2.global.php` file and set the following configuration as well as any OAuth2 server sesstings e.g. `allow_implicit`.
+Add the default storage adapter to the zf-oauth default storage.  `zfcampus/zf-oauth2` provides an `oauth2.local.php` file.  This repository's recommendation is to create a new `config/autoload/oauth2.global.php` file and set the following configuration as well as any OAuth2 server settings e.g. `allow_implicit`.
 
 ```php
 'zf-oauth2' => array(

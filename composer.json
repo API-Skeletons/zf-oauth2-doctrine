@@ -21,7 +21,7 @@
         "zendframework/zend-i18n": "^2.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "5.2",
+        "phpunit/phpunit": "^4.8.8 || ^5.2",
         "squizlabs/php_codesniffer": "^2.7",
         "zendframework/zend-form": "^2.4",
         "zendframework/zend-loader": "^2.4",
@@ -35,12 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ZF\\OAuth2\\Doctrine\\": "src/",
+            "ZF\\OAuth2\\Doctrine\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "ZFTest\\OAuth2\\Doctrine\\": "test/"
-        },
-        "classmap": [
-            "Module.php"
-        ]
+        }
     },
     "suggest": {
         "bushbaby/zf-oauth2-doctrine-mutatetablenames": "Allows configuration of the table names that this module uses"

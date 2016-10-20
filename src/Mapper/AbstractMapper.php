@@ -2,6 +2,7 @@
 
 namespace ZF\OAuth2\Doctrine\Mapper;
 
+use Doctrine\ORM\QueryBuilder;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTrait;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -134,11 +135,12 @@ class AbstractMapper implements
                 case 'collection':
                     $oAuth2String = array();
                     $fieldValues = explode(' ', $value);
-
+                    /** @var QueryBuilder $queryBuilder */
                     $queryBuilder = $this->getObjectManager()->createQueryBuilder();
                     $queryBuilder->select('row')
-                    ->from($this->getConfig()->mapping->$key->entity, 'row')
-                    ->andwhere(
+                    ->from($this->getConfig()->mapping->$key->entity, 'row');
+
+                    $queryBuilder->andwhere(
                         $queryBuilder->expr()->in(
                             'row.'
                             . $this->getConfig()->mapping->$key->name,

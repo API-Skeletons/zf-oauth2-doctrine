@@ -1,26 +1,26 @@
 <?php
 
-return array(
-    'service_manager' => array(
-        'invokables' => array(
+return [
+    'service_manager' => [
+        'invokables' => [
             'ZFTest\OAuth2\Doctrine\Listener\TestEvents'
-                => 'ZFTest\OAuth2\Doctrine\Listener\TestEvents'
-        ),
-    ),
-    'doctrine' => array(
-        'driver' => array(
-            'orm_driver' => array(
+            => 'ZFTest\OAuth2\Doctrine\Listener\TestEvents',
+        ],
+    ],
+    'doctrine' => [
+        'driver' => [
+            'orm_driver' => [
                 'class' => 'Doctrine\\ORM\\Mapping\\Driver\\XmlDriver',
-                'paths' => array(
+                'paths' => [
                     0 => __DIR__ . '/orm',
-                ),
-            ),
-            'orm_default' => array(
+                ],
+            ],
+            'orm_default' => [
                 'class' => 'Doctrine\\ORM\\Mapping\\Driver\\DriverChain',
-                'drivers' => array(
+                'drivers' => [
                     'ZFTest\\OAuth2\\Doctrine\\Entity' => 'orm_driver',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

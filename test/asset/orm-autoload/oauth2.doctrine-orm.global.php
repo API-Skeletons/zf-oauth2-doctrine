@@ -5,356 +5,356 @@
  */
 $userEntity = 'ZFTest\OAuth2\Doctrine\Entity\User';
 
-return array(
-    'zf-oauth2-doctrine' => array(
-        'default' => array(
+return [
+    'zf-oauth2-doctrine' => [
+        'default' => [
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'event_manager' => 'doctrine.eventmanager.orm_default',
             'driver' => 'doctrine.driver.orm_default',
-            'auth_identity_fields' => array('username'),
+            'auth_identity_fields' => ['username'],
             'enable_default_entities' => true,
             'bcrypt_cost' => 14, # match zfcuser
             // Dynamically map the user_entity to the client_entity
-            'dynamic_mapping' => array(
-                'user_entity' => array(
+            'dynamic_mapping' => [
+                'user_entity' => [
                     'entity' => $userEntity,
                     'field' => 'user',
-                ),
-                'client_entity' => array(
+                ],
+                'client_entity' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                     'field' => 'client',
-                    'additional_mapping_data' => array(
-                        'joinColumns' => array(
-                            array(
-                                'onDelete' => 'CASCADE'
-                            ),
-                        ),
-                    ),
-                ),
-                'access_token_entity' => array(
+                    'additional_mapping_data' => [
+                        'joinColumns' => [
+                            [
+                                'onDelete' => 'CASCADE',
+                            ],
+                        ],
+                    ],
+                ],
+                'access_token_entity' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\AccessToken',
                     'field' => 'accessToken',
-                    'additional_mapping_data' => array(
-                        'joinColumns' => array(
-                            array(
-                                'onDelete' => 'CASCADE'
-                            ),
-                        ),
-                    ),
-                ),
-                'authorization_code_entity' => array(
+                    'additional_mapping_data' => [
+                        'joinColumns' => [
+                            [
+                                'onDelete' => 'CASCADE',
+                            ],
+                        ],
+                    ],
+                ],
+                'authorization_code_entity' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\AuthorizationCode',
                     'field' => 'authorizationCode',
-                    'additional_mapping_data' => array(
-                        'joinColumns' => array(
-                            array(
-                                'onDelete' => 'CASCADE'
-                            ),
-                        ),
-                    ),
-                ),
-                'refresh_token_entity' => array(
+                    'additional_mapping_data' => [
+                        'joinColumns' => [
+                            [
+                                'onDelete' => 'CASCADE',
+                            ],
+                        ],
+                    ],
+                ],
+                'refresh_token_entity' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
                     'field' => 'refreshToken',
-                    'additional_mapping_data' => array(
-                        'joinColumns' => array(
-                            array(
-                                'onDelete' => 'CASCADE'
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'mapping' => array(
-                'User' => array(
+                    'additional_mapping_data' => [
+                        'joinColumns' => [
+                            [
+                                'onDelete' => 'CASCADE',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'mapping' => [
+                'User' => [
                     'entity' => $userEntity,
-                    'mapping' => array(
-                        'user_id' => array(
+                    'mapping' => [
+                        'user_id' => [
                             'type' => 'field',
                             'name' => 'id',
                             'datatype' => 'integer',
-                        ),
-                        'username' => array(
+                        ],
+                        'username' => [
                             'type' => 'field',
                             'name' => 'username',
                             'datatype' => 'string',
-                        ),
-                        'password' => array(
+                        ],
+                        'password' => [
                             'type' => 'field',
                             'name' => 'password',
                             'datatype' => 'string',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'Client' => array(
+                'Client' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
-                    'mapping' => array(
-                        'client_id' => array(
+                    'mapping' => [
+                        'client_id' => [
                             'type' => 'field',
                             'name' => 'clientId',
                             'datatype' => 'integer',
-                        ),
-                        'client_secret' => array(
+                        ],
+                        'client_secret' => [
                             'type' => 'field',
                             'name' => 'secret',
                             'datatype' => 'string',
-                        ),
-                        'redirect_uri' => array(
+                        ],
+                        'redirect_uri' => [
                             'type' => 'field',
                             'name' => 'redirectUri',
                             'datatype' => 'text',
-                        ),
-                        'grant_types' => array(
+                        ],
+                        'grant_types' => [
                             'type' => 'field',
                             'name' => 'grantType',
                             'datatype' => 'array',
-                        ),
-                        'scope' => array(
+                        ],
+                        'scope' => [
                             'type' => 'collection',
                             'name' => 'scope',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'Scope',
-                        ),
-                        'user_id' => array(
+                        ],
+                        'user_id' => [
                             'type' => 'relation',
                             'name' => 'user',
                             'entity_field_name' => 'id',
                             'entity' => $userEntity,
                             'datatype' => 'integer',
                             'allow_null' => true,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'AccessToken' => array(
+                'AccessToken' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\AccessToken',
-                    'mapping' => array(
-                        'access_token' => array(
+                    'mapping' => [
+                        'access_token' => [
                             'type' => 'field',
                             'name' => 'accessToken',
                             'datatype' => 'text',
-                        ),
-                        'expires' => array(
+                        ],
+                        'expires' => [
                             'type' => 'field',
                             'name' => 'expires',
                             'datatype' => 'datetime',
-                        ),
-                        'scope' => array(
+                        ],
+                        'scope' => [
                             'type' => 'collection',
                             'name' => 'scope',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'Scope',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                        'user_id' => array(
+                        ],
+                        'user_id' => [
                             'type' => 'relation',
                             'name' => 'user',
                             'entity_field_name' => 'id',
                             'entity' => $userEntity,
                             'datatype' => 'integer',
                             'allow_null' => true,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'RefreshToken' => array(
+                'RefreshToken' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\RefreshToken',
-                    'mapping' => array(
-                        'refresh_token' => array(
+                    'mapping' => [
+                        'refresh_token' => [
                             'type' => 'field',
                             'name' => 'refreshToken',
                             'datatype' => 'string',
-                        ),
-                        'expires' => array(
+                        ],
+                        'expires' => [
                             'type' => 'field',
                             'name' => 'expires',
                             'datatype' => 'datetime',
-                        ),
-                        'scope' => array(
+                        ],
+                        'scope' => [
                             'type' => 'collection',
                             'name' => 'scope',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'Scope',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                        'user_id' => array(
+                        ],
+                        'user_id' => [
                             'type' => 'relation',
                             'name' => 'user',
                             'entity_field_name' => 'id',
                             'entity' => $userEntity,
                             'datatype' => 'integer',
                             'allow_null' => true,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'AuthorizationCode' => array(
+                'AuthorizationCode' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\AuthorizationCode',
-                    'mapping' => array(
-                        'authorization_code' => array(
+                    'mapping' => [
+                        'authorization_code' => [
                             'type' => 'field',
                             'name' => 'authorizationCode',
                             'datatype' => 'string',
-                        ),
-                        'redirect_uri' => array(
+                        ],
+                        'redirect_uri' => [
                             'type' => 'field',
                             'name' => 'redirectUri',
                             'datatype' => 'text',
-                        ),
-                        'expires' => array(
+                        ],
+                        'expires' => [
                             'type' => 'field',
                             'name' => 'expires',
                             'datatype' => 'datetime',
-                        ),
-                        'scope' => array(
+                        ],
+                        'scope' => [
                             'type' => 'collection',
                             'name' => 'scope',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
                             'mapper' => 'Scope',
-                        ),
-                        'id_token' => array(
+                        ],
+                        'id_token' => [
                             'type' => 'field',
                             'name' => 'idToken',
                             'datatype' => 'text',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                        'user_id' => array(
+                        ],
+                        'user_id' => [
                             'type' => 'relation',
                             'name' => 'user',
                             'entity_field_name' => 'id',
                             'entity' => $userEntity,
                             'datatype' => 'integer',
                             'allow_null' => true,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'Jwt' => array(
+                'Jwt' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\Jwt',
-                    'mapping' => array(
-                        'subject' => array(
+                    'mapping' => [
+                        'subject' => [
                             'type' => 'field',
                             'name' => 'subject',
                             'datatype' => 'string',
-                        ),
-                        'public_key' => array(
+                        ],
+                        'public_key' => [
                             'type' => 'field',
                             'name' => 'publicKey',
                             'datatype' => 'text',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'Jti' => array(
+                'Jti' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\Jti',
-                    'mapping' => array(
-                        'subject' => array(
+                    'mapping' => [
+                        'subject' => [
                             'type' => 'field',
                             'name' => 'subject',
                             'datatype' => 'string',
-                        ),
-                        'audience' => array(
+                        ],
+                        'audience' => [
                             'type' => 'field',
                             'name' => 'audience',
                             'datatype' => 'string',
-                        ),
-                        'expires' => array(
+                        ],
+                        'expires' => [
                             'type' => 'field',
                             'name' => 'expires',
                             'datatype' => 'datetime',
-                        ),
-                        'jti' => array(
+                        ],
+                        'jti' => [
                             'type' => 'field',
                             'name' => 'jti',
                             'datatype' => 'text',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'Scope' => array(
+                'Scope' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
-                    'mapping' => array(
-                        'scope' => array(
+                    'mapping' => [
+                        'scope' => [
                             'type' => 'field',
                             'name' => 'scope',
                             'datatype' => 'text',
-                        ),
-                        'is_default' => array(
+                        ],
+                        'is_default' => [
                             'type' => 'field',
                             'name' => 'isDefault',
                             'datatype' => 'boolean',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-                'PublicKey' => array(
+                'PublicKey' => [
                     'entity' => 'ZF\OAuth2\Doctrine\Entity\PublicKey',
-                    'mapping' => array(
-                        'public_key' => array(
+                    'mapping' => [
+                        'public_key' => [
                             'type' => 'field',
                             'name' => 'publicKey',
                             'datatype' => 'text',
-                        ),
-                        'private_key' => array(
+                        ],
+                        'private_key' => [
                             'type' => 'field',
                             'name' => 'privateKey',
                             'datatype' => 'text',
-                        ),
-                        'encryption_algorithm' => array(
+                        ],
+                        'encryption_algorithm' => [
                             'type' => 'field',
                             'name' => 'encryptionAlgorithm',
                             'datatype' => 'string',
-                        ),
-                        'client_id' => array(
+                        ],
+                        'client_id' => [
                             'type' => 'relation',
                             'name' => 'client',
                             'entity_field_name' => 'clientId',
                             'entity' => 'ZF\OAuth2\Doctrine\Entity\Client',
                             'datatype' => 'integer',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

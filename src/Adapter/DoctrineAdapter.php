@@ -2,8 +2,6 @@
 
 namespace ZF\OAuth2\Doctrine\Adapter;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use OAuth2\OpenID\Storage\UserClaimsInterface as OpenIDUserClaimsInterface;
 use OAuth2\OpenID\Storage\AuthorizationCodeInterface as OpenIDAuthorizationCodeInterface;
 use OAuth2\Storage\AuthorizationCodeInterface;
@@ -15,10 +13,10 @@ use OAuth2\Storage\JwtBearerInterface;
 use OAuth2\Storage\ScopeInterface;
 use OAuth2\Storage\PublicKeyInterface;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\OAuth2\Doctrine\EventListener\DynamicMappingSubscriber;
 use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTrait;
 use ZF\OAuth2\Doctrine\Mapper\MapperManager;
@@ -65,15 +63,18 @@ class DoctrineAdapter implements
     /**
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
+    /**
+     * @return MapperManager
+     */
     public function getMapperManager()
     {
         return $this->mapperManager;
     }
 
     /**
-     * @param MapperManager
+     * @param MapperManager $manager
      * @return $this
      */
     public function setMapperManager(MapperManager $manager)
@@ -123,7 +124,8 @@ class DoctrineAdapter implements
     /**
      * Set the config for the entities implementing the interfaces
      *
-     * @param Config
+     * @param Config $config
+     * @return $this
      */
     public function setConfig(Config $config)
     {
@@ -143,9 +145,12 @@ class DoctrineAdapter implements
     /**
      * Because the DoctrineAdapter is not created when added to the service
      * manager it must be bootstrapped specifically in the onBootstrap event
+     *
+     * @param MvcEvent $e
      */
     public function bootstrap(MvcEvent $e)
     {
+        /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $e->getParam('application')->getServiceManager();
 
         // Enable default entities
@@ -169,13 +174,10 @@ class DoctrineAdapter implements
     /**
      * Make sure that the client credentials is valid.
      *
-     * @param $client_id
-     * Client identifier to be check with.
-     * @param $client_secret
-     * (optional) If a secret is required, check that they've given the right one.
+     * @param string $client_id Client identifier to be check with.
+     * @param string $client_secret (optional) If a secret is required, check that they've given the right one.
      *
-     * @return
-     * TRUE if the client credentials are valid, and MUST return FALSE if it isn't.
+     * @return bool TRUE if the client credentials are valid, and MUST return FALSE if it isn't.
      * @endcode
      *
      * @see http://tools.ietf.org/html/rfc6749#section-3.1
@@ -204,9 +206,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
@@ -225,10 +227,10 @@ class DoctrineAdapter implements
      * Determine if the client is a "public" client, and therefore
      * does not require passing credentials for certain grant types
      *
-     * @param $client_id
+     * @param string $client_id
      * Client identifier to be check with.
      *
-     * @return
+     * @return bool
      * TRUE if the client is public, and FALSE if it isn't.
      * @endcode
      *
@@ -256,16 +258,16 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
             return false;
         }
 
-        return ($client->getSecret()) ? false: true;
+        return ($client->getSecret()) ? false : true;
     }
 
 
@@ -314,9 +316,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
@@ -364,9 +366,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
@@ -377,25 +379,25 @@ class DoctrineAdapter implements
         }
 
         $scopes = new ArrayCollection;
-        foreach ((array) $scope as $scopeString) {
+        foreach ((array)$scope as $scopeString) {
             $scopes->add($this->getObjectManager()
                 ->getRepository($this->getConfig()->mapping->Scope->entity)
-                ->findOneBy(array(
+                ->findOneBy([
                     $this->getConfig()->mapping->Scope->mapping->scope->name
-                        => $scopeString,
-                )));
+                    => $scopeString,
+                ]));
         }
 
-        $client->exchangeArray(array(
+        $client->exchangeArray([
             $this->getConfig()->mapping->Client->mapping->client_secret->name
-                => $client_secret,
+            => $client_secret,
             $this->getConfig()->mapping->Client->mapping->redirect_uri->name
-                => $redirect_uri,
+            => $redirect_uri,
             $this->getConfig()->mapping->Client->mapping->grant_types->name
-                => $grant_types,
+            => $grant_types,
             $this->getConfig()->mapping->Client->mapping->scope->name
-                => $scopes,
-        ));
+            => $scopes,
+        ]);
 
         $this->getObjectManager()->flush();
 
@@ -440,9 +442,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
@@ -485,9 +487,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
@@ -540,9 +542,9 @@ class DoctrineAdapter implements
         $accessToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AccessToken->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineAccessTokenField => $access_token,
-                )
+                ]
             );
 
         if (!$accessToken) {
@@ -565,8 +567,8 @@ class DoctrineAdapter implements
      * @param $oauth_token    oauth_token to be stored.
      * @param $client_id      client identifier to be stored.
      * @param $user_id        user identifier to be stored.
-     * @param int    $expires expiration to be stored as a Unix timestamp.
-     * @param string $scope   OPTIONAL Scopes to be stored in space-separated string.
+     * @param int $expires expiration to be stored as a Unix timestamp.
+     * @param string $scope OPTIONAL Scopes to be stored in space-separated string.
      *
      * @ingroup oauth2_section_4
      */
@@ -598,9 +600,9 @@ class DoctrineAdapter implements
         $accessToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AccessToken->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineAccessTokenField => $access_token,
-                )
+                ]
             );
 
         if (!$accessToken) {
@@ -611,13 +613,13 @@ class DoctrineAdapter implements
         }
 
         $mapper = $this->getMapperManager()->get('AccessToken');
-        $mapper->exchangeOAuth2Array(array(
+        $mapper->exchangeOAuth2Array([
             'access_token' => $access_token,
             'client_id' => $client_id,
             'user_id' => $user_id,
             'expires' => $expires,
             'scope' => $scope,
-        ));
+        ]);
 
         $accessToken->exchangeArray($mapper->getDoctrineArrayCopy());
 
@@ -677,8 +679,7 @@ class DoctrineAdapter implements
             ->andwhere("authorizationCode.$doctrineAuthorizationCode = :code")
             ->andwhere("authorizationCode.$doctrineExpiresField > :now")
             ->setParameter('code', $code)
-            ->setParameter('now', new DateTime())
-            ;
+            ->setParameter('now', new DateTime());
 
         try {
             $authorizationCode = $queryBuilder->getQuery()->getSingleResult();
@@ -711,12 +712,12 @@ class DoctrineAdapter implements
      *
      * Required for OAuth2::GRANT_TYPE_AUTH_CODE.
      *
-     * @param string $code         Authorization code to be stored.
-     * @param mixed  $client_id    Client identifier to be stored.
-     * @param mixed  $user_id      User identifier to be stored.
+     * @param string $code Authorization code to be stored.
+     * @param mixed $client_id Client identifier to be stored.
+     * @param mixed $user_id User identifier to be stored.
      * @param string $redirect_uri Redirect URI(s) to be stored in a space-separated string.
-     * @param int    $expires      Expiration to be stored as a Unix timestamp.
-     * @param string $scope        OPTIONAL Scopes to be stored in space-separated string.
+     * @param int $expires Expiration to be stored as a Unix timestamp.
+     * @param string $scope OPTIONAL Scopes to be stored in space-separated string.
      *
      * @ingroup oauth2_section_4
      */
@@ -752,20 +753,20 @@ class DoctrineAdapter implements
         $authorizationCode = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AuthorizationCode->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineAuthorizationCodeField => $code,
-                )
+                ]
             );
 
         if (!$authorizationCode) {
             $entityClass = $this->getConfig()->mapping->AuthorizationCode->entity;
 
-            $authorizationCode= new $entityClass;
+            $authorizationCode = new $entityClass;
             $this->getObjectManager()->persist($authorizationCode);
         }
 
         $mapper = $this->getMapperManager()->get('AuthorizationCode');
-        $mapper->exchangeOAuth2Array(array(
+        $mapper->exchangeOAuth2Array([
             'authorization_code' => $code,
             'client_id' => $client_id,
             'redirect_uri' => $redirect_uri,
@@ -773,7 +774,7 @@ class DoctrineAdapter implements
             'scope' => $scope,
             'id_token' => $id_token,
             'user_id' => $user_id,
-        ));
+        ]);
 
         $authorizationCode->exchangeArray($mapper->getDoctrineArrayCopy());
 
@@ -814,17 +815,17 @@ class DoctrineAdapter implements
         $authorizationCode = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AuthorizationCode->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineAuthorizationCodeField => $code,
-                )
+                ]
             );
 
         if ($authorizationCode) {
             $doctrineExpiresField =
                 $this->getConfig()->mapping->AuthorizationCode->mapping->expires->name;
-            $authorizationCode->exchangeArray(array(
+            $authorizationCode->exchangeArray([
                 $doctrineExpiresField => new DateTime(), # maybe subtract 1 second?
-            ));
+            ]);
 
             $this->getObjectManager()->flush();
         }
@@ -872,7 +873,7 @@ class DoctrineAdapter implements
 
         $qb = $this->getObjectManager()->createQueryBuilder();
 
-        $qb->select(array('u'))
+        $qb->select(['u'])
             ->from($this->getConfig()->mapping->User->entity, 'u')
             ->setParameter('username', $username);
 
@@ -921,7 +922,7 @@ class DoctrineAdapter implements
 
         $qb = $this->getObjectManager()->createQueryBuilder();
 
-        $qb->select(array('u'))
+        $qb->select(['u'])
             ->from($this->getConfig()->mapping->User->entity, 'u')
             ->setParameter('username', $username);
 
@@ -980,9 +981,9 @@ class DoctrineAdapter implements
         $user = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->User->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineUsernameField => $username,
-                )
+                ]
             );
 
         if (!$user) {
@@ -1072,8 +1073,7 @@ class DoctrineAdapter implements
             ->andwhere("refreshToken.$doctrineRefreshTokenField = :token")
             ->andwhere("refreshToken.$doctrineExpiresField > :now")
             ->setParameter('token', $refresh_token)
-            ->setParameter('now', new DateTime())
-            ;
+            ->setParameter('now', new DateTime());
 
         try {
             $refreshToken = $queryBuilder->getQuery()->getSingleResult();
@@ -1139,38 +1139,38 @@ class DoctrineAdapter implements
         $doctrineRefreshTokenField =
             $this->getConfig()->mapping->RefreshToken->mapping->refresh_token->name;
 
-        $refreshToken= $this->getObjectManager()
+        $refreshToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->RefreshToken->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineRefreshTokenField => $refresh_token,
-                )
+                ]
             );
 
         if (!$refreshToken) {
             $entityClass = $this->getConfig()->mapping->RefreshToken->entity;
 
-            $refreshToken= new $entityClass;
+            $refreshToken = new $entityClass;
             $this->getObjectManager()->persist($refreshToken);
         }
 
         $mapper = $this->getMapperManager()->get('RefreshToken');
-        $mapper->exchangeOAuth2Array(array(
+        $mapper->exchangeOAuth2Array([
             'refresh_token' => $refresh_token,
             'client_id' => $client_id,
             'user_id' => $user_id,
             'expires' => $expires,
             'scope' => $scope,
             'user_id' => $user_id,
-        ));
+        ]);
 
         $scopes = new ArrayCollection;
-        foreach ((array) $scope as $scopeString) {
+        foreach ((array)$scope as $scopeString) {
             $scopes->add($this->getObjectManager()
                 ->getRepository($this->getConfig()->mapping->Scope->entity)
-                ->findOneBy(array(
+                ->findOneBy([
                     $this->getConfig()->mapping->Scope->mapping->scope->name => $scopeString,
-                )));
+                ]));
         }
 
         $refreshToken->exchangeArray($mapper->getDoctrineArrayCopy());
@@ -1216,17 +1216,17 @@ class DoctrineAdapter implements
         $refreshToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->RefreshToken->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineRefreshTokenCodeField => $refresh_token,
-                )
+                ]
             );
 
         if ($refreshToken) {
             $doctrineExpiresField =
                 $this->getConfig()->mapping->RefreshToken->mapping->expires->name;
-            $refreshToken ->exchangeArray(array(
+            $refreshToken->exchangeArray([
                 $doctrineExpiresField => new DateTime(), # maybe subtract 1 second?
-            ));
+            ]);
 
             $this->getObjectManager()->flush();
         }
@@ -1265,8 +1265,7 @@ class DoctrineAdapter implements
             ->from($this->getConfig()->mapping->Scope->entity, 'scope')
             ->andwhere(
                 $queryBuilder->expr()->in('scope.scope', $scopeArray)
-            )
-            ;
+            );
 
         $result = $queryBuilder->getQuery()->getResult();
 
@@ -1313,12 +1312,12 @@ class DoctrineAdapter implements
         $scope = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Scope->entity)
             ->findBy(
-                array(
+                [
                     $doctrineScopeIsDefaultField => true,
-                )
+                ]
             );
 
-        $return = array();
+        $return = [];
         foreach ($scope as $s) {
             $mapper = $this->getMapperManager()->get('Scope');
             $mapper->exchangeDoctrineArray($s->getArrayCopy());
@@ -1359,9 +1358,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client) {
@@ -1375,10 +1374,10 @@ class DoctrineAdapter implements
             $jwt = $this->getObjectManager()
                 ->getRepository($this->getConfig()->mapping->Jwt->entity)
                 ->findOneBy(
-                    array(
+                    [
                         $doctrineClientIdField => $client,
                         $doctrineSubjectField => $subject,
-                    )
+                    ]
                 );
         } catch (Exception $e) {
             // No result from doctrine ok
@@ -1451,25 +1450,25 @@ class DoctrineAdapter implements
         $doctrineJtiField = $this->getConfig()->mapping->Jti->mapping->jti->name;
 
         $mapper = $this->getMapperManager()->get('Jti');
-        $mapper->exchangeOAuth2Array(array(
+        $mapper->exchangeOAuth2Array([
             'client_id' => $client_id,
             'subject' => $subject,
             'audience' => $audience,
             'expires' => $expires,
             'jti' => $jti,
-        ));
+        ]);
 
         // Fetch doctrine array and filter for parameter values
         $query = $mapper->getDoctrineArrayCopy();
 
-        $jti= $this->getObjectManager()->getRepository($this->getConfig()->mapping->Jti->entity)
-            ->findOneBy(array(
+        $jti = $this->getObjectManager()->getRepository($this->getConfig()->mapping->Jti->entity)
+            ->findOneBy([
                 $doctrineClientIdField => $query['client'],
                 $doctrineSubjectField => $query['subject'],
                 $doctrineAudienceField => $query['audience'],
                 $doctrineExpirationField => $query['expires'],
                 $doctrineJtiField => $query['jti'],
-            ));
+            ]);
 
         if (!$jti) {
             return false;
@@ -1520,13 +1519,13 @@ class DoctrineAdapter implements
         $jtiEntity = new $jtiEntityClass;
 
         $mapper = $this->getMapperManager()->get('Jti');
-        $mapper->exchangeOAuth2Array(array(
-            'client_id'  => $client_id,
-            'subject'    => $subject,
-            'audience'   => $audience,
-            'expires'    => $expires,
-            'jti'        => $jti,
-        ));
+        $mapper->exchangeOAuth2Array([
+            'client_id' => $client_id,
+            'subject' => $subject,
+            'audience' => $audience,
+            'expires' => $expires,
+            'jti' => $jti,
+        ]);
 
         $jtiEntity->exchangeArray($mapper->getDoctrineArrayCopy());
 
@@ -1555,9 +1554,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client || !$client->getPublicKey()) {
@@ -1591,9 +1590,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client || !$client->getPublicKey()) {
@@ -1627,9 +1626,9 @@ class DoctrineAdapter implements
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
             ->findOneBy(
-                array(
+                [
                     $doctrineClientIdField => $client_id,
-                )
+                ]
             );
 
         if (!$client || !$client->getPublicKey()) {

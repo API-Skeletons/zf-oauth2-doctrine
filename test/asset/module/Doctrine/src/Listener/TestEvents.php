@@ -18,7 +18,7 @@ class TestEvents extends AbstractListenerAggregate
         $this->doctrineAdapter = $doctrineAdapter;
     }
 
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->handlers[] = $events->attach('checkUserCredentials', array($this, 'checkUserCredentials'));
         $this->handlers[] = $events->attach('checkClientCredentials', array($this, 'emptyEvent'));

@@ -2,7 +2,6 @@
 
 namespace ZF\OAuth2\Doctrine\Mapper;
 
-use Zend\ServiceManager\AbstractPluginManager;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTrait;
 use Zend\Config\Config;
@@ -13,15 +12,13 @@ class MapperManager implements
 {
     use ProvidesObjectManagerTrait;
 
-    public function __construct($services)
-    {
-        $this->services = $services;
-    }
-
-    protected $services;
-
+    /**
+     * @var Config
+     */
     protected $config;
-
+    /**
+     * @var bool
+     */
     protected $shareByDefault = false;
 
     /**
@@ -41,6 +38,10 @@ class MapperManager implements
         'publickey' => 'ZF\OAuth2\Doctrine\Mapper\PublicKey',
     );
 
+    /**
+     * @param Config $config
+     * @return $this
+     */
     public function setConfig(Config $config)
     {
         $this->config = $config;
@@ -48,13 +49,23 @@ class MapperManager implements
         return $this;
     }
 
+    /**
+     * @return Config
+     */
     public function getConfig()
     {
         return $this->config;
     }
 
+    /**
+     * @param string $name
+     * @param array $options
+     * @param bool $usePeeringServiceManagers
+     * @return AbstractMapper
+     */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
+        /** @var AbstractMapper $instance */
         $instance = new $this->invokableClasses[strtolower($name)];
         $instance->setConfig($this->getConfig()->$name);
         $instance->setObjectManager($this->getObjectManager());
@@ -77,7 +88,7 @@ class MapperManager implements
      * @param mixed $command
      *
      * @return void
-     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidServiceException
      */
     public function validatePlugin($command)
     {
@@ -87,7 +98,7 @@ class MapperManager implements
         }
 
         // @codeCoverageIgnoreStart
-        throw new Exception\RuntimeException(sprintf(
+        throw new Exception\InvalidServiceException(sprintf(
             'Plugin of type %s is invalid; must implement ZF\OAuth2\Doctrine\Mapper\AbstractMapper',
             (is_object($command) ? get_class($command) : gettype($command))
         ));

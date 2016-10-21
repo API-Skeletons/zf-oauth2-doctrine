@@ -36,7 +36,8 @@ class Module implements
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $e) {
+    public function onBootstrap(MvcEvent $e)
+    {
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $e->getParam('application')->getServiceManager();
         $serviceManager->get('oauth2.doctrineadapter.default')->bootstrap($e);
@@ -46,7 +47,7 @@ class Module implements
     {
         return [
             'factories' => [
-                'oauth2.doctrineadapter.default' => function($serviceManager) {
+                'oauth2.doctrineadapter.default' => function ($serviceManager) {
                     /** @var ServiceLocatorInterface|ContainerInterface $serviceManager */
                     $globalConfig = $serviceManager->get('Config');
                     $config = new Config($globalConfig['zf-oauth2-doctrine']['default']);

@@ -21,7 +21,7 @@ Installation
 Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 
 ```sh
-$ php composer.phar require api-skeletons/zf-oauth2-doctrine "^1.0"
+$ php composer.phar require api-skeletons/zf-oauth2-doctrine "^2.0"
 ```
 
 Add this module to your application's configuration:

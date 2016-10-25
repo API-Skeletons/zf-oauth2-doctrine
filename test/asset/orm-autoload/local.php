@@ -1,35 +1,30 @@
 <?php
 
-return array(
-    'zf-mvc-auth' => array(
-        'authentication' => array(
-            'map' => array(
-                'Api\\V1' => 'oauth2_doctrine',
-            ),
-        ),
-    ),
-
-    'zf-mvc-auth' => array(
-        'authentication' => array(
-            'adapters' => array(
-                'oauth2_doctrine' => array(
+return [
+    'zf-mvc-auth' => [
+        'authentication' => [
+            'adapters' => [
+                'oauth2_doctrine' => [
                     'adapter' => 'ZF\\MvcAuth\\Authentication\\OAuth2Adapter',
-                    'storage' => array(
+                    'storage' => [
                         'storage' => 'oauth2.doctrineadapter.default',
-                    ),
-                ),
-            ),
-        ),
-    ),
+                    ],
+                ],
+            ],
+            'map' => [
+                'Api\\V1' => 'oauth2_doctrine',
+            ],
+        ],
+    ],
 
-    'doctrine' => array(
-        'connection' => array(
-            'orm_default' => array(
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
-                'params' => array(
+                'params' => [
                     'memory' => 'true',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

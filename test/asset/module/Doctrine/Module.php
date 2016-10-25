@@ -2,7 +2,9 @@
 
 namespace ZFTest\OAuth2\Doctrine;
 
+use Zend\EventManager\EventManager;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ServiceManager\ServiceManager;
 use ZF\OAuth2\Doctrine\EventListener\DynamicMappingSubscriber;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Zend\Mvc\MvcEvent;
@@ -39,8 +41,10 @@ class Module
             ;
 
         $listenerAggregate = new \ZFTest\OAuth2\Doctrine\Listener\TestEvents($doctrineAdapter);
-
-        $serviceManager = $e->getParam('application')->getServiceManager()
-            ->get('oauth2.doctrineadapter.default')->getEventManager()->attachAggregate($listenerAggregate);
+        /** @var ServiceManager $serviceManager */
+        $serviceManager = $e->getParam('application')->getServiceManager();
+        /** @var EventManager $eventManager */
+        $eventManager = $serviceManager->get('oauth2.doctrineadapter.default')->getEventManager();
+        $listenerAggregate->attach($eventManager);
     }
 }

@@ -2,16 +2,50 @@ sudo: false
 
 language: php
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+env:
+  global:
+    - COMPOSER_ARGS="--no-interaction"
+
 matrix: 
   fast_finish: true
   include:
     - php: 5.5
       env:
-        EXECUTE_CS_CHECK=true
+        - DEPS=lowest
+    - php: 5.5
+      env:
+        - DEPS=latest
+        - EXECUTE_CS_CHECK=true
     - php: 5.6
       env:
-        EXECUTE_COVERAGE=true
-    - php: 7
+        - DEPS=lowest
+    - php: 5.6
+      env:
+        - EXECUTE_COVERAGE=true
+        - DEPS=latest
+    - php: 7.0
+      env:
+        - DEPS=lowest
+    - php: 7.0
+      env:
+        - DEPS=latest
+    - php: 7.1
+      env:
+        - DEPS=lowest
+    - php: 7.1
+      env:
+        - DEPS=latest
+    - php: hhvm
+      env:
+        - DEPS=lowest
+    - php: hhvm
+      env:
+        - DEPS=latest
+  allow_failures:
     - php: hhvm
 
 notifications:
@@ -24,12 +58,16 @@ before_install:
   - chmod -R +rwX test/asset/data
 
 install:
-  - travis_retry composer install --no-interaction --ignore-platform-reqs --prefer-source
+  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
+  - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
+  - travis_retry composer install $COMPOSER_ARGS
+  - composer show --installed
 
 script:
   - mkdir -p build/logs
-  - ./vendor/bin/phpunit
+  - if [[ EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml ; fi
+  - if [[ EXECUTE_COVERAGE != 'true' ]]; then ./vendor/bin/phpunit ; fi
   - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php src test; fi
 
 after_script:
-- php vendor/bin/coveralls
+  - php vendor/bin/coveralls

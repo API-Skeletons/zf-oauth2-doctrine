@@ -6,15 +6,28 @@
 
 namespace ZF\OAuth2\Doctrine\Adapter;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use InvalidArgumentException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\Config\Config;
+use ZF\OAuth2\Doctrine\Mapper\MapperManager;
 
 class DoctrineAdapterFactory implements FactoryInterface
 {
+    /**
+     * @var Config
+     */
     private $config;
 
+    /**
+     * @param Config $config
+     * @return $this
+     */
     public function setConfig(Config $config)
     {
         $this->config = $config;
@@ -24,29 +37,28 @@ class DoctrineAdapterFactory implements FactoryInterface
 
     /**
      * @param ServiceLocatorInterface $services
-     * @throws ZF\OAuth2\Controller\Exception\RuntimeException
-     * @return ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter
+     * @throws \ZF\OAuth2\Controller\Exception\RuntimeException
+     * @return \ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter
      */
     public function createService(ServiceLocatorInterface $services)
     {
-        $adapter = $services->get('ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter');
-
-        $adapter->setConfig($this->config);
-        $adapter->setObjectManager($this->loadObjectManager($services, $this->config->object_manager));
-        $adapter->setMapperManager($this->loadMapperManager($services, $this->config));
-
-        return $adapter;
+        return $this->create($services);
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param Zend\Config\Config $this->config
+     * @param ContainerInterface | ServiceLocatorInterface $services
+     * @param string $objectManagerAlias
      *
      * @return ObjectManager
      * @throws \Zend\ServiceManager\Exception\ServiceNotCreatedException
+     * @throws InvalidArgumentException
      */
-    protected function loadObjectManager(ServiceLocatorInterface $services, $objectManagerAlias)
+    protected function loadObjectManager($services, $objectManagerAlias)
     {
+        if (! $services instanceof ContainerInterface && ! $services instanceof ServiceLocatorInterface) {
+            throw new InvalidArgumentException('Invalid container');
+        }
+
         if ($services->has($objectManagerAlias)) {
             $objectManager = $services->get($objectManagerAlias);
         } else {
@@ -59,21 +71,26 @@ class DoctrineAdapterFactory implements FactoryInterface
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param string
+     * @param ContainerInterface | ServiceLocatorInterface $services
+     * @param Config $config
      *
-     * @return ObjectManager
+     * @return MapperManager
      * @throws \Zend\ServiceManager\Exception\ServiceNotCreatedException
+     * @throws InvalidArgumentException
      */
-    protected function loadMapperManager(ServiceLocatorInterface $services, Config $config)
+    protected function loadMapperManager($services, Config $config)
     {
+        if (! $services instanceof ContainerInterface && ! $services instanceof ServiceLocatorInterface) {
+            throw new InvalidArgumentException('Invalid container');
+        }
+
         if ($services->has('ZF\OAuth2\Doctrine\Mapper\MapperManager')) {
-            $mapperManager = new \ZF\OAuth2\Doctrine\Mapper\MapperManager($services);
+            $mapperManager = new MapperManager($services);
         } else {
             // @codeCoverageIgnoreStart
-            throw new ServiceNotCreatedException('The MapperManager '
-                . 'ZF\OAuth2\Doctrine\Mapper\MapperManager'
-                . ' could not be found.');
+            throw new ServiceNotCreatedException(
+                'The MapperManager ZF\OAuth2\Doctrine\Mapper\MapperManager could not be found.'
+            );
         }
         // @codeCoverageIgnoreEnd
 
@@ -81,5 +98,47 @@ class DoctrineAdapterFactory implements FactoryInterface
         $mapperManager->setObjectManager($this->loadObjectManager($services, $config->object_manager));
 
         return $mapperManager;
+    }
+
+    /**
+     * Create an object
+     *
+     * @param  ContainerInterface $container
+     * @param  string $requestedName
+     * @param  null|array $options
+     * @return DoctrineAdapter
+     * @throws \Interop\Container\Exception\NotFoundException
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws InvalidArgumentException
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when
+     *     creating a service.
+     * @throws ContainerException if any other error occurs
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        return $this->create($container);
+    }
+
+    /**
+     * @param ContainerInterface | ServiceLocatorInterface $container
+     * @return DoctrineAdapter
+     * @throws \Interop\Container\Exception\NotFoundException
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws InvalidArgumentException
+     */
+    protected function create($container)
+    {
+        if (! $container instanceof ContainerInterface && ! $container instanceof ServiceLocatorInterface) {
+            throw new InvalidArgumentException('Invalid container');
+        }
+
+        $adapter = $container->get('ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter');
+
+        $adapter->setConfig($this->config);
+        $adapter->setObjectManager($this->loadObjectManager($container, $this->config->object_manager));
+        $adapter->setMapperManager($this->loadMapperManager($container, $this->config));
+
+        return $adapter;
     }
 }

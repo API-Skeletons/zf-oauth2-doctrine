@@ -48,7 +48,7 @@ class Module implements
         return [
             'factories' => [
                 'oauth2.doctrineadapter.default' => function ($serviceManager) {
-                    /** @var ServiceLocatorInterface|ContainerInterface $serviceManager */
+                    /** @var ServiceLocatorInterface | ContainerInterface $serviceManager */
                     $globalConfig = $serviceManager->get('Config');
                     $config = new Config($globalConfig['zf-oauth2-doctrine']['default']);
                     /** @var DoctrineAdapterFactory $factory */

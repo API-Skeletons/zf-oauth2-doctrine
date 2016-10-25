@@ -3,6 +3,7 @@
 namespace ZF\OAuth2\Doctrine\Query;
 
 use Interop\Container\ContainerInterface;
+use InvalidArgumentException;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\InitializerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -35,10 +36,10 @@ class OAuth2ServerInitializer implements InitializerInterface
     }
 
     /**
-     * @param ContainerInterface|ServiceLocatorInterface $container
+     * @param ContainerInterface | ServiceLocatorInterface $container
      * @param mixed $instance
      * @return OAuth2ServerInterface
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function internalInitialize($container, $instance)
     {
@@ -46,8 +47,8 @@ class OAuth2ServerInitializer implements InitializerInterface
             return $instance;
         }
 
-        if (!$container instanceof ContainerInterface && !$container instanceof ServiceLocatorInterface) {
-            throw new \InvalidArgumentException('Invalid container');
+        if (! $container instanceof ContainerInterface && ! $container instanceof ServiceLocatorInterface) {
+            throw new InvalidArgumentException('Invalid container');
         }
 
         $oAuth2ServerFactory = $container->get('ZF\OAuth2\Service\OAuth2Server');

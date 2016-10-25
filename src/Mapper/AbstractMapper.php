@@ -138,7 +138,7 @@ class AbstractMapper implements
                     /** @var QueryBuilder $queryBuilder */
                     $queryBuilder = $this->getObjectManager()->createQueryBuilder();
                     $queryBuilder->select('row')
-                    ->from($this->getConfig()->mapping->$key->entity, 'row');
+                        ->from($this->getConfig()->mapping->$key->entity, 'row');
 
                     $queryBuilder->andwhere(
                         $queryBuilder->expr()->in(

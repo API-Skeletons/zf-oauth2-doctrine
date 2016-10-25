@@ -205,11 +205,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             return false;
@@ -257,11 +255,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             return false;
@@ -315,11 +311,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             return false;
@@ -365,11 +359,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             $clientClass = $this->getConfig()->mapping->Client->entity;
@@ -383,20 +375,15 @@ class DoctrineAdapter implements
             $scopes->add($this->getObjectManager()
                 ->getRepository($this->getConfig()->mapping->Scope->entity)
                 ->findOneBy([
-                    $this->getConfig()->mapping->Scope->mapping->scope->name
-                    => $scopeString,
+                    $this->getConfig()->mapping->Scope->mapping->scope->name => $scopeString,
                 ]));
         }
 
         $client->exchangeArray([
-            $this->getConfig()->mapping->Client->mapping->client_secret->name
-            => $client_secret,
-            $this->getConfig()->mapping->Client->mapping->redirect_uri->name
-            => $redirect_uri,
-            $this->getConfig()->mapping->Client->mapping->grant_types->name
-            => $grant_types,
-            $this->getConfig()->mapping->Client->mapping->scope->name
-            => $scopes,
+            $this->getConfig()->mapping->Client->mapping->client_secret->name => $client_secret,
+            $this->getConfig()->mapping->Client->mapping->redirect_uri->name => $redirect_uri,
+            $this->getConfig()->mapping->Client->mapping->grant_types->name => $grant_types,
+            $this->getConfig()->mapping->Client->mapping->scope->name => $scopes,
         ]);
 
         $this->getObjectManager()->flush();
@@ -416,7 +403,7 @@ class DoctrineAdapter implements
      * @param $grant_type
      * Grant type to be check with
      *
-     * @return
+     * @return bool
      * TRUE if the grant type is supported by this client identifier, and
      * FALSE if it isn't.
      *
@@ -441,11 +428,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             return false;
@@ -486,11 +471,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             return false;
@@ -541,11 +524,9 @@ class DoctrineAdapter implements
 
         $accessToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AccessToken->entity)
-            ->findOneBy(
-                [
-                    $doctrineAccessTokenField => $access_token,
-                ]
-            );
+            ->findOneBy([
+                $doctrineAccessTokenField => $access_token,
+            ]);
 
         if (!$accessToken) {
             return false;
@@ -599,11 +580,9 @@ class DoctrineAdapter implements
 
         $accessToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AccessToken->entity)
-            ->findOneBy(
-                [
-                    $doctrineAccessTokenField => $access_token,
-                ]
-            );
+            ->findOneBy([
+                $doctrineAccessTokenField => $access_token,
+            ]);
 
         if (!$accessToken) {
             $entityClass = $this->getConfig()->mapping->AccessToken->entity;
@@ -752,11 +731,9 @@ class DoctrineAdapter implements
 
         $authorizationCode = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AuthorizationCode->entity)
-            ->findOneBy(
-                [
-                    $doctrineAuthorizationCodeField => $code,
-                ]
-            );
+            ->findOneBy([
+                $doctrineAuthorizationCodeField => $code,
+            ]);
 
         if (!$authorizationCode) {
             $entityClass = $this->getConfig()->mapping->AuthorizationCode->entity;
@@ -814,11 +791,9 @@ class DoctrineAdapter implements
 
         $authorizationCode = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->AuthorizationCode->entity)
-            ->findOneBy(
-                [
-                    $doctrineAuthorizationCodeField => $code,
-                ]
-            );
+            ->findOneBy([
+                $doctrineAuthorizationCodeField => $code,
+            ]);
 
         if ($authorizationCode) {
             $doctrineExpiresField =
@@ -980,11 +955,9 @@ class DoctrineAdapter implements
 
         $user = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->User->entity)
-            ->findOneBy(
-                [
-                    $doctrineUsernameField => $username,
-                ]
-            );
+            ->findOneBy([
+                $doctrineUsernameField => $username,
+            ]);
 
         if (!$user) {
             return false;
@@ -1141,11 +1114,9 @@ class DoctrineAdapter implements
 
         $refreshToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->RefreshToken->entity)
-            ->findOneBy(
-                [
-                    $doctrineRefreshTokenField => $refresh_token,
-                ]
-            );
+            ->findOneBy([
+                $doctrineRefreshTokenField => $refresh_token,
+            ]);
 
         if (!$refreshToken) {
             $entityClass = $this->getConfig()->mapping->RefreshToken->entity;
@@ -1161,7 +1132,6 @@ class DoctrineAdapter implements
             'user_id' => $user_id,
             'expires' => $expires,
             'scope' => $scope,
-            'user_id' => $user_id,
         ]);
 
         $scopes = new ArrayCollection;
@@ -1215,11 +1185,9 @@ class DoctrineAdapter implements
 
         $refreshToken = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->RefreshToken->entity)
-            ->findOneBy(
-                [
-                    $doctrineRefreshTokenCodeField => $refresh_token,
-                ]
-            );
+            ->findOneBy([
+                $doctrineRefreshTokenCodeField => $refresh_token,
+            ]);
 
         if ($refreshToken) {
             $doctrineExpiresField =
@@ -1357,11 +1325,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client) {
             return false;
@@ -1373,12 +1339,10 @@ class DoctrineAdapter implements
         try {
             $jwt = $this->getObjectManager()
                 ->getRepository($this->getConfig()->mapping->Jwt->entity)
-                ->findOneBy(
-                    [
-                        $doctrineClientIdField => $client,
-                        $doctrineSubjectField => $subject,
-                    ]
-                );
+                ->findOneBy([
+                    $doctrineClientIdField => $client,
+                    $doctrineSubjectField => $subject,
+                ]);
         } catch (Exception $e) {
             // No result from doctrine ok
         }
@@ -1553,11 +1517,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client || !$client->getPublicKey()) {
             return false;
@@ -1589,11 +1551,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client || !$client->getPublicKey()) {
             return false;
@@ -1625,11 +1585,9 @@ class DoctrineAdapter implements
 
         $client = $this->getObjectManager()
             ->getRepository($this->getConfig()->mapping->Client->entity)
-            ->findOneBy(
-                [
-                    $doctrineClientIdField => $client_id,
-                ]
-            );
+            ->findOneBy([
+                $doctrineClientIdField => $client_id,
+            ]);
 
         if (!$client || !$client->getPublicKey()) {
             return false;

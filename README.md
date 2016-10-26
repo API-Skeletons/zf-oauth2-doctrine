@@ -1,5 +1,5 @@
-OAuth2 Doctrine Adapter for Apigility
-=====================================
+OAuth2 Doctrine ORM Adapter for Apigility
+=========================================
 
 [![Build Status](https://travis-ci.org/API-Skeletons/zf-oauth2-doctrine.svg)](https://travis-ci.org/API-Skeletons/zf-oauth2-doctrine)
 [![Total Downloads](https://poser.pugx.org/api-skeletons/zf-oauth2-doctrine/downloads)](https://packagist.org/packages/api-skeletons/zf-oauth2-doctrine)

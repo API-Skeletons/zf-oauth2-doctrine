@@ -9,5 +9,5 @@ This provides a Doctrine adapter for [zfcampus/zf-mvc-auth](https://github.com/z
 ![Entity Relationship Diagram](https://raw.githubusercontent.com/API-Skeletons/zf-oauth2-doctrine/master/media/oauth2-doctrine-erd.png)
 Entity Relationship Diagram created with [Skipper](https://skipper18.com)
 
-[Read The Documentation](https://github.com/API-Skeletons/zf-oauth2-doctrine/wiki)
+[Read The Documentation](http://doctrine-in-apigility-docs.readthedocs.io/en/latest/zf-oauth2-doctrine/index.html)
 ======

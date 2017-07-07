@@ -4,3 +4,8 @@ composer.lock
 test/coverage
 build
 .DS_Store
+/.settings/
+/.buildpath
+/.project
+/deployment.properties
+/deployment.xml

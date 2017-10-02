@@ -20,14 +20,6 @@ matrix:
     - php: 7.1
       env:
         - DEPS=latest
-    - php: hhvm
-      env:
-        - DEPS=lowest
-    - php: hhvm
-      env:
-        - DEPS=latest
-  allow_failures:
-    - php: hhvm
 
 notifications:
   irc: "irc.freenode.org#apigility-dev"

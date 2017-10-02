@@ -9,6 +9,7 @@ use Zend\Config\Config;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory;
+use Zend\Loader\StandardAutoloader;
 
 class Module implements
     AutoloaderProviderInterface,
@@ -21,7 +22,7 @@ class Module implements
      */
     public function getAutoloaderConfig()
     {
-        return ['Zend\Loader\StandardAutoloader' => ['namespaces' => [
+        return [StandardAutoloader::class => ['namespaces' => [
             __NAMESPACE__ => __DIR__,
         ]]];
     }
@@ -33,7 +34,13 @@ class Module implements
      */
     public function getConfig()
     {
-        return include __DIR__ . '/../config/module.config.php';
+        $provider = new ConfigProvider();
+
+        return [
+            'service_manager' => $provider->getDependencyConfig(),
+            'zf-apigility-doctrine-query-create-filter' => $provider->getQueryCreateFilterConfig(),
+            'zf-apigility-doctrine-query-provider' => $provider->getQueryProviderConfig(),
+        ];
     }
 
     public function onBootstrap(MvcEvent $e)
@@ -54,6 +61,7 @@ class Module implements
                     /** @var DoctrineAdapterFactory $factory */
                     $factory = $serviceManager->get(DoctrineAdapterFactory::class);
                     $factory->setConfig($config);
+
                     return $factory->createService($serviceManager);
                 }
             ],

@@ -7,9 +7,9 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Config\Config;
 use Zend\Mvc\MvcEvent;
+use Zend\Loader\StandardAutoloader;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\OAuth2\Doctrine\Adapter\DoctrineAdapterFactory;
-use Zend\Loader\StandardAutoloader;
 
 class Module implements
     AutoloaderProviderInterface,

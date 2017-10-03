@@ -43,6 +43,11 @@
             "ZFTest\\OAuth2\\Doctrine\\": "test/"
         }
     },
+    "extra": {
+        "zf": {
+            "module": "ZF\\OAuth2\\Doctrine"
+        }
+    },
     "suggest": {
         "api-skeletons/zf-oauth2-doctrine-permissions-acl": "Access Control Lists for zf-oauth2-doctrine",
         "bushbaby/zf-oauth2-doctrine-mutatetablenames": "Allows configuration of the table names that this module uses"

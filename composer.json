@@ -45,7 +45,8 @@
     },
     "extra": {
         "zf": {
-            "module": "ZF\\OAuth2\\Doctrine"
+            "component": "ZF\\OAuth2\\Doctrine",
+            "config-provider": "ZF\\OAuth2\\Doctrine\\ConfigProvider"
         }
     },
     "suggest": {

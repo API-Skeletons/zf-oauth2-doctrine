@@ -14,9 +14,9 @@ class ConfigProvider
     public function __invoke()
     {
         return [
-            'dependencies' => $provider->getDependencyConfig(),
-            'zf-apigility-doctrine-query-create-filter' => $provider->getQueryCreateFilterConfig(),
-            'zf-apigility-doctrine-query-provider' => $provider->getQueryProviderConfig(),
+            'dependencies' => $this->getDependencyConfig(),
+            'zf-apigility-doctrine-query-create-filter' => $this->getQueryCreateFilterConfig(),
+            'zf-apigility-doctrine-query-provider' => $this->getQueryProviderConfig(),
         ];
     }
 

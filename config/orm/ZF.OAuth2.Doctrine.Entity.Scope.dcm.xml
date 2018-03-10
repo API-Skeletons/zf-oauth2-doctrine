@@ -7,40 +7,40 @@
     <many-to-many field="client" target-entity="ZF\OAuth2\Doctrine\Entity\Client" inversed-by="scope">
       <join-table name="ClientToScope_OAuth2">
         <join-columns>
-          <join-column name="scope_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="scope_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </join-columns>
         <inverse-join-columns>
-          <join-column name="client_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="client_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </inverse-join-columns>
       </join-table>
     </many-to-many>
     <many-to-many field="authorizationCode" target-entity="ZF\OAuth2\Doctrine\Entity\AuthorizationCode" inversed-by="scope">
       <join-table name="AuthorizationCodeToScope_OAuth2">
         <join-columns>
-          <join-column name="scope_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="scope_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </join-columns>
         <inverse-join-columns>
-          <join-column name="authorization_code_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="authorization_code_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </inverse-join-columns>
       </join-table>
     </many-to-many>
     <many-to-many field="refreshToken" target-entity="ZF\OAuth2\Doctrine\Entity\RefreshToken" inversed-by="scope">
       <join-table name="RefreshTokenToScope_OAuth2">
         <join-columns>
-          <join-column name="scope_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="scope_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </join-columns>
         <inverse-join-columns>
-          <join-column name="refresh_token_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="refresh_token_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </inverse-join-columns>
       </join-table>
     </many-to-many>
     <many-to-many field="accessToken" target-entity="ZF\OAuth2\Doctrine\Entity\AccessToken" inversed-by="scope">
       <join-table name="AccessTokenToScope_OAuth2">
         <join-columns>
-          <join-column name="scope_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="scope_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </join-columns>
         <inverse-join-columns>
-          <join-column name="access_token_id" referenced-column-name="id" nullable="false"/>
+          <join-column name="access_token_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </inverse-join-columns>
       </join-table>
     </many-to-many>

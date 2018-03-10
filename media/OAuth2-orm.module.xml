@@ -55,33 +55,57 @@
     <many-to-many mn-entity="\ZF\OAuth2\Doctrine\Entity\ClientToScope" uuid="1d7e8cae-9456-4602-a095-f2048b9303c4">
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\Scope" owning-side="true" alias="scope" uuid="5a9f1849-17bf-4479-9c06-dcd5e1784e90">
         <many-to-many-field from="scope_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\Client" owning-side="false" alias="client" uuid="f71382dc-97f2-4398-a7fd-cd6155b23f83">
         <many-to-many-field from="client_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
     </many-to-many>
     <many-to-many mn-entity="\ZF\OAuth2\Doctrine\Entity\AuthorizationCodeToScope" uuid="609e9b50-11d4-4ba4-8e4e-37a0286c0358">
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\Scope" owning-side="true" alias="scope" uuid="d7fb61d0-fe82-458d-a2a6-5b4cc9065a49">
         <many-to-many-field from="scope_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\AuthorizationCode" owning-side="false" alias="authorizationCode" uuid="438b279b-99ed-4a90-9352-79845961ace6">
         <many-to-many-field from="authorization_code_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
     </many-to-many>
     <many-to-many mn-entity="\ZF\OAuth2\Doctrine\Entity\RefreshTokenToScope" uuid="7563f43f-925d-4df3-bfd3-d2bf1855a0ca">
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\Scope" owning-side="true" alias="scope" uuid="d69ad79d-983f-4cda-905f-1e084aefaff1">
         <many-to-many-field from="scope_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\RefreshToken" owning-side="false" alias="refreshToken" uuid="216d4d0a-a391-4879-ad9e-d195d818dc27">
         <many-to-many-field from="refresh_token_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
     </many-to-many>
     <many-to-many mn-entity="\ZF\OAuth2\Doctrine\Entity\AccessTokenToScope" uuid="d6c88e38-48c1-43d7-b5e9-b6902ee48e7c">
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\Scope" owning-side="true" alias="scope" uuid="391c57b9-1832-4a9a-b7fb-75b2c5c59ebf">
         <many-to-many-field from="scope_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\AccessToken" owning-side="false" alias="accessToken" uuid="1a2f2f70-ba2a-49c8-a50c-ffe2206b4013">
         <many-to-many-field from="access_token_id" to="id"/>
+        <orm-attributes>
+          <attribute name="on-delete">CASCADE</attribute>
+        </orm-attributes>
       </many-to-many-entity>
     </many-to-many>
     <region namespace="\ZF\OAuth2\Doctrine\Entity" caption="Token" uuid="2842966b-796c-48f0-920e-74b0fc40ec24">

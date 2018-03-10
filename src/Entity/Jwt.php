@@ -18,7 +18,7 @@ class Jwt
     private $publicKey;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -86,7 +86,7 @@ class Jwt
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

@@ -20,7 +20,7 @@ class RefreshToken
     private $expires;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -148,7 +148,7 @@ class RefreshToken
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

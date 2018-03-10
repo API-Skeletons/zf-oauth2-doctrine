@@ -21,7 +21,7 @@ class AccessToken implements ArraySerializableInterface
     private $expires;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -147,7 +147,7 @@ class AccessToken implements ArraySerializableInterface
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

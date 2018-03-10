@@ -23,7 +23,7 @@ class PublicKey
     private $encryptionAlgorithm;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -115,7 +115,7 @@ class PublicKey
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

@@ -36,7 +36,7 @@ class Client implements ArraySerializableInterface
     private $clientScope;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -265,7 +265,7 @@ class Client implements ArraySerializableInterface
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

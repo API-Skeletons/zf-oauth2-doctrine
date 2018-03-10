@@ -30,7 +30,7 @@ class AuthorizationCode
     private $idToken;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -208,7 +208,7 @@ class AuthorizationCode
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

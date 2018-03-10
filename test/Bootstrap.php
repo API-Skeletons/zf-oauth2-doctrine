@@ -24,6 +24,11 @@ class Bootstrap
 
     public static function init()
     {
+        copy(
+            __DIR__ . '/../config/oauth2.doctrine-orm.global.php.dist',
+            __DIR__ . '/asset/orm-autoload/oauth2.doctrine-orm.global.php'
+        );
+
         static::initAutoloader();
     }
 

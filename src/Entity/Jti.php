@@ -28,7 +28,7 @@ class Jti
     private $jti;
 
     /**
-     * @var integer
+     * @var bigint
      */
     private $id;
 
@@ -173,7 +173,7 @@ class Jti
     /**
      * Get id
      *
-     * @return integer
+     * @return bigint
      */
     public function getId()
     {

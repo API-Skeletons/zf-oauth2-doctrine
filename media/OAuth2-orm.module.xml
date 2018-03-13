@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <skipper version="3.2.11.1392" mvc="Without MVC" orm="Doctrine2">
-  <module name="\OAuth2 ORM" local-name="OAuth2 ORM" namespace="\ZF\OAuth2\Doctrine\Entity" local-namespace="ZF\OAuth2\Doctrine\Entity" export-format="Doctrine2Xml" export-path="../config/orm" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
+  <module name="\api-skeletons/zf-oauth2-doctrine" local-name="api-skeletons/zf-oauth2-doctrine" namespace="\ZF\OAuth2\Doctrine\Entity" local-namespace="ZF\OAuth2\Doctrine\Entity" export-format="Doctrine2Xml" export-path="../config/orm" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
     <entity name="\ZF\OAuth2\Doctrine\Entity\Client" local-name="Client" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a">
       <field name="id" type="bigint" required="true" unique="true" primary="true" auto-increment="true" uuid="f24288d3-c5ab-4e4f-a251-0bca949873d1"/>
       <field name="clientId" type="string" uuid="5902288a-0d1f-44c0-a02c-19bc92de37b1"/>
@@ -13,6 +13,8 @@
     </entity>
     <comment caption="Disconnected User" description="The ZF\OAuth2\Entity\User does not exist and should be replaced with a custom user entity with a client relation to dynamically assoicate them.  This is dynamically mapped and defined in the config." uuid="664daa50-d4a6-4d82-a35f-5eb5e2e8e7ca"/>
     <comment caption="Unique clientId" description="A unique index for clientId is required and added dynamically through the metadata subscriber.  It is not in the schema to allow for custom naming strategies." uuid="5e19d4fc-7756-4a50-9d4d-91a05aeabac2"/>
+    <comment caption="Scope Fixture" description="The Scope entity is intended for use as a fixture.  You must manually assign an id to each scope." uuid="a24412f2-ffc8-48f6-bf21-a1843f47865d"/>
+    <comment caption="Unique Scope name" description="A unique index for name is required and added dynamically through the metadata subscriber.  It is not in the schema to allow for custom naming strategies." uuid="df548641-cc75-4355-89a3-9e01d81b9d41"/>
     <region namespace="\ZF\OAuth2\Doctrine\Entity" caption="Scope" uuid="98a49ed5-e644-4a4e-9b59-d5421643572a">
       <entity name="\ZF\OAuth2\Doctrine\Entity\Scope" local-name="Scope" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="8cc40580-9611-471f-a6c7-9a64ec3b2869">
         <field name="id" type="bigint" required="true" unique="true" primary="true" uuid="c8033880-f92f-47e6-bbf8-e9f8a99299fb"/>
@@ -50,7 +52,6 @@
           <attribute name="table">AccessTokenToScope_OAuth2</attribute>
         </orm-attributes>
       </entity>
-      <comment caption="Scope Fixture" description="The Scope entity is intended for use as a fixture.  You must manually assign an id to each scope." uuid="a24412f2-ffc8-48f6-bf21-a1843f47865d"/>
     </region>
     <many-to-many mn-entity="\ZF\OAuth2\Doctrine\Entity\ClientToScope" uuid="1d7e8cae-9456-4602-a095-f2048b9303c4">
       <many-to-many-entity name="\ZF\OAuth2\Doctrine\Entity\Scope" owning-side="true" alias="scope" uuid="5a9f1849-17bf-4479-9c06-dcd5e1784e90">
@@ -208,19 +209,28 @@
         <attribute name="on-delete">CASCADE</attribute>
       </orm-attributes>
     </association>
+    <region namespace="\ZF\OAuth2\Doctrine\Entity" caption="Legend" uuid="244ca074-ff30-43f1-8fbe-fe598c7197a0">
+      <comment caption="Fixture" uuid="d1332131-0d0e-4828-9203-e72718424145"/>
+      <comment caption="Comment" uuid="0177f8ca-e899-4464-bc00-e00d67748ade"/>
+      <comment caption="Author" description="Tom H Anderson &#10;API Skeletons&#10;&lt;contact@apiskeletons.com&gt;" uuid="20696f21-eaef-41bb-ba17-9dc01d1bf8e3"/>
+    </region>
   </module>
   <visual-data>
+    <comment uuid="0177f8ca-e899-4464-bc00-e00d67748ade" bg-color="#FFFFE0" position-x="68" position-y="7" size-x="0" size-x2="49" size-y="0" size-y2="20" txt-color="#000000"/>
     <comment uuid="05a610e1-fad6-4e65-8b59-c09ed14d78bb" bg-color="4294967264" position-x="25" position-y="364" size-x="0" size-x2="198" size-y="0" size-y2="92" txt-color="4278190080"/>
-    <comment uuid="5e19d4fc-7756-4a50-9d4d-91a05aeabac2" bg-color="#FFFFE0" position-x="286" position-y="397" size-x="0" size-x2="124" size-y="0" size-y2="129" txt-color="#000000"/>
-    <comment uuid="664daa50-d4a6-4d82-a35f-5eb5e2e8e7ca" bg-color="4294967264" position-x="39" position-y="5" size-x="0" size-x2="264" size-y="0" size-y2="72" txt-color="4278190080"/>
-    <comment uuid="a24412f2-ffc8-48f6-bf21-a1843f47865d" bg-color="#FFFFE0" position-x="-6" position-y="311" size-x="0" size-x2="113" size-y="0" size-y2="84" txt-color="#000000"/>
+    <comment uuid="20696f21-eaef-41bb-ba17-9dc01d1bf8e3" bg-color="#FFFFE0" position-x="181" position-y="7" size-x="0" size-x2="151" size-y="0" size-y2="58" txt-color="#000000"/>
+    <comment uuid="5e19d4fc-7756-4a50-9d4d-91a05aeabac2" bg-color="#FFFFE0" position-x="287" position-y="-8" size-x="0" size-x2="93" size-y="0" size-y2="123" txt-color="#000000"/>
+    <comment uuid="664daa50-d4a6-4d82-a35f-5eb5e2e8e7ca" bg-color="4294967264" position-x="437" position-y="-8" size-x="0" size-x2="250" size-y="0" size-y2="72" txt-color="4278190080"/>
+    <comment uuid="a24412f2-ffc8-48f6-bf21-a1843f47865d" bg-color="#FFFFE0" position-x="737" position-y="-8" size-x="0" size-x2="150" size-y="0" size-y2="71" txt-color="#000000"/>
+    <comment uuid="d1332131-0d0e-4828-9203-e72718424145" bg-color="#0BC0A9" position-x="12" position-y="7" size-x="0" size-x2="38" size-y="0" size-y2="20" txt-color="#000000"/>
+    <comment uuid="df548641-cc75-4355-89a3-9e01d81b9d41" bg-color="#FFFFE0" position-x="911" position-y="-8" size-x="0" size-x2="176" size-y="0" size-y2="70" txt-color="#000000"/>
     <entity uuid="0cef011b-fcdf-4e6e-a813-2a8d49ba4748" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="62" position-y="185" size-x="0" size-x2="106" size-y="0" size-y2="73"/>
-    <entity uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="300" position-y="203" size-x="0" size-x2="93" size-y="0" size-y2="87"/>
+    <entity uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="286" position-y="171" size-x="0" size-x2="93" size-y="0" size-y2="87"/>
     <entity uuid="1b40f6a9-e21a-49d3-8d44-604e36d28d35" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="57" position-y="30" size-x="0" size-x2="127" size-y="0" size-y2="101"/>
     <entity uuid="4f5f9113-1ca7-472d-ba02-7b178329ced8" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="27" position-y="191" size-x="0" size-x2="127" size-y="0" size-y2="60"/>
     <entity uuid="654eac84-7c6d-4280-9138-1658291dfb7e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="27" position-y="99" size-x="0" size-x2="148" size-y="0" size-y2="60"/>
     <entity uuid="8c75fc92-0e0a-43ed-b5dc-5859aba057ae" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="63" position-y="304" size-x="0" size-x2="106" size-y="0" size-y2="73"/>
-    <entity uuid="8cc40580-9611-471f-a6c7-9a64ec3b2869" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="208" position-y="172" size-x="0" size-x2="99" size-y="0" size-y2="59"/>
+    <entity uuid="8cc40580-9611-471f-a6c7-9a64ec3b2869" bg-color="#FFFFFF" hdr-color="#0BC0A9" position-x="208" position-y="172" size-x="0" size-x2="99" size-y="0" size-y2="59"/>
     <entity uuid="9c143447-a1f4-4187-a5f9-45e768f78ebb" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="241" size-x="0" size-x2="93" size-y="0" size-y2="73"/>
     <entity uuid="b6562bcc-4fca-413e-a560-91da4d75dc9f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="18" position-y="33" size-x="0" size-x2="134" size-y="0" size-y2="87"/>
     <entity uuid="d25ad9b3-1751-49e7-901d-a92fae42a8b2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="146" position-y="310" size-x="0" size-x2="127" size-y="0" size-y2="60"/>
@@ -236,9 +246,10 @@
     <many-to-many-association-entity uuid="5a9f1849-17bf-4479-9c06-dcd5e1784e90" center-position-x="0" center-position-y="-16"/>
     <many-to-many-association-entity uuid="d69ad79d-983f-4cda-905f-1e084aefaff1" center-position-x="0" center-position-y="0"/>
     <many-to-many-association-entity uuid="f71382dc-97f2-4398-a7fd-cd6155b23f83" split="1"/>
-    <module uuid="e33a902b-9096-46f4-81af-cb8fa813a736" bg-color="4287552497" size-x="30" size-x2="1020" size-y="32" size-y2="651"/>
-    <region uuid="2842966b-796c-48f0-920e-74b0fc40ec24" bg-color="#E4F3E8" position-x="422" position-y="121" size-x="0" size-x2="225" size-y="0" size-y2="405"/>
-    <region uuid="98a49ed5-e644-4a4e-9b59-d5421643572a" bg-color="4292931823" position-x="675" position-y="122" size-x="16" size-x2="319" size-y="0" size-y2="404"/>
-    <region uuid="f75990b4-77ef-4d38-950e-631e3b3b8fbb" bg-color="4292728527" position-x="20" position-y="117" size-x="0" size-x2="255" size-y="0" size-y2="484"/>
+    <module uuid="e33a902b-9096-46f4-81af-cb8fa813a736" bg-color="#8EDBF1" size-x="70" size-x2="1137" size-y="32" size-y2="692"/>
+    <region uuid="244ca074-ff30-43f1-8fbe-fe598c7197a0" bg-color="#FEEFE3" position-x="737" position-y="563" size-x="0" size-x2="350" size-y="21" size-y2="79"/>
+    <region uuid="2842966b-796c-48f0-920e-74b0fc40ec24" bg-color="#E4F3E8" position-x="437" position-y="92" size-x="0" size-x2="250" size-y="0" size-y2="400"/>
+    <region uuid="98a49ed5-e644-4a4e-9b59-d5421643572a" bg-color="4292931823" position-x="753" position-y="92" size-x="16" size-x2="334" size-y="0" size-y2="400"/>
+    <region uuid="f75990b4-77ef-4d38-950e-631e3b3b8fbb" bg-color="4292728527" position-x="-13" position-y="42" size-x="0" size-x2="250" size-y="0" size-y2="500"/>
   </visual-data>
 </skipper>

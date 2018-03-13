@@ -64,6 +64,10 @@ return array(
                         ),
                     ),
                 ),
+                'scope_entity' => array(
+                    'entity' => 'ZF\OAuth2\Doctrine\Entity\Scope',
+                    'field' => 'scope',
+                ),
             ),
             'mapping' => array(
                 'User' => array(

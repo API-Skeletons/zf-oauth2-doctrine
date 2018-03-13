@@ -10,9 +10,15 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Zend\Config\Config;
+use DoctrineModule\Persistence\ProvidesObjectManager;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 
-class DynamicMappingSubscriber implements EventSubscriber
+class DynamicMappingSubscriber implements
+    EventSubscriber,
+    ObjectManagerAwareInterface
 {
+    use ProvidesObjectManager;
+
     protected $config = array();
     protected $mapping = array();
 
@@ -47,6 +53,8 @@ class DynamicMappingSubscriber implements EventSubscriber
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
+        $this->setObjectManager($eventArgs->getObjectManager());
+
         // the $metadata is the whole mapping info for this class
         $metadata = $eventArgs->getClassMetadata();
 
@@ -83,8 +91,10 @@ class DynamicMappingSubscriber implements EventSubscriber
                 $clientIdField = $this->getMapping()->Client->mapping->client_id->name;
 
                 $clientIdColumn = $metadata->columnNames[$clientIdField];
-                $metadata->table['uniqueConstraints']['idx_' . $clientIdColumn . '_unique']['columns'][] =
-                    $clientIdColumn;
+                $indexName = $this->_generateIdentifierName(
+                    array_merge(array($metadata->table['name']), ['clientId']), "uniq", $this->_getMaxIdentifierLength()
+                );
+                $metadata->table['uniqueConstraints'][$indexName]['columns'][] = $clientIdColumn;
 
                 $joinMap = array(
                     'targetEntity' => $this->getConfig()->user_entity->entity,
@@ -145,8 +155,39 @@ class DynamicMappingSubscriber implements EventSubscriber
                 $metadata->mapManyToOne($joinMap);
                 break;
 
+            case $this->getConfig()->scope_entity->entity:
+                // Add unique constriant for clientId based on column
+                // See https://github.com/TomHAnderson/zf-oauth2-doctrine/issues/24
+                $nameField = $this->getMapping()->Scope->mapping->scope->name;
+                $nameColumn = $metadata->columnNames[$nameField];
+                $indexName = $this->_generateIdentifierName(
+                    array_merge(array($metadata->table['name']), ['scope']), "uniq", $this->_getMaxIdentifierLength()
+                );
+                $metadata->table['uniqueConstraints'][$indexName]['columns'][] = $nameColumn;
+                break;
+
             default:
                 break;
         }
+    }
+
+    // Copied from Doctrine DBAL\Schema\Table
+    protected function _generateIdentifierName($columnNames, $prefix='', $maxSize=30)
+    {
+        $hash = implode("", array_map(function ($column) {
+            return dechex(crc32($column));
+        }, $columnNames));
+
+        return substr(strtoupper($prefix . "_" . $hash), 0, $maxSize);
+    }
+
+    protected function _getMaxIdentifierLength()
+    {
+        return $this->getObjectManager()
+            ->getConnection()
+            ->getSchemaManager()
+            ->getDatabasePlatform()
+            ->getMaxIdentifierLength()
+            ;
     }
 }

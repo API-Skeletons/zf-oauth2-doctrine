@@ -10,19 +10,19 @@ trait OAuth2ServerTrait
 {
     protected $oAuth2Server;
 
-    public function setOAuth2Server(OAuth2Server $server)
+    public function setOauth2Server(OAuth2Server $server)
     {
         $this->oAuth2Server = $server;
 
         return $this;
     }
 
-    public function getOAuth2Server()
+    public function getOauth2Server()
     {
         return $this->oAuth2Server;
     }
 
-    public function validateOAuth2($scope = null)
+    public function validateOauth2($scope = null)
     {
         if (! $this->getOAuth2Server()->verifyResourceRequest(
             OAuth2Request::createFromGlobals(),

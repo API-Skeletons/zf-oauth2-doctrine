@@ -34,13 +34,13 @@ class PublicKey
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'publicKey' => $this->getPublicKey(),
             'privateKey' => $this->getPrivateKey(),
             'encryptionAlgorithm' => $this->getEncryptionAlgorithm(),
             'client' => $this->getClient(),
-        );
+        ];
     }
 
     /**

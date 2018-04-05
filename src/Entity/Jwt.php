@@ -29,12 +29,12 @@ class Jwt
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'client' => $this->getClient(),
             'subject' => $this->getSubject(),
             'publicKey' => $this->getPublicKey(),
-        );
+        ];
     }
 
     /**

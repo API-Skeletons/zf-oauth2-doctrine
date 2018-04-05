@@ -68,14 +68,14 @@ class Jti
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'client' => $this->getClient(),
             'subject' => $this->getSubject(),
             'audience' => $this->getAudience(),
             'expires' => $this->getExpires(),
             'jti' => $this->getJti(),
-        );
+        ];
     }
 
     /**

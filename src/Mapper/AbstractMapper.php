@@ -30,12 +30,12 @@ class AbstractMapper implements
     /**
      * @var data
      */
-    protected $oAuth2Data = array();
+    protected $oAuth2Data = [];
 
     /**
      * @var data
      */
-    protected $doctrineData = array();
+    protected $doctrineData = [];
 
     public function setMapperManager(MapperManager $mapperManager)
     {
@@ -49,12 +49,12 @@ class AbstractMapper implements
         return $this->mapperManager;
     }
 
-    protected function getOAuth2Data()
+    protected function getOauth2Data()
     {
         return $this->oAuth2Data;
     }
 
-    protected function setOAuth2Data(array $data)
+    protected function setOauth2Data(array $data)
     {
         $this->oAuth2Data = $data;
 
@@ -100,14 +100,14 @@ class AbstractMapper implements
      * Pass data formatted for the oauth2 server
      * and populate both oauth2 and doctrine data
      */
-    public function exchangeOAuth2Array(array $array)
+    public function exchangeOauth2Array(array $array)
     {
-        $oAuth2Data = $this->getOAuth2Data();
+        $oAuth2Data = $this->getOauth2Data();
         $doctrineData = $this->getDoctrineData();
         $config = $this->getConfig();
 
         foreach ($array as $key => $value) {
-            if (!isset($this->getConfig()->mapping->$key)) {
+            if (! isset($this->getConfig()->mapping->$key)) {
                 continue;
             }
 
@@ -123,8 +123,8 @@ class AbstractMapper implements
                             $doctrineData[$this->getConfig()->mapping->$key->name] = $date;
                             break;
                         case 'boolean':
-                            $oAuth2Data[$key] = (int) (bool) $value;
-                            $doctrineData[$this->getConfig()->mapping->$key->name] = (bool) $value;
+                            $oAuth2Data[$key] = (int)(bool)$value;
+                            $doctrineData[$this->getConfig()->mapping->$key->name] = (bool)$value;
                             break;
                         default:
                             $oAuth2Data[$key] = $value;
@@ -133,7 +133,7 @@ class AbstractMapper implements
                     }
                     break;
                 case 'collection':
-                    $oAuth2String = array();
+                    $oAuth2String = [];
                     $fieldValues = explode(' ', $value);
                     /** @var QueryBuilder $queryBuilder */
                     $queryBuilder = $this->getObjectManager()->createQueryBuilder();
@@ -156,12 +156,12 @@ class AbstractMapper implements
                     // die($this->getConfig()->mapping->$key->entity);
                     $relation = $this->getObjectManager()->getRepository($this->getConfig()->mapping->$key->entity)
                     ->findOneBy(
-                        array(
-                        $this->getConfig()->mapping->$key->entity_field_name => $value,
-                        )
+                        [
+                            $this->getConfig()->mapping->$key->entity_field_name => $value,
+                        ]
                     );
 
-                    if (!$relation) {
+                    if (! $relation) {
                         if (isset($this->getConfig()->mapping->$key->allow_null)
                         && $this->getConfig()->mapping->$key->allow_null
                         ) {
@@ -184,7 +184,7 @@ class AbstractMapper implements
             }
         }
 
-        $this->setOAuth2Data($oAuth2Data);
+        $this->setOauth2Data($oAuth2Data);
         $this->setDoctrineData($doctrineData);
 
         return $this;
@@ -196,7 +196,7 @@ class AbstractMapper implements
      */
     public function exchangeDoctrineArray(array $array)
     {
-        $oAuth2Data = $this->getOAuth2Data();
+        $oAuth2Data = $this->getOauth2Data();
         $doctrineData = $this->getDoctrineData();
         $config = $this->getConfig();
 
@@ -211,7 +211,7 @@ class AbstractMapper implements
                 }
             }
 
-            if (!$key) {
+            if (! $key) {
                 continue;
             }
 
@@ -225,8 +225,8 @@ class AbstractMapper implements
                             $doctrineData[$this->getConfig()->mapping->$key->name] = $value;
                             break;
                         case 'boolean':
-                            $oAuth2Data[$key] = (int) $value;
-                            $doctrineData[$this->getConfig()->mapping->$key->name] = (bool) $value;
+                            $oAuth2Data[$key] = (int)$value;
+                            $doctrineData[$this->getConfig()->mapping->$key->name] = (bool)$value;
                             break;
                         default:
                             $oAuth2Data[$key] = $value;
@@ -235,12 +235,12 @@ class AbstractMapper implements
                     }
                     break;
                 case 'collection':
-                    $oAuth2String = array();
+                    $oAuth2String = [];
                     foreach ($value as $entity) {
                         $mapper = $this->getMapperManager()->get($this->getConfig()->mapping->$key->mapper);
 
                         $mapper->exchangeDoctrineArray($entity->getArrayCopy());
-                        $data = $mapper->getOAuth2ArrayCopy();
+                        $data = $mapper->getOauth2ArrayCopy();
 
                         $oAuth2String[] = $data[$this->getConfig()->mapping->$key->name];
                     }
@@ -260,12 +260,12 @@ class AbstractMapper implements
                         ->getRepository($this->getConfig()->mapping->$key->entity)
                         ->findOneBy(
                             [
-                            $this->getConfig()->mapping->$key->entity_field_name => $value,
-                                ]
+                                $this->getConfig()->mapping->$key->entity_field_name => $value,
+                            ]
                         );
                     }
 
-                    if (!$relation) {
+                    if (! $relation) {
                         if (isset($this->getConfig()->mapping->$key->allow_null)
                         && $this->getConfig()->mapping->$key->allow_null
                         ) {
@@ -317,15 +317,15 @@ class AbstractMapper implements
             }
         }
 
-        $this->setOAuth2Data($oAuth2Data);
+        $this->setOauth2Data($oAuth2Data);
         $this->setDoctrineData($doctrineData);
 
         return $this;
     }
 
-    public function getOAuth2ArrayCopy()
+    public function getOauth2ArrayCopy()
     {
-        return $this->getOAuth2Data();
+        return $this->getOauth2Data();
     }
 
     public function getDoctrineArrayCopy()

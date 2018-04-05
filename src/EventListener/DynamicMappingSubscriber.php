@@ -19,8 +19,8 @@ class DynamicMappingSubscriber implements
 {
     use ProvidesObjectManager;
 
-    protected $config = array();
-    protected $mapping = array();
+    protected $config = [];
+    protected $mapping = [];
 
     public function __construct(Config $config, Config $mapping)
     {
@@ -43,9 +43,9 @@ class DynamicMappingSubscriber implements
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             Events::loadClassMetadata,
-        );
+        ];
     }
 
     /**
@@ -60,29 +60,29 @@ class DynamicMappingSubscriber implements
 
         switch ($metadata->getName()) {
             case $this->getConfig()->user_entity->entity:
-                $metadata->mapOneToMany(array(
+                $metadata->mapOneToMany([
                     'targetEntity' => $this->getConfig()->client_entity->entity,
                     'fieldName' => $this->getConfig()->client_entity->field,
                     'mappedBy' => $this->getConfig()->user_entity->field,
-                ));
+                ]);
 
-                $metadata->mapOneToMany(array(
+                $metadata->mapOneToMany([
                     'targetEntity' => $this->getConfig()->access_token_entity->entity,
                     'fieldName' => $this->getConfig()->access_token_entity->field,
                     'mappedBy' => $this->getConfig()->user_entity->field,
-                ));
+                ]);
 
-                $metadata->mapOneToMany(array(
+                $metadata->mapOneToMany([
                     'targetEntity' => $this->getConfig()->authorization_code_entity->entity,
                     'fieldName' => $this->getConfig()->authorization_code_entity->field,
                     'mappedBy' => $this->getConfig()->user_entity->field,
-                ));
+                ]);
 
-                $metadata->mapOneToMany(array(
+                $metadata->mapOneToMany([
                     'targetEntity' => $this->getConfig()->refresh_token_entity->entity,
                     'fieldName' => $this->getConfig()->refresh_token_entity->field,
                     'mappedBy' => $this->getConfig()->user_entity->field,
-                ));
+                ]);
                 break;
 
             case $this->getConfig()->client_entity->entity:
@@ -91,16 +91,18 @@ class DynamicMappingSubscriber implements
                 $clientIdField = $this->getMapping()->Client->mapping->client_id->name;
 
                 $clientIdColumn = $metadata->columnNames[$clientIdField];
-                $indexName = $this->_generateIdentifierName(
-                    array_merge(array($metadata->table['name']), ['clientId']), "uniq", $this->_getMaxIdentifierLength()
+                $indexName = $this->generateIdentifierName(
+                    array_merge([$metadata->table['name']], ['clientId']),
+                    "uniq",
+                    $this->getMaxIdentifierLength()
                 );
                 $metadata->table['uniqueConstraints'][$indexName]['columns'][] = $clientIdColumn;
 
-                $joinMap = array(
+                $joinMap = [
                     'targetEntity' => $this->getConfig()->user_entity->entity,
                     'fieldName' => $this->getConfig()->user_entity->field,
                     'inversedBy' => $this->getConfig()->client_entity->field,
-                );
+                ];
                 if (isset($this->getConfig()->client_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
@@ -111,11 +113,11 @@ class DynamicMappingSubscriber implements
                 break;
 
             case $this->getConfig()->access_token_entity->entity:
-                $joinMap = array(
+                $joinMap = [
                     'targetEntity' => $this->getConfig()->user_entity->entity,
                     'fieldName' => $this->getConfig()->user_entity->field,
                     'inversedBy' => $this->getConfig()->access_token_entity->field,
-                );
+                ];
                 if (isset($this->getConfig()->access_token_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
@@ -126,11 +128,11 @@ class DynamicMappingSubscriber implements
                 break;
 
             case $this->getConfig()['authorization_code_entity']['entity']:
-                $joinMap = array(
+                $joinMap = [
                     'targetEntity' => $this->getConfig()->user_entity->entity,
                     'fieldName' => $this->getConfig()->user_entity->field,
                     'inversedBy' => $this->getConfig()->authorization_code_entity->field,
-                );
+                ];
                 if (isset($this->getConfig()->authorization_code_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
@@ -141,11 +143,11 @@ class DynamicMappingSubscriber implements
                 break;
 
             case $this->getConfig()->refresh_token_entity->entity:
-                $joinMap = array(
+                $joinMap = [
                     'targetEntity' => $this->getConfig()->user_entity->entity,
                     'fieldName' => $this->getConfig()->user_entity->field,
                     'inversedBy' => $this->getConfig()->refresh_token_entity->field,
-                );
+                ];
                 if (isset($this->getConfig()->refresh_token_entity->additional_mapping_data)) {
                     $joinMap = array_merge(
                         $joinMap,
@@ -160,8 +162,10 @@ class DynamicMappingSubscriber implements
                 // See https://github.com/TomHAnderson/zf-oauth2-doctrine/issues/24
                 $nameField = $this->getMapping()->Scope->mapping->scope->name;
                 $nameColumn = $metadata->columnNames[$nameField];
-                $indexName = $this->_generateIdentifierName(
-                    array_merge(array($metadata->table['name']), ['scope']), "uniq", $this->_getMaxIdentifierLength()
+                $indexName = $this->generateIdentifierName(
+                    array_merge([$metadata->table['name']], ['scope']),
+                    "uniq",
+                    $this->getMaxIdentifierLength()
                 );
                 $metadata->table['uniqueConstraints'][$indexName]['columns'][] = $nameColumn;
                 break;
@@ -172,7 +176,7 @@ class DynamicMappingSubscriber implements
     }
 
     // Copied from Doctrine DBAL\Schema\Table
-    protected function _generateIdentifierName($columnNames, $prefix='', $maxSize=30)
+    protected function generateIdentifierName($columnNames, $prefix = '', $maxSize = 30)
     {
         $hash = implode("", array_map(function ($column) {
             return dechex(crc32($column));
@@ -181,7 +185,7 @@ class DynamicMappingSubscriber implements
         return substr(strtoupper($prefix . "_" . $hash), 0, $maxSize);
     }
 
-    protected function _getMaxIdentifierLength()
+    protected function getMaxIdentifierLength()
     {
         return $this->getObjectManager()
             ->getConnection()

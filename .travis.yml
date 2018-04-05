@@ -16,6 +16,7 @@ matrix:
     - php: 7.1
       env:
         - EXECUTE_COVERAGE=true
+        - EXECUTE_CS_CHECK=true 
         - DEPS=lowest
     - php: 7.1
       env:
@@ -40,7 +41,7 @@ script:
   - mkdir -p build/logs
   - if [[ EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml ; fi
   - if [[ EXECUTE_COVERAGE != 'true' ]]; then ./vendor/bin/phpunit ; fi
-  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php src test; fi
+  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs; fi
 
 after_script:
   - php vendor/bin/coveralls

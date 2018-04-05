@@ -24,7 +24,9 @@ class Module implements
     {
         return [StandardAutoloader::class => ['namespaces' => [
             __NAMESPACE__ => __DIR__,
-        ]]];
+        ]
+        ]
+        ];
     }
 
     /**

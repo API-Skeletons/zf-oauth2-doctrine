@@ -60,7 +60,7 @@ class AuthorizationCode
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'authorizationCode' => $this->getAuthorizationCode(),
             'redirectUri' => $this->getRedirectUri(),
@@ -69,7 +69,7 @@ class AuthorizationCode
             'scope' => $this->getScope(),
             'client' => $this->getClient(),
             'user' => $this->getUser(),
-        );
+        ];
     }
 
     public function exchangeArray(array $array)

@@ -57,11 +57,11 @@ class Scope
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'scope' => $this->getScope(),
             'isDefault' => $this->getIsDefault(),
-        );
+        ];
     }
 
     /**

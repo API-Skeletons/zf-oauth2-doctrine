@@ -26,7 +26,7 @@ class MapperManager implements
      *
      * @var array
      */
-    protected $invokableClasses = array(
+    protected $invokableClasses = [
         'user' => 'ZF\OAuth2\Doctrine\Mapper\User',
         'client' => 'ZF\OAuth2\Doctrine\Mapper\Client',
         'accesstoken' => 'ZF\OAuth2\Doctrine\Mapper\AccessToken',
@@ -36,7 +36,7 @@ class MapperManager implements
         'jti' => 'ZF\OAuth2\Doctrine\Mapper\Jti',
         'scope' => 'ZF\OAuth2\Doctrine\Mapper\Scope',
         'publickey' => 'ZF\OAuth2\Doctrine\Mapper\PublicKey',
-    );
+    ];
 
     /**
      * @param Config $config
@@ -63,7 +63,7 @@ class MapperManager implements
      * @param bool $usePeeringServiceManagers
      * @return AbstractMapper
      */
-    public function get($name, $options = array(), $usePeeringServiceManagers = true)
+    public function get($name, $options = [], $usePeeringServiceManagers = true)
     {
         /** @var AbstractMapper $instance */
         $instance = new $this->invokableClasses[strtolower($name)];
@@ -76,7 +76,7 @@ class MapperManager implements
 
     public function getAll()
     {
-        $resources = array();
+        $resources = [];
         foreach ($this->getConfig() as $resourceName => $config) {
             $resources[] = $this->get($resourceName);
         }

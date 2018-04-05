@@ -96,7 +96,7 @@ class Client implements ArraySerializableInterface
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'clientId' => $this->getClientId(),
             'secret' => $this->getSecret(),
@@ -104,7 +104,7 @@ class Client implements ArraySerializableInterface
             'grantType' => $this->getGrantType(),
             'scope' => $this->getScope(),
             'user' => $this->getUser(),
-        );
+        ];
     }
 
     public function exchangeArray(array $array)

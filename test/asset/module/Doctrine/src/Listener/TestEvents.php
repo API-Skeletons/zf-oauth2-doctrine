@@ -10,7 +10,7 @@ use ZF\OAuth2\Doctrine\Adapter\DoctrineAdapter;
 
 class TestEvents extends AbstractListenerAggregate
 {
-    protected $handlers = array();
+    protected $handlers = [];
     protected $doctrineAdapter;
 
     public function __construct(DoctrineAdapter $doctrineAdapter)
@@ -20,32 +20,32 @@ class TestEvents extends AbstractListenerAggregate
 
     public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->handlers[] = $events->attach('checkUserCredentials', array($this, 'checkUserCredentials'));
-        $this->handlers[] = $events->attach('checkClientCredentials', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('isPublicClient', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getClientDetails', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('setClientDetails', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('checkRestrictedGrantType', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getClientScope', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getAccessToken', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('setAccessToken', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getAuthorizationCode', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('setAuthorizationCode', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('expireAuthorizationCode', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('checkUserCredentials', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getUserDetails', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getUserClaims', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getRefreshToken', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('setRefreshToken', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('unsetRefreshToken', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('scopeExists', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getDefaultScope', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getClientKey', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getJti', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('setJti', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getPublicKey', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getPrivateKey', array($this, 'emptyEvent'));
-        $this->handlers[] = $events->attach('getEncryptionAlgorithm', array($this, 'emptyEvent'));
+        $this->handlers[] = $events->attach('checkUserCredentials', [$this, 'checkUserCredentials']);
+        $this->handlers[] = $events->attach('checkClientCredentials', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('isPublicClient', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getClientDetails', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('setClientDetails', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('checkRestrictedGrantType', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getClientScope', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getAccessToken', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('setAccessToken', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getAuthorizationCode', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('setAuthorizationCode', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('expireAuthorizationCode', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('checkUserCredentials', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getUserDetails', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getUserClaims', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getRefreshToken', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('setRefreshToken', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('unsetRefreshToken', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('scopeExists', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getDefaultScope', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getClientKey', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getJti', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('setJti', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getPublicKey', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getPrivateKey', [$this, 'emptyEvent']);
+        $this->handlers[] = $events->attach('getEncryptionAlgorithm', [$this, 'emptyEvent']);
     }
 
     public function emptyEvent(Event $e)

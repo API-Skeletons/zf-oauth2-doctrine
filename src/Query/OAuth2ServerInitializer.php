@@ -43,7 +43,7 @@ class OAuth2ServerInitializer implements InitializerInterface
      */
     protected function internalInitialize($container, $instance)
     {
-        if (!$instance instanceof OAuth2ServerInterface) {
+        if (! $instance instanceof OAuth2ServerInterface) {
             return $instance;
         }
 

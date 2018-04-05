@@ -80,7 +80,7 @@ class ClientTest extends AbstractTest
             return;
         }
 
-        $clientId = 'some-client-'.rand();
+        $clientId = 'some-client-'. rand();
 
         // create a new client
         $success = $storage->setClientDetails(

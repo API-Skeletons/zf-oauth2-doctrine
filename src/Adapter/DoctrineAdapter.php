@@ -209,7 +209,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             return false;
         }
 
@@ -259,7 +259,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             return false;
         }
 
@@ -315,7 +315,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             return false;
         }
 
@@ -363,7 +363,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             $clientClass = $this->getConfig()->mapping->Client->entity;
             $client = new $clientClass;
             $client->setClientId($client_id);
@@ -432,7 +432,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             return false;
         }
 
@@ -475,7 +475,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             return false;
         }
 
@@ -528,7 +528,7 @@ class DoctrineAdapter implements
                 $doctrineAccessTokenField => $access_token,
             ]);
 
-        if (!$accessToken) {
+        if (! $accessToken) {
             return false;
         }
 
@@ -584,7 +584,7 @@ class DoctrineAdapter implements
                 $doctrineAccessTokenField => $access_token,
             ]);
 
-        if (!$accessToken) {
+        if (! $accessToken) {
             $entityClass = $this->getConfig()->mapping->AccessToken->entity;
 
             $accessToken = new $entityClass;
@@ -666,7 +666,7 @@ class DoctrineAdapter implements
             $authorizationCode = false;
         }
 
-        if (!$authorizationCode) {
+        if (! $authorizationCode) {
             return false;
         }
 
@@ -735,7 +735,7 @@ class DoctrineAdapter implements
                 $doctrineAuthorizationCodeField => $code,
             ]);
 
-        if (!$authorizationCode) {
+        if (! $authorizationCode) {
             $entityClass = $this->getConfig()->mapping->AuthorizationCode->entity;
 
             $authorizationCode = new $entityClass;
@@ -959,7 +959,7 @@ class DoctrineAdapter implements
                 $doctrineUsernameField => $username,
             ]);
 
-        if (!$user) {
+        if (! $user) {
             return false;
         }
 
@@ -1118,7 +1118,7 @@ class DoctrineAdapter implements
                 $doctrineRefreshTokenField => $refresh_token,
             ]);
 
-        if (!$refreshToken) {
+        if (! $refreshToken) {
             $entityClass = $this->getConfig()->mapping->RefreshToken->entity;
 
             $refreshToken = new $entityClass;
@@ -1329,7 +1329,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client) {
+        if (! $client) {
             return false;
         }
 
@@ -1347,7 +1347,7 @@ class DoctrineAdapter implements
             // No result from doctrine ok
         }
 
-        if (!$jwt) {
+        if (! $jwt) {
             return false;
         }
 
@@ -1434,7 +1434,7 @@ class DoctrineAdapter implements
                 $doctrineJtiField => $query['jti'],
             ]);
 
-        if (!$jti) {
+        if (! $jti) {
             return false;
         }
 
@@ -1521,7 +1521,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client || !$client->getPublicKey()) {
+        if (! $client || ! $client->getPublicKey()) {
             return false;
         }
 
@@ -1555,7 +1555,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client || !$client->getPublicKey()) {
+        if (! $client || ! $client->getPublicKey()) {
             return false;
         }
 
@@ -1589,7 +1589,7 @@ class DoctrineAdapter implements
                 $doctrineClientIdField => $client_id,
             ]);
 
-        if (!$client || !$client->getPublicKey()) {
+        if (! $client || ! $client->getPublicKey()) {
             return false;
         }
 

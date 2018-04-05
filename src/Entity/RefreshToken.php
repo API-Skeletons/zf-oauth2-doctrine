@@ -89,14 +89,14 @@ class RefreshToken
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'refreshToken' => $this->getRefreshToken(),
             'expires' => $this->getExpires(),
             'client' => $this->getClient(),
             'scope' => $this->getScope(),
             'user' => $this->getUser(),
-        );
+        ];
     }
 
     /**

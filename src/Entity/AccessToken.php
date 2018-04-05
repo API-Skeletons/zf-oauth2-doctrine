@@ -51,14 +51,14 @@ class AccessToken implements ArraySerializableInterface
 
     public function getArrayCopy()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'accessToken' => $this->getAccessToken(),
             'expires' => $this->getExpires(),
             'client' => $this->getClient(),
             'scope' => $this->getScope(),
             'user' => $this->getUser(),
-        );
+        ];
     }
 
     public function exchangeArray(array $array)

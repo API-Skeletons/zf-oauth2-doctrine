@@ -40,16 +40,16 @@ class UserCredentialsTest extends AbstractTest
     public function testUserClaims(UserCredentialsInterface $storage)
     {
         $profile = $storage->getUserClaims('oauth_test_user', 'profile');
-        $this->assertEquals(array('profile' => 'profile'), $profile);
+        $this->assertEquals(['profile' => 'profile'], $profile);
 
         $email = $storage->getUserClaims('oauth_test_user', 'email');
-        $this->assertEquals(array('email' => 'doctrine@zfcampus'), $email);
+        $this->assertEquals(['email' => 'doctrine@zfcampus'], $email);
 
         $address = $storage->getUserClaims('oauth_test_user', 'address');
-        $this->assertEquals(array('country' => 'US'), $address);
+        $this->assertEquals(['country' => 'US'], $address);
 
         $phone = $storage->getUserClaims('oauth_test_user', 'phone');
-        $this->assertEquals(array('phone_number' => 'phone'), $phone);
+        $this->assertEquals(['phone_number' => 'phone'], $phone);
 
         $this->assertFalse($storage->getUserClaims('oauth_test_user', 'invalid'));
         $this->assertFalse($storage->getUserClaims('invalid', 'invalid'));

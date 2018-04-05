@@ -16,7 +16,7 @@ class ScopeTest extends AbstractTest
             return;
         }
 
-        if (!$storage instanceof ScopeInterface) {
+        if (! $storage instanceof ScopeInterface) {
             // incompatible storage
             return;
         }
@@ -40,7 +40,7 @@ class ScopeTest extends AbstractTest
             return;
         }
 
-        if (!$storage instanceof ScopeInterface) {
+        if (! $storage instanceof ScopeInterface) {
             // incompatible storage
             return;
         }

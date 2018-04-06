@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.11.1392" mvc="Without MVC" orm="Doctrine2" name="zf-oauth2" uuid="b7638313-3ca8-4389-9163-d2bb1c15f725">
+<skipper version="3.2.12.1400" mvc="Without MVC" orm="Doctrine2" name="zf-oauth2" uuid="b7638313-3ca8-4389-9163-d2bb1c15f725">
   <external-module storage-path="OAuth2-orm.module.xml"/>
   <visual-data>
     <association uuid="1a897fc1-617e-4cc3-82b7-54f564d3335d" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>

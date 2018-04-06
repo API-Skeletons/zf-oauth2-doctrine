@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.11.1392" mvc="Without MVC" orm="Doctrine2">
+<skipper version="3.2.12.1400" mvc="Without MVC" orm="Doctrine2">
   <module name="\api-skeletons/zf-oauth2-doctrine" local-name="api-skeletons/zf-oauth2-doctrine" namespace="\ZF\OAuth2\Doctrine\Entity" local-namespace="ZF\OAuth2\Doctrine\Entity" export-format="Doctrine2Xml" export-path="../config/orm" uuid="e33a902b-9096-46f4-81af-cb8fa813a736">
     <entity name="\ZF\OAuth2\Doctrine\Entity\Client" local-name="Client" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="0e40a98d-82ec-47f1-acc0-649982b1c48a">
       <field name="id" type="bigint" required="true" unique="true" primary="true" auto-increment="true" uuid="f24288d3-c5ab-4e4f-a251-0bca949873d1"/>
@@ -18,7 +18,7 @@
     <region namespace="\ZF\OAuth2\Doctrine\Entity" caption="Scope" uuid="98a49ed5-e644-4a4e-9b59-d5421643572a">
       <entity name="\ZF\OAuth2\Doctrine\Entity\Scope" local-name="Scope" namespace="\ZF\OAuth2\Doctrine\Entity" uuid="8cc40580-9611-471f-a6c7-9a64ec3b2869">
         <field name="id" type="bigint" required="true" unique="true" primary="true" uuid="c8033880-f92f-47e6-bbf8-e9f8a99299fb"/>
-        <field name="scope" type="text" uuid="54d7a7b3-1ffc-44f5-a198-fcd2d1f14dd5"/>
+        <field name="scope" type="string" required="true" uuid="54d7a7b3-1ffc-44f5-a198-fcd2d1f14dd5"/>
         <field name="isDefault" type="boolean" uuid="944d76ea-159b-43fb-a182-5100908dfd7b"/>
         <orm-attributes>
           <attribute name="table">Scope_OAuth2</attribute>

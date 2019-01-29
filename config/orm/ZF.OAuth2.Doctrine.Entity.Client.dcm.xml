@@ -4,7 +4,7 @@
     <id name="id" type="bigint">
       <generator strategy="AUTO"/>
     </id>
-    <field name="clientId" type="string" nullable="true"/>
+    <field name="clientId" type="string" length="191" nullable="true"/>
     <field name="secret" type="string" nullable="true"/>
     <field name="redirectUri" type="text" nullable="true"/>
     <field name="grantType" type="array" nullable="true"/>

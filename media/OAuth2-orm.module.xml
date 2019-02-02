@@ -246,7 +246,7 @@
     <many-to-many-association-entity uuid="5a9f1849-17bf-4479-9c06-dcd5e1784e90" center-position-x="0" center-position-y="-16"/>
     <many-to-many-association-entity uuid="d69ad79d-983f-4cda-905f-1e084aefaff1" center-position-x="0" center-position-y="0"/>
     <many-to-many-association-entity uuid="f71382dc-97f2-4398-a7fd-cd6155b23f83" split="1"/>
-    <module uuid="e33a902b-9096-46f4-81af-cb8fa813a736" bg-color="#8EDBF1" size-x="70" size-x2="1137" size-y="32" size-y2="692"/>
+    <module uuid="e33a902b-9096-46f4-81af-cb8fa813a736" bg-color="#8EDBF1" size-x="63" size-x2="1137" size-y="33" size-y2="692"/>
     <region uuid="244ca074-ff30-43f1-8fbe-fe598c7197a0" bg-color="#FEEFE3" position-x="737" position-y="563" size-x="0" size-x2="350" size-y="21" size-y2="79"/>
     <region uuid="2842966b-796c-48f0-920e-74b0fc40ec24" bg-color="#E4F3E8" position-x="437" position-y="92" size-x="0" size-x2="250" size-y="0" size-y2="400"/>
     <region uuid="98a49ed5-e644-4a4e-9b59-d5421643572a" bg-color="4292931823" position-x="753" position-y="92" size-x="16" size-x2="334" size-y="0" size-y2="400"/>

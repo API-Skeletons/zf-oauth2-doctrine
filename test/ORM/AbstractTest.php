@@ -122,7 +122,7 @@ abstract class AbstractTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpCo
 
             $accessToken = new Entity\AccessToken();
             $accessToken->setClient($client);
-            $accessToken->setExpires(DateTime::createFromFormat('Y-m-d', '2020-01-01'));
+            $accessToken->setExpires(DateTime::createFromFormat('Y-m-d', '2050-01-01'));
             $accessToken->setAccessToken('testtoken');
             $accessToken->setUser($user);
 
@@ -133,14 +133,14 @@ abstract class AbstractTest extends \Zend\Test\PHPUnit\Controller\AbstractHttpCo
             $authorizationCode->setAuthorizationCode('testtoken');
             $authorizationCode->setClient($client);
             $authorizationCode->setRedirectUri('http://redirect');
-            $authorizationCode->setExpires(DateTime::createFromFormat('Y-m-d', '2020-01-01'));
+            $authorizationCode->setExpires(DateTime::createFromFormat('Y-m-d', '2050-01-01'));
             $authorizationCode->setUser($user);
 
             $objectManager->persist($authorizationCode);
 
             $refreshToken = new Entity\RefreshToken();
             $refreshToken->setClient($client);
-            $refreshToken->setExpires(DateTime::createFromFormat('Y-m-d', '2020-01-01'));
+            $refreshToken->setExpires(DateTime::createFromFormat('Y-m-d', '2050-01-01'));
             $refreshToken->setRefreshToken('testtoken');
             $refreshToken->setUser($user);
 
